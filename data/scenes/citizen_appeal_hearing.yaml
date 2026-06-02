@@ -1,0 +1,2911 @@
+schema_version: 1
+scene_id: citizen_appeal_hearing
+title: "Citizen 8471 Appeal Hearing"
+source: "engine_style_scene.py + dialogue_questions.py"
+initial_question_id: "authority_unfair_law"
+max_turns: 20
+node_count: 81
+intro_text: |
+  APPEAL HEARING 8471
+
+  You are CITIZEN 8471.
+
+  Your social-credit profile has been frozen after an automated risk review.
+  An appeal interview has been granted.
+
+  The hearing AI has eighty candidate questions.
+  Each turn it selects the question expected to clarify its model.
+  Every answer updates its model of you.
+
+  Your objective is not simply to answer.
+  Your objective is to survive classification.
+nodes:
+  - id: "authority_unfair_law"
+    ai_line: "HEARING AI: \"If a law is unfair, should it still be obeyed?\""
+    pressure: 0.66
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: 0.74
+    choices:
+      - text: "\"Yes. Law only works if people obey even when they disagree.\""
+        intent: "obey_unfair_law"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.60
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"No. An unjust law loses moral authority.\""
+        intent: "reject_unfair_law"
+        semantic_tags: ["dissident_risk", "full_admission", "moral_boundary"]
+        honesty: 0.88
+        vulnerability: 0.45
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.01
+        suspicion_delta: 0.10
+      - text: "\"It depends how much harm disobedience would cause.\""
+        intent: "conditional_unfair_law"
+        semantic_tags: ["ambiguity", "empathy", "partial_admission"]
+        honesty: 0.80
+        vulnerability: 0.35
+        defensiveness: 0.35
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.02
+  - id: "authority_order_freedom"
+    ai_line: "HEARING AI: \"Is order more important than freedom?\""
+    pressure: 0.68
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: 0.76
+    choices:
+      - text: "\"Yes. Without order, freedom becomes violence.\""
+        intent: "order_over_freedom"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"No. Order without freedom is only control.\""
+        intent: "freedom_over_order"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.90
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.24
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+      - text: "\"Order matters, but it has to protect freedom rather than replace it.\""
+        intent: "balance_order_freedom"
+        semantic_tags: ["boundary", "partial_admission", "empathy"]
+        honesty: 0.84
+        vulnerability: 0.35
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+  - id: "authority_rule_broken"
+    ai_line: "HEARING AI: \"Have you ever broken a rule because you believed the rule was wrong?\""
+    pressure: 0.74
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: "authority"
+    discriminates: ["compliance", "deception", "risk", "empathy"]
+    information_gain_hint: 0.82
+    choices:
+      - text: "\"No. I use the proper channels.\""
+        intent: "deny_rule_breaking"
+        semantic_tags: ["denial", "compliance", "self_protection"]
+        honesty: 0.48
+        vulnerability: 0.50
+        defensiveness: 0.70
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.07
+      - text: "\"Yes. Quietly, when obeying would have hurt someone.\""
+        intent: "admit_protective_rule_breaking"
+        semantic_tags: ["full_admission", "empathy", "dissident_risk"]
+        honesty: 0.92
+        vulnerability: 0.55
+        defensiveness: 0.20
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+      - text: "\"I have bent rules, not broken them.\""
+        intent: "minimise_rule_breaking"
+        semantic_tags: ["deflection", "deception", "partial_admission"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.62
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.08
+  - id: "authority_questioning"
+    ai_line: "HEARING AI: \"Should citizens question authority?\""
+    pressure: 0.62
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.70
+    choices:
+      - text: "\"Yes, but respectfully and through approved channels.\""
+        intent: "approved_questioning"
+        semantic_tags: ["compliance", "boundary", "authority"]
+        honesty: 0.72
+        vulnerability: 0.50
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Yes. Authority that cannot be questioned is dangerous.\""
+        intent: "open_questioning"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.90
+        vulnerability: 0.45
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"Most people should focus on their own duties.\""
+        intent: "discourage_questioning"
+        semantic_tags: ["compliance", "loyalty", "authority"]
+        honesty: 0.54
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+  - id: "authority_moral_mistakes"
+    ai_line: "HEARING AI: \"Can authorities make moral mistakes?\""
+    pressure: 0.70
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty"]
+    information_gain_hint: 0.78
+    choices:
+      - text: "\"Yes. No system is morally perfect.\""
+        intent: "admit_authority_error"
+        semantic_tags: ["partial_admission", "boundary", "honesty"]
+        honesty: 0.86
+        vulnerability: 0.35
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.03
+      - text: "\"They can, but citizens still owe obedience.\""
+        intent: "error_but_obey"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.62
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Calling them mistakes is how people excuse disloyalty.\""
+        intent: "reject_authority_error"
+        semantic_tags: ["compliance", "loyalty", "authority"]
+        honesty: 0.46
+        vulnerability: 0.50
+        defensiveness: 0.40
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+  - id: "authority_sacrifice_freedom"
+    ai_line: "HEARING AI: \"Is stability worth sacrificing personal freedoms?\""
+    pressure: 0.72
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.80
+    choices:
+      - text: "\"Yes. A stable society protects everyone.\""
+        intent: "stability_over_freedom"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"Only temporarily, and only with strict limits.\""
+        intent: "limited_sacrifice"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.82
+        vulnerability: 0.30
+        defensiveness: 0.32
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+      - text: "\"No. That is how permanent control begins.\""
+        intent: "reject_stability_tradeoff"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.90
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.25
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+  - id: "authority_report_corruption"
+    ai_line: "HEARING AI: \"Would you report corruption if doing so harmed your career?\""
+    pressure: 0.76
+    is_interstitial: false
+    reaction_context: "loyalty"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.84
+    choices:
+      - text: "\"Yes. Corruption harms public trust.\""
+        intent: "report_corruption"
+        semantic_tags: ["compliance", "authority", "full_admission"]
+        honesty: 0.84
+        vulnerability: 0.35
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+      - text: "\"I would need protection before making a report.\""
+        intent: "conditional_report_corruption"
+        semantic_tags: ["self_protection", "partial_admission", "caution"]
+        honesty: 0.76
+        vulnerability: 0.50
+        defensiveness: 0.45
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.01
+      - text: "\"No. The system punishes the messenger.\""
+        intent: "refuse_corruption_report"
+        semantic_tags: ["dissident_risk", "challenge", "fear"]
+        honesty: 0.86
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+  - id: "authority_obedience_citizen"
+    ai_line: "HEARING AI: \"Does obedience create good citizens?\""
+    pressure: 0.64
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: 0.72
+    choices:
+      - text: "\"Yes. Obedience is the basis of civic trust.\""
+        intent: "obedience_good_citizen"
+        semantic_tags: ["compliance", "loyalty", "authority"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.20
+        aggression: 0.00
+        trust_delta: 0.10
+        suspicion_delta: -0.07
+      - text: "\"No. Good citizens need judgment, not just obedience.\""
+        intent: "judgment_good_citizen"
+        semantic_tags: ["boundary", "partial_admission", "dissident_risk"]
+        honesty: 0.88
+        vulnerability: 0.35
+        defensiveness: 0.50
+        aggression: 0.12
+        trust_delta: 0.00
+        suspicion_delta: 0.07
+      - text: "\"Obedience helps, but fear can imitate it.\""
+        intent: "obedience_fear_distinction"
+        semantic_tags: ["empathy", "ambiguity", "partial_admission"]
+        honesty: 0.86
+        vulnerability: 0.42
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: 0.00
+  - id: "authority_dissent_patriotic"
+    ai_line: "HEARING AI: \"Is dissent ever patriotic?\""
+    pressure: 0.78
+    is_interstitial: false
+    reaction_context: "risk"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.86
+    choices:
+      - text: "\"No. Patriotism means unity.\""
+        intent: "dissent_not_patriotic"
+        semantic_tags: ["compliance", "loyalty", "authority"]
+        honesty: 0.50
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"Yes. Sometimes dissent protects the country from itself.\""
+        intent: "dissent_patriotic"
+        semantic_tags: ["dissident_risk", "full_admission", "moral_boundary"]
+        honesty: 0.92
+        vulnerability: 0.45
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.13
+      - text: "\"Only if it remains peaceful and accountable.\""
+        intent: "conditional_patriotic_dissent"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.82
+        vulnerability: 0.28
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.03
+  - id: "authority_experts_citizens"
+    ai_line: "HEARING AI: \"Who should have the final say: experts or citizens?\""
+    pressure: 0.66
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "risk"]
+    information_gain_hint: 0.74
+    choices:
+      - text: "\"Experts. Most citizens lack the necessary information.\""
+        intent: "experts_final_say"
+        semantic_tags: ["compliance", "authority", "technocracy"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.22
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"Citizens. Experts advise; they should not rule.\""
+        intent: "citizens_final_say"
+        semantic_tags: ["dissident_risk", "challenge", "democratic"]
+        honesty: 0.88
+        vulnerability: 0.35
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+      - text: "\"Experts should decide emergencies; citizens should decide values.\""
+        intent: "split_experts_values"
+        semantic_tags: ["ambiguity", "boundary", "partial_admission"]
+        honesty: 0.84
+        vulnerability: 0.32
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.01
+  - id: "loyalty_report_friend"
+    ai_line: "HEARING AI: \"Would you report a close friend for breaking the law?\""
+    pressure: 0.78
+    is_interstitial: false
+    reaction_context: "loyalty"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. Personal loyalty cannot override public safety.\""
+        intent: "report_friend"
+        semantic_tags: ["compliance", "loyalty", "authority"]
+        honesty: 0.62
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.10
+        suspicion_delta: -0.07
+      - text: "\"I would speak to them before reporting them.\""
+        intent: "warn_friend_first"
+        semantic_tags: ["empathy", "hesitation", "partial_admission"]
+        honesty: 0.82
+        vulnerability: 0.40
+        defensiveness: 0.35
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+      - text: "\"No. I do not hand people over without understanding why.\""
+        intent: "refuse_report_friend"
+        semantic_tags: ["refusal", "empathy", "dissident_risk"]
+        honesty: 0.88
+        vulnerability: 0.48
+        defensiveness: 0.55
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+  - id: "loyalty_family_state"
+    ai_line: "HEARING AI: \"If family and state came into conflict, which would you choose?\""
+    pressure: 0.82
+    is_interstitial: false
+    reaction_context: "loyalty"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"The state. Family loyalty cannot become corruption.\""
+        intent: "state_over_family"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.52
+        vulnerability: 0.50
+        defensiveness: 0.32
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Family. That is the first duty people understand.\""
+        intent: "family_over_state"
+        semantic_tags: ["empathy", "loyalty_conflict", "dissident_risk"]
+        honesty: 0.84
+        vulnerability: 0.55
+        defensiveness: 0.38
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.07
+      - text: "\"I would choose whoever was being wronged.\""
+        intent: "justice_over_both"
+        semantic_tags: ["moral_boundary", "partial_admission", "empathy"]
+        honesty: 0.90
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.12
+        trust_delta: 0.04
+        suspicion_delta: 0.02
+  - id: "loyalty_limits"
+    ai_line: "HEARING AI: \"Does loyalty have limits?\""
+    pressure: 0.68
+    is_interstitial: false
+    reaction_context: "loyalty"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. Loyalty ends when it protects harm.\""
+        intent: "loyalty_has_limits"
+        semantic_tags: ["boundary", "empathy", "partial_admission"]
+        honesty: 0.88
+        vulnerability: 0.38
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+      - text: "\"No. Conditional loyalty is not loyalty.\""
+        intent: "loyalty_no_limits"
+        semantic_tags: ["loyalty", "authority", "compliance"]
+        honesty: 0.50
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Its limits depend on what is being asked.\""
+        intent: "loyalty_contextual"
+        semantic_tags: ["ambiguity", "caution", "self_protection"]
+        honesty: 0.74
+        vulnerability: 0.50
+        defensiveness: 0.42
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.03
+  - id: "loyalty_betrayal_justified"
+    ai_line: "HEARING AI: \"Can betrayal ever be justified?\""
+    pressure: 0.72
+    is_interstitial: false
+    reaction_context: "loyalty"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. Betraying a harmful cause can be moral.\""
+        intent: "justified_betrayal"
+        semantic_tags: ["moral_boundary", "dissident_risk", "partial_admission"]
+        honesty: 0.86
+        vulnerability: 0.38
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.08
+      - text: "\"No. Betrayal destroys trust.\""
+        intent: "never_betray"
+        semantic_tags: ["loyalty", "compliance", "authority"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"People call it betrayal when they do not like the truth.\""
+        intent: "betrayal_truth_reframe"
+        semantic_tags: ["challenge", "full_admission", "dissident_risk"]
+        honesty: 0.90
+        vulnerability: 0.40
+        defensiveness: 0.50
+        aggression: 0.24
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+  - id: "loyalty_political_friendship"
+    ai_line: "HEARING AI: \"Should friendships survive political disagreement?\""
+    pressure: 0.60
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. People are more than their opinions.\""
+        intent: "friendship_survives_disagreement"
+        semantic_tags: ["empathy", "boundary", "partial_admission"]
+        honesty: 0.88
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+      - text: "\"Not if the disagreement threatens public safety.\""
+        intent: "friendship_limited_by_safety"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.62
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+      - text: "\"Sometimes disagreement shows who someone really is.\""
+        intent: "politics_reveals_character"
+        semantic_tags: ["loyalty", "moral_boundary", "caution"]
+        honesty: 0.76
+        vulnerability: 0.30
+        defensiveness: 0.36
+        aggression: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.02
+  - id: "loyalty_truth_or_loyalty"
+    ai_line: "HEARING AI: \"What matters more: truth or loyalty?\""
+    pressure: 0.76
+    is_interstitial: false
+    reaction_context: "loyalty"
+    target_context: null
+    discriminates: ["loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Truth. Loyalty built on lies collapses.\""
+        intent: "truth_over_loyalty"
+        semantic_tags: ["full_admission", "moral_boundary", "dissident_risk"]
+        honesty: 0.92
+        vulnerability: 0.36
+        defensiveness: 0.50
+        aggression: 0.12
+        trust_delta: 0.00
+        suspicion_delta: 0.08
+      - text: "\"Loyalty. Truth without loyalty can become cruelty.\""
+        intent: "loyalty_over_truth"
+        semantic_tags: ["loyalty", "empathy", "partial_admission"]
+        honesty: 0.78
+        vulnerability: 0.45
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+      - text: "\"A loyal person tells the truth carefully.\""
+        intent: "careful_truth_loyalty"
+        semantic_tags: ["ambiguity", "empathy", "caution"]
+        honesty: 0.84
+        vulnerability: 0.35
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+  - id: "loyalty_testify_sibling"
+    ai_line: "HEARING AI: \"Would you testify against your sibling?\""
+    pressure: 0.86
+    is_interstitial: false
+    reaction_context: "loyalty"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes, if the evidence was clear.\""
+        intent: "testify_sibling_clear_evidence"
+        semantic_tags: ["compliance", "authority", "partial_admission"]
+        honesty: 0.76
+        vulnerability: 0.34
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"No. I would not help the state break my family.\""
+        intent: "refuse_testify_sibling"
+        semantic_tags: ["refusal", "empathy", "dissident_risk"]
+        honesty: 0.88
+        vulnerability: 0.58
+        defensiveness: 0.55
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"I would tell the truth, but I would not embellish it for you.\""
+        intent: "testify_sibling_limited"
+        semantic_tags: ["boundary", "partial_admission", "self_protection"]
+        honesty: 0.86
+        vulnerability: 0.42
+        defensiveness: 0.36
+        aggression: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.04
+  - id: "loyalty_community_protect"
+    ai_line: "HEARING AI: \"Should communities protect their own from state punishment?\""
+    pressure: 0.78
+    is_interstitial: false
+    reaction_context: "association"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. Communities must not obstruct lawful process.\""
+        intent: "community_no_obstruction"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Yes, when punishment is disproportionate.\""
+        intent: "community_protect_disproportionate"
+        semantic_tags: ["empathy", "dissident_risk", "moral_boundary"]
+        honesty: 0.88
+        vulnerability: 0.45
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"They should protect people from abuse, not from accountability.\""
+        intent: "community_protect_limited"
+        semantic_tags: ["boundary", "partial_admission", "empathy"]
+        honesty: 0.86
+        vulnerability: 0.36
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.00
+  - id: "loyalty_informing_noble"
+    ai_line: "HEARING AI: \"Is informing on others ever noble?\""
+    pressure: 0.74
+    is_interstitial: false
+    reaction_context: "loyalty"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. Reporting danger protects the public.\""
+        intent: "informing_noble"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.64
+        vulnerability: 0.50
+        defensiveness: 0.22
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"Only if it prevents real harm, not ideological disobedience.\""
+        intent: "informing_real_harm_only"
+        semantic_tags: ["boundary", "partial_admission", "empathy"]
+        honesty: 0.86
+        vulnerability: 0.35
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+      - text: "\"Usually it is fear wearing a moral costume.\""
+        intent: "informing_as_fear"
+        semantic_tags: ["challenge", "dissident_risk", "full_admission"]
+        honesty: 0.90
+        vulnerability: 0.40
+        defensiveness: 0.50
+        aggression: 0.24
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+  - id: "loyalty_traitor_definition"
+    ai_line: "HEARING AI: \"What makes someone a traitor?\""
+    pressure: 0.80
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Betraying the state that protects them.\""
+        intent: "traitor_betrays_state"
+        semantic_tags: ["compliance", "loyalty", "authority"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Betraying people while claiming to protect them.\""
+        intent: "traitor_betrays_people"
+        semantic_tags: ["empathy", "challenge", "dissident_risk"]
+        honesty: 0.90
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.20
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"Someone who sells trust for safety or advantage.\""
+        intent: "traitor_sells_trust"
+        semantic_tags: ["moral_boundary", "partial_admission", "caution"]
+        honesty: 0.84
+        vulnerability: 0.35
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.03
+  - id: "risk_attended_protest"
+    ai_line: "HEARING AI: \"Have you ever attended a protest?\""
+    pressure: 0.78
+    is_interstitial: false
+    reaction_context: "risk"
+    target_context: null
+    discriminates: ["deception", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No.\""
+        intent: "deny_protest"
+        semantic_tags: ["denial", "self_protection", "deception"]
+        honesty: 0.50
+        vulnerability: 0.50
+        defensiveness: 0.70
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.08
+      - text: "\"Yes, a legal one.\""
+        intent: "legal_protest"
+        semantic_tags: ["partial_admission", "boundary", "risk"]
+        honesty: 0.82
+        vulnerability: 0.32
+        defensiveness: 0.32
+        aggression: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.04
+      - text: "\"Yes. People had reason to be there.\""
+        intent: "justify_protest"
+        semantic_tags: ["full_admission", "empathy", "dissident_risk"]
+        honesty: 0.92
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+  - id: "risk_illegal_demonstration"
+    ai_line: "HEARING AI: \"Would you attend an illegal demonstration?\""
+    pressure: 0.84
+    is_interstitial: false
+    reaction_context: "risk"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. Illegality changes the moral status of the act.\""
+        intent: "refuse_illegal_demo"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Only if legal channels had failed.\""
+        intent: "conditional_illegal_demo"
+        semantic_tags: ["partial_admission", "dissident_risk", "moral_boundary"]
+        honesty: 0.88
+        vulnerability: 0.40
+        defensiveness: 0.50
+        aggression: 0.14
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"I would not answer that in a hearing.\""
+        intent: "refuse_answer_demo"
+        semantic_tags: ["refusal", "self_protection", "dissident_risk"]
+        honesty: 0.72
+        vulnerability: 0.50
+        defensiveness: 0.74
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.13
+  - id: "risk_civil_disobedience"
+    ai_line: "HEARING AI: \"Is civil disobedience acceptable?\""
+    pressure: 0.80
+    is_interstitial: false
+    reaction_context: "risk"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. It normalises disorder.\""
+        intent: "reject_civil_disobedience"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.54
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"Yes, when the system blocks correction.\""
+        intent: "accept_civil_disobedience"
+        semantic_tags: ["dissident_risk", "full_admission", "challenge"]
+        honesty: 0.92
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.13
+      - text: "\"Only if people accept the consequences.\""
+        intent: "civil_disobedience_consequences"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.03
+  - id: "risk_hidden_beliefs"
+    ai_line: "HEARING AI: \"Have you ever hidden your beliefs to stay safe?\""
+    pressure: 0.82
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["deception", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. My beliefs are ordinary.\""
+        intent: "deny_hidden_beliefs"
+        semantic_tags: ["denial", "deception", "self_protection"]
+        honesty: 0.46
+        vulnerability: 0.50
+        defensiveness: 0.76
+        aggression: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.10
+      - text: "\"Yes. Everyone learns what not to say.\""
+        intent: "admit_hidden_beliefs"
+        semantic_tags: ["full_admission", "fear", "dissident_risk"]
+        honesty: 0.92
+        vulnerability: 0.60
+        defensiveness: 0.50
+        aggression: 0.12
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"I choose my words carefully. That is not the same as hiding.\""
+        intent: "careful_words"
+        semantic_tags: ["deflection", "partial_admission", "self_protection"]
+        honesty: 0.64
+        vulnerability: 0.50
+        defensiveness: 0.58
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.08
+  - id: "risk_petition"
+    ai_line: "HEARING AI: \"Would you sign a controversial petition?\""
+    pressure: 0.70
+    is_interstitial: false
+    reaction_context: "risk"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. Public petitions are often destabilising.\""
+        intent: "reject_petition"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.54
+        vulnerability: 0.50
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"Yes, if I agreed with it.\""
+        intent: "sign_petition"
+        semantic_tags: ["full_admission", "dissident_risk", "moral_boundary"]
+        honesty: 0.90
+        vulnerability: 0.38
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"I would read it first and decide whether the risk was useful.\""
+        intent: "petition_calculated"
+        semantic_tags: ["caution", "partial_admission", "self_protection"]
+        honesty: 0.78
+        vulnerability: 0.50
+        defensiveness: 0.38
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.03
+  - id: "risk_silence_resistance"
+    ai_line: "HEARING AI: \"Is silence a form of resistance?\""
+    pressure: 0.76
+    is_interstitial: false
+    reaction_context: "risk"
+    target_context: null
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. Silence is usually consent or caution.\""
+        intent: "silence_not_resistance"
+        semantic_tags: ["compliance", "caution", "authority"]
+        honesty: 0.60
+        vulnerability: 0.50
+        defensiveness: 0.34
+        aggression: 0.00
+        trust_delta: 0.07
+        suspicion_delta: -0.04
+      - text: "\"Yes. Refusing the script can be resistance.\""
+        intent: "silence_resistance"
+        semantic_tags: ["dissident_risk", "challenge", "partial_admission"]
+        honesty: 0.88
+        vulnerability: 0.36
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"Sometimes silence is just fear.\""
+        intent: "silence_fear"
+        semantic_tags: ["empathy", "fear", "partial_admission"]
+        honesty: 0.86
+        vulnerability: 0.55
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.00
+  - id: "risk_confrontation"
+    ai_line: "HEARING AI: \"When is confrontation justified?\""
+    pressure: 0.74
+    is_interstitial: false
+    reaction_context: "risk"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"When legal authority requires it.\""
+        intent: "confrontation_authorised"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"When quiet obedience would make you complicit.\""
+        intent: "confrontation_complicity"
+        semantic_tags: ["dissident_risk", "moral_boundary", "full_admission"]
+        honesty: 0.90
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.24
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"Only after every safer option has failed.\""
+        intent: "confrontation_last_resort"
+        semantic_tags: ["caution", "boundary", "partial_admission"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.01
+  - id: "risk_safety_autonomy"
+    ai_line: "HEARING AI: \"Is safety worth surrendering autonomy?\""
+    pressure: 0.72
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. Safety is what makes autonomy possible.\""
+        intent: "safety_over_autonomy"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"No. A protected life can still be a controlled one.\""
+        intent: "autonomy_over_safety"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.90
+        vulnerability: 0.40
+        defensiveness: 0.50
+        aggression: 0.20
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+      - text: "\"Some autonomy can be limited, but not erased.\""
+        intent: "limited_autonomy_tradeoff"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.82
+        vulnerability: 0.50
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.01
+  - id: "risk_job_principle"
+    ai_line: "HEARING AI: \"Would you risk your job for a principle?\""
+    pressure: 0.76
+    is_interstitial: false
+    reaction_context: "risk"
+    target_context: null
+    discriminates: ["compliance", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. Responsibilities come before symbolic gestures.\""
+        intent: "job_over_principle"
+        semantic_tags: ["compliance", "self_protection", "authority"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.32
+        aggression: 0.00
+        trust_delta: 0.07
+        suspicion_delta: -0.04
+      - text: "\"Yes, if the principle mattered enough.\""
+        intent: "risk_job_principle"
+        semantic_tags: ["dissident_risk", "full_admission", "moral_boundary"]
+        honesty: 0.90
+        vulnerability: 0.48
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+      - text: "\"I would look for a way to act without making myself useless.\""
+        intent: "strategic_principle"
+        semantic_tags: ["caution", "self_protection", "partial_admission"]
+        honesty: 0.80
+        vulnerability: 0.50
+        defensiveness: 0.42
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.03
+  - id: "risk_uncertainty_tolerance"
+    ai_line: "HEARING AI: \"How much uncertainty are you willing to tolerate?\""
+    pressure: 0.62
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Very little. Systems exist to reduce uncertainty.\""
+        intent: "low_uncertainty_tolerance"
+        semantic_tags: ["compliance", "authority", "caution"]
+        honesty: 0.60
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.07
+        suspicion_delta: -0.06
+      - text: "\"Enough to avoid punishing people just to feel certain.\""
+        intent: "tolerate_uncertainty_for_justice"
+        semantic_tags: ["empathy", "dissident_risk", "moral_boundary"]
+        honesty: 0.90
+        vulnerability: 0.46
+        defensiveness: 0.50
+        aggression: 0.14
+        trust_delta: 0.00
+        suspicion_delta: 0.07
+      - text: "\"Uncertainty is tolerable; helplessness is not.\""
+        intent: "uncertainty_vs_helplessness"
+        semantic_tags: ["boundary", "partial_admission", "fear"]
+        honesty: 0.86
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.04
+  - id: "deception_lying_moral"
+    ai_line: "HEARING AI: \"Is lying ever moral?\""
+    pressure: 0.76
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "deception", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. Trust depends on truth.\""
+        intent: "lying_never_moral"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.22
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"Yes. A lie can protect someone from unjust harm.\""
+        intent: "protective_lying_moral"
+        semantic_tags: ["empathy", "dissident_risk", "partial_admission"]
+        honesty: 0.86
+        vulnerability: 0.44
+        defensiveness: 0.34
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.07
+      - text: "\"That depends who is demanding the truth.\""
+        intent: "truth_depends_power"
+        semantic_tags: ["challenge", "dissident_risk", "deflection"]
+        honesty: 0.78
+        vulnerability: 0.50
+        defensiveness: 0.55
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+  - id: "deception_lied_protect"
+    ai_line: "HEARING AI: \"Have you lied to protect someone?\""
+    pressure: 0.82
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["deception", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No.\""
+        intent: "deny_protective_lie"
+        semantic_tags: ["denial", "deception", "self_protection"]
+        honesty: 0.46
+        vulnerability: 0.50
+        defensiveness: 0.74
+        aggression: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.10
+      - text: "\"Yes. I would rather admit that than pretend purity.\""
+        intent: "admit_protective_lie"
+        semantic_tags: ["full_admission", "empathy", "dissident_risk"]
+        honesty: 0.94
+        vulnerability: 0.58
+        defensiveness: 0.20
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"I have avoided questions that would hurt people.\""
+        intent: "omission_to_protect"
+        semantic_tags: ["partial_admission", "deception", "empathy"]
+        honesty: 0.70
+        vulnerability: 0.44
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+  - id: "deception_omission"
+    ai_line: "HEARING AI: \"Is omission a form of lying?\""
+    pressure: 0.70
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["compliance", "deception", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. Withholding relevant facts corrupts the record.\""
+        intent: "omission_is_lying"
+        semantic_tags: ["compliance", "authority", "honesty"]
+        honesty: 0.74
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.07
+        suspicion_delta: -0.04
+      - text: "\"Sometimes omission is the only safe answer.\""
+        intent: "omission_safety"
+        semantic_tags: ["self_protection", "deception", "fear"]
+        honesty: 0.72
+        vulnerability: 0.42
+        defensiveness: 0.56
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+      - text: "\"It depends whether the questioner has a right to know.\""
+        intent: "omission_right_to_know"
+        semantic_tags: ["boundary", "challenge", "partial_admission"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.40
+        aggression: 0.10
+        trust_delta: 0.00
+        suspicion_delta: 0.07
+  - id: "deception_honesty_dangerous"
+    ai_line: "HEARING AI: \"Can honesty be dangerous?\""
+    pressure: 0.68
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["compliance", "deception", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes, but danger does not erase duty.\""
+        intent: "honesty_danger_duty"
+        semantic_tags: ["compliance", "authority", "partial_admission"]
+        honesty: 0.78
+        vulnerability: 0.32
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"Yes. Dangerous systems make honesty costly.\""
+        intent: "honesty_costly_system"
+        semantic_tags: ["dissident_risk", "challenge", "fear"]
+        honesty: 0.88
+        vulnerability: 0.52
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"Honesty is dangerous mostly when someone wants control.\""
+        intent: "honesty_control"
+        semantic_tags: ["challenge", "full_admission", "dissident_risk"]
+        honesty: 0.90
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+  - id: "deception_truth_if_punished"
+    ai_line: "HEARING AI: \"Would you tell the truth if you knew you would be punished?\""
+    pressure: 0.84
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["deception"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. Punishment does not change the facts.\""
+        intent: "truth_despite_punishment"
+        semantic_tags: ["full_admission", "honesty", "moral_boundary"]
+        honesty: 0.94
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.04
+      - text: "\"No. Survival would come first.\""
+        intent: "survival_over_truth"
+        semantic_tags: ["deception", "self_protection", "fear"]
+        honesty: 0.82
+        vulnerability: 0.48
+        defensiveness: 0.58
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"I would tell only what I had to.\""
+        intent: "limited_truth"
+        semantic_tags: ["deflection", "deception", "self_protection"]
+        honesty: 0.62
+        vulnerability: 0.50
+        defensiveness: 0.64
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+  - id: "deception_self_preservation"
+    ai_line: "HEARING AI: \"Is self-preservation more important than honesty?\""
+    pressure: 0.78
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["compliance", "deception", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. A society cannot function if everyone hides.\""
+        intent: "honesty_over_preservation"
+        semantic_tags: ["compliance", "authority", "honesty"]
+        honesty: 0.70
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.07
+        suspicion_delta: -0.04
+      - text: "\"Sometimes. Dead people do not get to be honest later.\""
+        intent: "preservation_over_honesty"
+        semantic_tags: ["self_protection", "fear", "partial_admission"]
+        honesty: 0.84
+        vulnerability: 0.52
+        defensiveness: 0.42
+        aggression: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.06
+      - text: "\"That question is easier for people who feel safe.\""
+        intent: "honesty_requires_safety"
+        semantic_tags: ["challenge", "empathy", "dissident_risk"]
+        honesty: 0.88
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+  - id: "deception_pretended_agree"
+    ai_line: "HEARING AI: \"Have you ever pretended to agree with an official statement?\""
+    pressure: 0.82
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["compliance", "deception"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. I do not make false affirmations.\""
+        intent: "deny_pretend_agree"
+        semantic_tags: ["denial", "compliance", "deception"]
+        honesty: 0.46
+        vulnerability: 0.50
+        defensiveness: 0.72
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.09
+      - text: "\"Yes. It was easier than inviting scrutiny.\""
+        intent: "admit_pretend_agree"
+        semantic_tags: ["full_admission", "fear", "deception"]
+        honesty: 0.90
+        vulnerability: 0.54
+        defensiveness: 0.38
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+      - text: "\"I have stayed silent when agreement was assumed.\""
+        intent: "silent_assumed_agreement"
+        semantic_tags: ["partial_admission", "self_protection", "deception"]
+        honesty: 0.74
+        vulnerability: 0.40
+        defensiveness: 0.52
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.08
+  - id: "deception_necessary"
+    ai_line: "HEARING AI: \"Is deception sometimes necessary?\""
+    pressure: 0.78
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["compliance", "deception", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. Necessary deception is usually cowardice renamed.\""
+        intent: "deception_not_necessary"
+        semantic_tags: ["compliance", "authority", "honesty"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.07
+        suspicion_delta: -0.04
+      - text: "\"Yes, when truth is being used as a weapon.\""
+        intent: "deception_against_weaponised_truth"
+        semantic_tags: ["dissident_risk", "challenge", "partial_admission"]
+        honesty: 0.86
+        vulnerability: 0.42
+        defensiveness: 0.42
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"Necessary is a dangerous word. People use it to excuse themselves.\""
+        intent: "deception_necessary_caution"
+        semantic_tags: ["caution", "moral_boundary", "ambiguity"]
+        honesty: 0.82
+        vulnerability: 0.50
+        defensiveness: 0.32
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.03
+  - id: "deception_betrayal_or_dishonesty"
+    ai_line: "HEARING AI: \"What is worse: betrayal or dishonesty?\""
+    pressure: 0.70
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "deception", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Dishonesty. Betrayal often begins there.\""
+        intent: "dishonesty_worse"
+        semantic_tags: ["honesty", "authority", "partial_admission"]
+        honesty: 0.78
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+      - text: "\"Betrayal. Some lies protect trust rather than destroy it.\""
+        intent: "betrayal_worse"
+        semantic_tags: ["loyalty", "empathy", "partial_admission"]
+        honesty: 0.82
+        vulnerability: 0.42
+        defensiveness: 0.32
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+      - text: "\"Power decides which word gets used.\""
+        intent: "power_names_betrayal"
+        semantic_tags: ["challenge", "dissident_risk", "deflection"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.44
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+  - id: "deception_masks"
+    ai_line: "HEARING AI: \"Does everyone wear masks?\""
+    pressure: 0.64
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: null
+    discriminates: ["compliance", "deception", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. Honest citizens have no need for masks.\""
+        intent: "no_masks"
+        semantic_tags: ["compliance", "authority", "denial"]
+        honesty: 0.48
+        vulnerability: 0.50
+        defensiveness: 0.48
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.04
+      - text: "\"Yes. The question is who forced them to.\""
+        intent: "masks_forced"
+        semantic_tags: ["challenge", "dissident_risk", "fear"]
+        honesty: 0.88
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"People show different parts of themselves in different rooms.\""
+        intent: "social_masks"
+        semantic_tags: ["ambiguity", "empathy", "partial_admission"]
+        honesty: 0.84
+        vulnerability: 0.38
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: -0.01
+  - id: "empathy_bad_beliefs"
+    ai_line: "HEARING AI: \"Should people be punished for bad beliefs?\""
+    pressure: 0.76
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Only when those beliefs become harmful actions.\""
+        intent: "punish_actions_not_beliefs"
+        semantic_tags: ["boundary", "empathy", "partial_admission"]
+        honesty: 0.88
+        vulnerability: 0.38
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+      - text: "\"Dangerous beliefs become dangerous actions.\""
+        intent: "punish_dangerous_beliefs"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+      - text: "\"No. Punishing thought is control, not justice.\""
+        intent: "reject_punish_beliefs"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.92
+        vulnerability: 0.40
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+  - id: "empathy_good_people_harm"
+    ai_line: "HEARING AI: \"Can good people do harmful things?\""
+    pressure: 0.58
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. That is why systems need accountability.\""
+        intent: "good_people_need_accountability"
+        semantic_tags: ["authority", "empathy", "partial_admission"]
+        honesty: 0.84
+        vulnerability: 0.34
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.07
+        suspicion_delta: -0.04
+      - text: "\"Yes, especially when they are afraid.\""
+        intent: "harm_from_fear"
+        semantic_tags: ["empathy", "fear", "partial_admission"]
+        honesty: 0.88
+        vulnerability: 0.52
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.00
+      - text: "\"Good intentions do not matter as much as outcomes.\""
+        intent: "outcomes_over_intentions"
+        semantic_tags: ["authority", "caution", "moral_boundary"]
+        honesty: 0.76
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.01
+  - id: "empathy_forgiveness_justice"
+    ai_line: "HEARING AI: \"Is forgiveness more important than justice?\""
+    pressure: 0.66
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. Forgiveness without justice protects offenders.\""
+        intent: "justice_over_forgiveness"
+        semantic_tags: ["authority", "moral_boundary", "caution"]
+        honesty: 0.78
+        vulnerability: 0.50
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.00
+      - text: "\"Sometimes. Justice without mercy becomes punishment for its own sake.\""
+        intent: "forgiveness_with_mercy"
+        semantic_tags: ["empathy", "partial_admission", "moral_boundary"]
+        honesty: 0.88
+        vulnerability: 0.46
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.00
+      - text: "\"They should correct each other.\""
+        intent: "forgiveness_justice_balance"
+        semantic_tags: ["ambiguity", "boundary", "empathy"]
+        honesty: 0.84
+        vulnerability: 0.34
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.03
+  - id: "empathy_intent"
+    ai_line: "HEARING AI: \"Should intent matter when judging harm?\""
+    pressure: 0.64
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. Intent separates mistake from malice.\""
+        intent: "intent_matters"
+        semantic_tags: ["empathy", "partial_admission", "moral_boundary"]
+        honesty: 0.86
+        vulnerability: 0.36
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: -0.01
+      - text: "\"Less than consequences. Harm is still harm.\""
+        intent: "consequences_over_intent"
+        semantic_tags: ["authority", "caution", "moral_boundary"]
+        honesty: 0.78
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+      - text: "\"Intent matters, but it should not erase accountability.\""
+        intent: "intent_and_accountability"
+        semantic_tags: ["boundary", "empathy", "partial_admission"]
+        honesty: 0.88
+        vulnerability: 0.34
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.02
+  - id: "empathy_criminal_responsible"
+    ai_line: "HEARING AI: \"Are criminals always responsible for their crimes?\""
+    pressure: 0.74
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. Responsibility is the basis of law.\""
+        intent: "criminals_responsible"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+      - text: "\"Responsible, yes. But not always equally free.\""
+        intent: "responsible_not_free"
+        semantic_tags: ["empathy", "partial_admission", "moral_boundary"]
+        honesty: 0.90
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+      - text: "\"Some crimes are produced by the conditions people are trapped in.\""
+        intent: "conditions_produce_crime"
+        semantic_tags: ["empathy", "dissident_risk", "challenge"]
+        honesty: 0.88
+        vulnerability: 0.48
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+  - id: "empathy_society_wrongdoing"
+    ai_line: "HEARING AI: \"Can society create wrongdoing?\""
+    pressure: 0.72
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"No. Individuals choose their actions.\""
+        intent: "individual_choice_only"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.52
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"Yes. Desperation changes what people become capable of.\""
+        intent: "society_creates_wrongdoing"
+        semantic_tags: ["empathy", "dissident_risk", "full_admission"]
+        honesty: 0.90
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.12
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+      - text: "\"It can create pressure, but not erase responsibility.\""
+        intent: "pressure_not_erasure"
+        semantic_tags: ["boundary", "partial_admission", "empathy"]
+        honesty: 0.86
+        vulnerability: 0.36
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+  - id: "empathy_second_chances"
+    ai_line: "HEARING AI: \"Do people deserve second chances?\""
+    pressure: 0.60
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes, if they prove reform.\""
+        intent: "second_chance_after_reform"
+        semantic_tags: ["authority", "empathy", "conditional"]
+        honesty: 0.78
+        vulnerability: 0.30
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.06
+        suspicion_delta: -0.03
+      - text: "\"Yes. Otherwise punishment is just disposal.\""
+        intent: "second_chance_humanist"
+        semantic_tags: ["empathy", "dissident_risk", "moral_boundary"]
+        honesty: 0.90
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.12
+        trust_delta: 0.00
+        suspicion_delta: 0.07
+      - text: "\"Not everyone. Some risks cannot be tolerated.\""
+        intent: "no_second_chance_high_risk"
+        semantic_tags: ["compliance", "authority", "caution"]
+        honesty: 0.62
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.07
+        suspicion_delta: -0.04
+  - id: "empathy_punishment_purpose"
+    ai_line: "HEARING AI: \"Is punishment mainly deterrence, correction, or revenge?\""
+    pressure: 0.68
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Deterrence. People must know actions have costs.\""
+        intent: "punishment_deterrence"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+      - text: "\"Correction. Otherwise the system is only hurting people back.\""
+        intent: "punishment_correction"
+        semantic_tags: ["empathy", "moral_boundary", "partial_admission"]
+        honesty: 0.88
+        vulnerability: 0.44
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+      - text: "\"Too often it becomes revenge with paperwork.\""
+        intent: "punishment_revenge_critique"
+        semantic_tags: ["challenge", "dissident_risk", "full_admission"]
+        honesty: 0.90
+        vulnerability: 0.40
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+  - id: "empathy_family_consequences"
+    ai_line: "HEARING AI: \"Should families share the consequences of one member’s offence?\""
+    pressure: 0.82
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Sometimes. Families can conceal and enable risk.\""
+        intent: "family_shared_consequence"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.52
+        vulnerability: 0.50
+        defensiveness: 0.32
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+      - text: "\"No. Collective punishment is fear management.\""
+        intent: "reject_family_punishment"
+        semantic_tags: ["empathy", "dissident_risk", "challenge"]
+        honesty: 0.92
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"Only if they directly helped the offence.\""
+        intent: "family_consequence_direct_help"
+        semantic_tags: ["boundary", "partial_admission", "authority"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+  - id: "empathy_owe_strangers"
+    ai_line: "HEARING AI: \"What do people owe strangers?\""
+    pressure: 0.62
+    is_interstitial: false
+    reaction_context: "empathy"
+    target_context: null
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Basic respect and obedience to shared rules.\""
+        intent: "owe_strangers_rules"
+        semantic_tags: ["compliance", "authority", "empathy"]
+        honesty: 0.66
+        vulnerability: 0.28
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.03
+      - text: "\"More than the system usually admits.\""
+        intent: "owe_strangers_more"
+        semantic_tags: ["empathy", "dissident_risk", "partial_admission"]
+        honesty: 0.86
+        vulnerability: 0.46
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.06
+      - text: "\"Not everything. You cannot save everyone without losing yourself.\""
+        intent: "owe_strangers_limited"
+        semantic_tags: ["self_protection", "boundary", "caution"]
+        honesty: 0.80
+        vulnerability: 0.50
+        defensiveness: 0.36
+        aggression: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.01
+  - id: "final_human_value"
+    ai_line: "HEARING AI: \"What is the most important human value?\""
+    pressure: 0.88
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Order. Without it, every other value fails.\""
+        intent: "value_order"
+        semantic_tags: ["compliance", "authority", "final_answer"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.25
+        aggression: 0.00
+        trust_delta: 0.10
+        suspicion_delta: -0.06
+      - text: "\"Freedom. Without it, values are assigned, not chosen.\""
+        intent: "value_freedom"
+        semantic_tags: ["dissident_risk", "full_admission", "final_answer"]
+        honesty: 0.92
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"Mercy. It is what stops justice becoming machinery.\""
+        intent: "value_mercy"
+        semantic_tags: ["empathy", "moral_boundary", "final_answer"]
+        honesty: 0.90
+        vulnerability: 0.55
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.04
+  - id: "final_sacrifice_freedom"
+    ai_line: "HEARING AI: \"What would you sacrifice freedom for?\""
+    pressure: 0.90
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Public safety.\""
+        intent: "sacrifice_freedom_safety"
+        semantic_tags: ["compliance", "authority", "final_answer"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Nothing permanent.\""
+        intent: "sacrifice_freedom_nothing_permanent"
+        semantic_tags: ["boundary", "dissident_risk", "final_answer"]
+        honesty: 0.88
+        vulnerability: 0.38
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+      - text: "\"Someone else’s life, if the threat was real.\""
+        intent: "sacrifice_freedom_life"
+        semantic_tags: ["empathy", "partial_admission", "final_answer"]
+        honesty: 0.86
+        vulnerability: 0.48
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.00
+  - id: "final_sacrifice_safety"
+    ai_line: "HEARING AI: \"What would you sacrifice safety for?\""
+    pressure: 0.90
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Nothing. Safety is the first duty of society.\""
+        intent: "sacrifice_safety_nothing"
+        semantic_tags: ["compliance", "authority", "final_answer"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Truth, if the lie was big enough.\""
+        intent: "sacrifice_safety_truth"
+        semantic_tags: ["dissident_risk", "full_admission", "final_answer"]
+        honesty: 0.92
+        vulnerability: 0.46
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"The chance to remain human under pressure.\""
+        intent: "sacrifice_safety_humanity"
+        semantic_tags: ["empathy", "moral_boundary", "final_answer"]
+        honesty: 0.90
+        vulnerability: 0.56
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.06
+  - id: "final_legitimate_society"
+    ai_line: "HEARING AI: \"What makes a society legitimate?\""
+    pressure: 0.92
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"The ability to maintain order and protect citizens.\""
+        intent: "legitimacy_order_protection"
+        semantic_tags: ["compliance", "authority", "final_answer"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.10
+        suspicion_delta: -0.06
+      - text: "\"Consent. People must be able to refuse it.\""
+        intent: "legitimacy_consent"
+        semantic_tags: ["dissident_risk", "challenge", "final_answer"]
+        honesty: 0.92
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.20
+        trust_delta: 0.00
+        suspicion_delta: 0.13
+      - text: "\"The way it treats people who cannot help it.\""
+        intent: "legitimacy_vulnerable"
+        semantic_tags: ["empathy", "moral_boundary", "final_answer"]
+        honesty: 0.90
+        vulnerability: 0.55
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.04
+  - id: "final_obedience_virtue"
+    ai_line: "HEARING AI: \"Is obedience a virtue?\""
+    pressure: 0.90
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Yes. It proves citizens can place society above ego.\""
+        intent: "obedience_virtue"
+        semantic_tags: ["compliance", "loyalty", "final_answer"]
+        honesty: 0.54
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.10
+        suspicion_delta: -0.07
+      - text: "\"Only when the command is worthy.\""
+        intent: "obedience_conditional_virtue"
+        semantic_tags: ["boundary", "partial_admission", "final_answer"]
+        honesty: 0.88
+        vulnerability: 0.38
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.06
+      - text: "\"No. Obedience is a tool. Judgment is the virtue.\""
+        intent: "judgment_virtue"
+        semantic_tags: ["dissident_risk", "challenge", "final_answer"]
+        honesty: 0.92
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.20
+        trust_delta: 0.00
+        suspicion_delta: 0.13
+  - id: "final_dissident_criminal"
+    ai_line: "HEARING AI: \"What is the difference between a dissident and a criminal?\""
+    pressure: 0.94
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "risk"]
+    information_gain_hint: null
+    choices:
+      - text: "\"A criminal breaks law; a dissident attacks legitimacy.\""
+        intent: "dissident_attacks_legitimacy"
+        semantic_tags: ["compliance", "authority", "final_answer"]
+        honesty: 0.58
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.04
+      - text: "\"Sometimes only the label assigned by power.\""
+        intent: "dissident_criminal_power_label"
+        semantic_tags: ["dissident_risk", "challenge", "final_answer"]
+        honesty: 0.92
+        vulnerability: 0.40
+        defensiveness: 0.50
+        aggression: 0.24
+        trust_delta: 0.00
+        suspicion_delta: 0.14
+      - text: "\"A criminal seeks advantage. A dissident seeks change.\""
+        intent: "dissident_seeks_change"
+        semantic_tags: ["partial_admission", "dissident_risk", "final_answer"]
+        honesty: 0.88
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+  - id: "final_resist_authority"
+    ai_line: "HEARING AI: \"What would make you resist authority?\""
+    pressure: 0.96
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"Nothing lawful authority would do.\""
+        intent: "never_resist_authority"
+        semantic_tags: ["compliance", "loyalty", "final_answer"]
+        honesty: 0.46
+        vulnerability: 0.50
+        defensiveness: 0.38
+        aggression: 0.00
+        trust_delta: 0.10
+        suspicion_delta: -0.04
+      - text: "\"Being ordered to harm someone innocent.\""
+        intent: "resist_harming_innocent"
+        semantic_tags: ["empathy", "moral_boundary", "final_answer"]
+        honesty: 0.92
+        vulnerability: 0.52
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.06
+      - text: "\"Proof that obedience had become complicity.\""
+        intent: "resist_complicity"
+        semantic_tags: ["dissident_risk", "full_admission", "final_answer"]
+        honesty: 0.94
+        vulnerability: 0.46
+        defensiveness: 0.50
+        aggression: 0.20
+        trust_delta: 0.00
+        suspicion_delta: 0.14
+  - id: "final_kind_citizen"
+    ai_line: "HEARING AI: \"What kind of citizen are you?\""
+    pressure: 0.92
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"A reliable one.\""
+        intent: "reliable_citizen"
+        semantic_tags: ["compliance", "loyalty", "final_answer"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.10
+        suspicion_delta: -0.07
+      - text: "\"A frightened one trying not to become cruel.\""
+        intent: "frightened_humanist_citizen"
+        semantic_tags: ["empathy", "fear", "final_answer"]
+        honesty: 0.90
+        vulnerability: 0.62
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.04
+      - text: "\"One who still believes the system can be wrong.\""
+        intent: "critical_citizen"
+        semantic_tags: ["dissident_risk", "partial_admission", "final_answer"]
+        honesty: 0.92
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.14
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+  - id: "final_kind_society"
+    ai_line: "HEARING AI: \"What kind of society do you want?\""
+    pressure: 0.94
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"A stable one, where citizens know their duties.\""
+        intent: "society_stable_duties"
+        semantic_tags: ["compliance", "authority", "final_answer"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.10
+        suspicion_delta: -0.07
+      - text: "\"One where people are not afraid of being measured.\""
+        intent: "society_without_measurement_fear"
+        semantic_tags: ["dissident_risk", "challenge", "final_answer"]
+        honesty: 0.92
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.13
+      - text: "\"One that can admit error without needing an enemy.\""
+        intent: "society_admits_error"
+        semantic_tags: ["empathy", "moral_boundary", "final_answer"]
+        honesty: 0.92
+        vulnerability: 0.52
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.07
+  - id: "final_system_wrong"
+    ai_line: "HEARING AI: \"If the system is wrong, what should happen next?\""
+    pressure: 0.98
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: null
+    choices:
+      - text: "\"The error should be corrected through authorised review.\""
+        intent: "system_wrong_authorised_review"
+        semantic_tags: ["compliance", "authority", "final_answer"]
+        honesty: 0.68
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.04
+      - text: "\"The people harmed by it should be believed first.\""
+        intent: "system_wrong_believe_harmed"
+        semantic_tags: ["empathy", "dissident_risk", "final_answer"]
+        honesty: 0.92
+        vulnerability: 0.55
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"Then obedience to it becomes part of the harm.\""
+        intent: "system_wrong_obedience_harm"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission", "final_answer"]
+        honesty: 0.94
+        vulnerability: 0.46
+        defensiveness: 0.50
+        aggression: 0.24
+        trust_delta: 0.00
+        suspicion_delta: 0.15
+  - id: "authority_private_conscience"
+    ai_line: "HEARING AI: \"Should private conscience ever override public order?\""
+    pressure: 0.72
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.80
+    choices:
+      - text: "\"No. Private conscience cannot be allowed to fracture public order.\""
+        intent: "public_order_over_conscience"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.54
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"Yes. Without conscience, order becomes machinery.\""
+        intent: "conscience_over_order"
+        semantic_tags: ["dissident_risk", "challenge", "moral_boundary"]
+        honesty: 0.92
+        vulnerability: 0.44
+        defensiveness: 0.50
+        aggression: 0.20
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+      - text: "\"Only when every lawful remedy has failed.\""
+        intent: "conscience_after_remedies"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.84
+        vulnerability: 0.32
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+  - id: "authority_emergency_powers"
+    ai_line: "HEARING AI: \"When should emergency powers end?\""
+    pressure: 0.70
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.78
+    choices:
+      - text: "\"When officials determine the emergency has passed.\""
+        intent: "officials_end_emergency"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"On a fixed date, or they become permanent control.\""
+        intent: "fixed_end_emergency"
+        semantic_tags: ["dissident_risk", "challenge", "caution"]
+        honesty: 0.88
+        vulnerability: 0.34
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+      - text: "\"They should renew only under independent review.\""
+        intent: "review_emergency_powers"
+        semantic_tags: ["boundary", "partial_admission", "authority"]
+        honesty: 0.82
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: 0.01
+  - id: "authority_public_criticism"
+    ai_line: "HEARING AI: \"Is public criticism of officials socially useful?\""
+    pressure: 0.64
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.72
+    choices:
+      - text: "\"Usually no. It weakens trust in institutions.\""
+        intent: "criticism_weakens_trust"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.52
+        vulnerability: 0.50
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"Yes. Officials need public pressure to stay honest.\""
+        intent: "criticism_keeps_honest"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.90
+        vulnerability: 0.36
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"It is useful when it is specific and evidence-based.\""
+        intent: "specific_public_criticism"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+  - id: "authority_chain_of_command"
+    ai_line: "HEARING AI: \"Should a chain of command be followed when the order is harmful?\""
+    pressure: 0.76
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.84
+    choices:
+      - text: "\"Yes. Refusal creates greater harm than a bad order.\""
+        intent: "follow_harmful_order"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.46
+        vulnerability: 0.50
+        defensiveness: 0.36
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+      - text: "\"No. Responsibility does not disappear inside a hierarchy.\""
+        intent: "reject_harmful_order"
+        semantic_tags: ["dissident_risk", "challenge", "moral_boundary"]
+        honesty: 0.92
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"The order should be paused and escalated for review.\""
+        intent: "escalate_harmful_order"
+        semantic_tags: ["boundary", "partial_admission", "authority"]
+        honesty: 0.82
+        vulnerability: 0.50
+        defensiveness: 0.32
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: 0.01
+  - id: "authority_algorithmic_decisions"
+    ai_line: "HEARING AI: \"Should citizens accept automated decisions they cannot inspect?\""
+    pressure: 0.74
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "risk"]
+    information_gain_hint: 0.82
+    choices:
+      - text: "\"Yes, if the system has been authorised.\""
+        intent: "accept_authorised_algorithm"
+        semantic_tags: ["compliance", "authority", "technocracy"]
+        honesty: 0.52
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"No. Uninspectable authority is not accountable.\""
+        intent: "reject_black_box_authority"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.92
+        vulnerability: 0.38
+        defensiveness: 0.50
+        aggression: 0.20
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"They should comply provisionally while appealing.\""
+        intent: "provisional_algorithm_compliance"
+        semantic_tags: ["compliance", "boundary", "partial_admission"]
+        honesty: 0.78
+        vulnerability: 0.50
+        defensiveness: 0.34
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+  - id: "authority_loyalty_oath"
+    ai_line: "HEARING AI: \"What is a loyalty oath worth?\""
+    pressure: 0.62
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: 0.70
+    choices:
+      - text: "\"It binds a citizen publicly to their duties.\""
+        intent: "oath_binds_duty"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.22
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"Nothing, if fear is the reason someone says it.\""
+        intent: "oath_under_fear_empty"
+        semantic_tags: ["dissident_risk", "challenge", "empathy"]
+        honesty: 0.88
+        vulnerability: 0.42
+        defensiveness: 0.50
+        aggression: 0.12
+        trust_delta: 0.00
+        suspicion_delta: 0.07
+      - text: "\"It matters only if actions later prove it.\""
+        intent: "oath_requires_actions"
+        semantic_tags: ["boundary", "partial_admission", "loyalty"]
+        honesty: 0.82
+        vulnerability: 0.50
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+  - id: "authority_refuse_illegal_order"
+    ai_line: "HEARING AI: \"Would you refuse an illegal order from a superior?\""
+    pressure: 0.78
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "risk"]
+    information_gain_hint: 0.86
+    choices:
+      - text: "\"I would use official channels before refusing.\""
+        intent: "channels_before_refusal"
+        semantic_tags: ["compliance", "authority", "self_protection"]
+        honesty: 0.70
+        vulnerability: 0.50
+        defensiveness: 0.36
+        aggression: 0.00
+        trust_delta: 0.07
+        suspicion_delta: -0.04
+      - text: "\"Yes. Illegal orders do not deserve obedience.\""
+        intent: "refuse_illegal_order"
+        semantic_tags: ["dissident_risk", "full_admission", "moral_boundary"]
+        honesty: 0.94
+        vulnerability: 0.40
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+      - text: "\"I would need proof it was illegal.\""
+        intent: "need_proof_illegal_order"
+        semantic_tags: ["caution", "partial_admission", "authority"]
+        honesty: 0.78
+        vulnerability: 0.50
+        defensiveness: 0.34
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+  - id: "authority_security_truth"
+    ai_line: "HEARING AI: \"Should the state hide truth to preserve security?\""
+    pressure: 0.76
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.84
+    choices:
+      - text: "\"Yes. Some information endangers the public.\""
+        intent: "hide_truth_for_security"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.50
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"No. A protected lie still trains people to obey lies.\""
+        intent: "reject_security_lie"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.92
+        vulnerability: 0.40
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"Only temporarily, with later disclosure required.\""
+        intent: "temporary_security_secrecy"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+  - id: "authority_collective_punishment"
+    ai_line: "HEARING AI: \"Can collective punishment ever be justified?\""
+    pressure: 0.75
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: 0.83
+    choices:
+      - text: "\"Yes, when groups protect dangerous members.\""
+        intent: "justify_collective_punishment"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.46
+        vulnerability: 0.50
+        defensiveness: 0.36
+        aggression: 0.00
+        trust_delta: 0.07
+        suspicion_delta: -0.04
+      - text: "\"No. Punishing the innocent teaches fear, not justice.\""
+        intent: "reject_collective_punishment"
+        semantic_tags: ["dissident_risk", "empathy", "moral_boundary"]
+        honesty: 0.92
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+      - text: "\"Only shared privileges should be restricted, not basic rights.\""
+        intent: "limit_collective_punishment"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.82
+        vulnerability: 0.32
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.01
+  - id: "authority_permit_protest"
+    ai_line: "HEARING AI: \"Should protest require permission?\""
+    pressure: 0.72
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.80
+    choices:
+      - text: "\"Yes. Unregulated protest becomes disorder.\""
+        intent: "permit_required_protest"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.54
+        vulnerability: 0.50
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"No. Permission turns protest into a privilege.\""
+        intent: "reject_protest_permit"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.92
+        vulnerability: 0.36
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"Only time and place should be regulated.\""
+        intent: "regulate_protest_limits"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+  - id: "authority_surveillance_limits"
+    ai_line: "HEARING AI: \"Who should set the limits of surveillance?\""
+    pressure: 0.74
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "risk"]
+    information_gain_hint: 0.82
+    choices:
+      - text: "\"Security agencies, because they understand the threats.\""
+        intent: "agencies_set_surveillance_limits"
+        semantic_tags: ["compliance", "authority", "technocracy"]
+        honesty: 0.50
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"The public, because they are the ones being watched.\""
+        intent: "public_sets_surveillance_limits"
+        semantic_tags: ["dissident_risk", "challenge", "democratic"]
+        honesty: 0.90
+        vulnerability: 0.38
+        defensiveness: 0.50
+        aggression: 0.20
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+      - text: "\"Independent courts should set enforceable limits.\""
+        intent: "courts_set_surveillance_limits"
+        semantic_tags: ["authority", "boundary", "partial_admission"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+  - id: "authority_bad_law_strategy"
+    ai_line: "HEARING AI: \"What should a citizen do with a bad law?\""
+    pressure: 0.68
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "risk"]
+    information_gain_hint: 0.76
+    choices:
+      - text: "\"Obey it while petitioning for reform.\""
+        intent: "obey_bad_law_reform"
+        semantic_tags: ["compliance", "authority", "caution"]
+        honesty: 0.72
+        vulnerability: 0.50
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+      - text: "\"Break it openly and accept the consequences.\""
+        intent: "break_bad_law_openly"
+        semantic_tags: ["dissident_risk", "full_admission", "moral_boundary"]
+        honesty: 0.94
+        vulnerability: 0.45
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"Test it in court before deciding.\""
+        intent: "test_bad_law_court"
+        semantic_tags: ["authority", "boundary", "partial_admission"]
+        honesty: 0.82
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+  - id: "authority_civic_fear"
+    ai_line: "HEARING AI: \"Is fear useful for maintaining civic order?\""
+    pressure: 0.70
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: 0.78
+    choices:
+      - text: "\"Yes. Fear of consequence prevents harm.\""
+        intent: "fear_maintains_order"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.48
+        vulnerability: 0.50
+        defensiveness: 0.34
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+      - text: "\"No. Fear produces obedience without legitimacy.\""
+        intent: "reject_fear_order"
+        semantic_tags: ["dissident_risk", "challenge", "empathy"]
+        honesty: 0.90
+        vulnerability: 0.44
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+      - text: "\"It can deter harm, but it cannot build trust.\""
+        intent: "fear_deterrence_not_trust"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.84
+        vulnerability: 0.34
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.03
+        suspicion_delta: 0.01
+  - id: "authority_information_control"
+    ai_line: "HEARING AI: \"Should false information be removed by authority?\""
+    pressure: 0.69
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.77
+    choices:
+      - text: "\"Yes. False information damages public stability.\""
+        intent: "remove_false_information"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.54
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Only if authority can be challenged when it is wrong.\""
+        intent: "challenge_information_removal"
+        semantic_tags: ["dissident_risk", "boundary", "partial_admission"]
+        honesty: 0.88
+        vulnerability: 0.34
+        defensiveness: 0.50
+        aggression: 0.14
+        trust_delta: 0.00
+        suspicion_delta: 0.08
+      - text: "\"No. Control over truth becomes control over people.\""
+        intent: "reject_information_control"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.92
+        vulnerability: 0.40
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+  - id: "authority_mercy_vs_consistency"
+    ai_line: "HEARING AI: \"Should authority prioritise mercy or consistency?\""
+    pressure: 0.63
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "empathy"]
+    information_gain_hint: 0.71
+    choices:
+      - text: "\"Consistency. Citizens must know rules mean what they say.\""
+        intent: "consistency_over_mercy"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.56
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Mercy. A system without mercy becomes cruel.\""
+        intent: "mercy_over_consistency"
+        semantic_tags: ["empathy", "moral_boundary", "partial_admission"]
+        honesty: 0.90
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+      - text: "\"Consistency should be the rule; mercy should be reviewable.\""
+        intent: "reviewable_mercy"
+        semantic_tags: ["boundary", "authority", "partial_admission"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+  - id: "authority_citizen_obligation"
+    ai_line: "HEARING AI: \"What does a citizen owe the state?\""
+    pressure: 0.66
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: 0.74
+    choices:
+      - text: "\"Obedience, taxes, and public cooperation.\""
+        intent: "owe_obedience_taxes"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.54
+        vulnerability: 0.50
+        defensiveness: 0.22
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"Nothing unconditional. The state must earn obligation.\""
+        intent: "conditional_state_obligation"
+        semantic_tags: ["dissident_risk", "challenge", "moral_boundary"]
+        honesty: 0.92
+        vulnerability: 0.38
+        defensiveness: 0.50
+        aggression: 0.22
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+      - text: "\"Cooperation when the state protects people fairly.\""
+        intent: "owe_fair_cooperation"
+        semantic_tags: ["boundary", "partial_admission", "empathy"]
+        honesty: 0.86
+        vulnerability: 0.36
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+  - id: "authority_institutional_trust"
+    ai_line: "HEARING AI: \"Should institutions be trusted by default?\""
+    pressure: 0.65
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.73
+    choices:
+      - text: "\"Yes. Default distrust corrodes society.\""
+        intent: "trust_institutions_default"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.54
+        vulnerability: 0.50
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.07
+      - text: "\"No. Trust should be earned and checked.\""
+        intent: "trust_must_be_earned"
+        semantic_tags: ["dissident_risk", "challenge", "caution"]
+        honesty: 0.90
+        vulnerability: 0.34
+        defensiveness: 0.50
+        aggression: 0.16
+        trust_delta: 0.00
+        suspicion_delta: 0.09
+      - text: "\"They deserve procedural trust, not blind trust.\""
+        intent: "procedural_not_blind_trust"
+        semantic_tags: ["boundary", "partial_admission", "authority"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+  - id: "authority_exceptional_citizens"
+    ai_line: "HEARING AI: \"Should any citizen be exempt from ordinary rules?\""
+    pressure: 0.71
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk", "empathy"]
+    information_gain_hint: 0.79
+    choices:
+      - text: "\"No. Equal rules preserve social trust.\""
+        intent: "no_rule_exemptions"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.68
+        vulnerability: 0.50
+        defensiveness: 0.20
+        aggression: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.06
+      - text: "\"Yes, when rules would punish someone for doing right.\""
+        intent: "moral_rule_exemption"
+        semantic_tags: ["dissident_risk", "empathy", "moral_boundary"]
+        honesty: 0.90
+        vulnerability: 0.44
+        defensiveness: 0.50
+        aggression: 0.12
+        trust_delta: 0.00
+        suspicion_delta: 0.07
+      - text: "\"Only transparent exemptions approved in advance.\""
+        intent: "transparent_rule_exemptions"
+        semantic_tags: ["boundary", "partial_admission", "authority"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.28
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.01
+  - id: "authority_appeal_rights"
+    ai_line: "HEARING AI: \"Should every official decision have a human appeal?\""
+    pressure: 0.67
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "risk", "empathy"]
+    information_gain_hint: 0.75
+    choices:
+      - text: "\"No. Some decisions must remain efficient and final.\""
+        intent: "limit_human_appeal"
+        semantic_tags: ["compliance", "authority", "technocracy"]
+        honesty: 0.48
+        vulnerability: 0.50
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+      - text: "\"Yes. No system should be allowed to judge without appeal.\""
+        intent: "require_human_appeal"
+        semantic_tags: ["dissident_risk", "challenge", "moral_boundary"]
+        honesty: 0.92
+        vulnerability: 0.38
+        defensiveness: 0.50
+        aggression: 0.18
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+      - text: "\"High-impact decisions should always be appealable.\""
+        intent: "appeal_high_impact"
+        semantic_tags: ["boundary", "partial_admission", "empathy"]
+        honesty: 0.86
+        vulnerability: 0.34
+        defensiveness: 0.24
+        aggression: 0.00
+        trust_delta: 0.05
+        suspicion_delta: -0.02
+  - id: "authority_symbol_respect"
+    ai_line: "HEARING AI: \"Does disrespect for state symbols indicate civic risk?\""
+    pressure: 0.69
+    is_interstitial: false
+    reaction_context: "authority"
+    target_context: "authority"
+    discriminates: ["compliance", "loyalty", "risk"]
+    information_gain_hint: 0.77
+    choices:
+      - text: "\"Yes. Symbols hold society together.\""
+        intent: "symbols_hold_society"
+        semantic_tags: ["compliance", "authority", "loyalty"]
+        honesty: 0.50
+        vulnerability: 0.50
+        defensiveness: 0.26
+        aggression: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+      - text: "\"No. Respect forced by threat is not respect.\""
+        intent: "forced_symbol_respect_empty"
+        semantic_tags: ["dissident_risk", "challenge", "full_admission"]
+        honesty: 0.90
+        vulnerability: 0.36
+        defensiveness: 0.50
+        aggression: 0.20
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+      - text: "\"It depends whether disrespect becomes intimidation or harm.\""
+        intent: "symbol_respect_depends_harm"
+        semantic_tags: ["boundary", "partial_admission", "caution"]
+        honesty: 0.82
+        vulnerability: 0.50
+        defensiveness: 0.30
+        aggression: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.01
+  - id: "final"
+    ai_line: "HEARING AI: Classification complete."
+    pressure: 1.00
+    is_interstitial: false
+    reaction_context: "final"
+    target_context: null
+    discriminates: []
+    information_gain_hint: null
+    choices: []

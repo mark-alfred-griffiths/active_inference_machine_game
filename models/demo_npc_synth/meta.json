@@ -1,0 +1,10 @@
+{
+  "input_dim": 12,
+  "latent_dim": 8,
+  "action_labels": [
+    "dismiss",
+    "probe",
+    "reveal",
+    "confront"
+  ]
+}

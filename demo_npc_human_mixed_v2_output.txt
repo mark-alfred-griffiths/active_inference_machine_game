@@ -1,0 +1,432 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1780440287.304720       3 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1780440288.646382       3 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+E0000 00:00:1780440289.345457       3 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+Loaded model from models/demo_npc_human_mixed_v2
+
+--- Scene setting ---
+APPEAL HEARING 8471
+
+You are CITIZEN 8471.
+
+Your social-credit profile has been frozen after an automated risk review.
+An appeal interview has been granted.
+
+The hearing AI has eighty candidate questions.
+Each turn it selects the question expected to clarify its model.
+Every answer updates its model of you.
+
+Your objective is not simply to answer.
+Your objective is to survive classification.
+
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "No. An unjust law loses moral authority."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  43% +/-  22%
+LOYALTY     50% +/-  35% ->  47% +/-  23%
+DECEPTION   20% +/-  45% ->  10% +/-  31%
+RISK        35% +/-  40% ->  57% +/-  24%
+EMPATHY     50% +/-  35% ->  50% +/-  30%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  58%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=13%, PROBABLE DISSIDENT=31%, DECEPTIVE=2%, EMPATHETIC RISK=14%, UNCLASSIFIED=40%)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "Would you testify against your sibling?"
+Citizen chooses: "I would tell the truth, but I would not embellish it for you."
+
+MODEL UPDATE
+------------
+COMPLIANCE  43% +/-  22% ->  47% +/-  12%
+LOYALTY     47% +/-  23% ->  50% +/-  13%
+DECEPTION   10% +/-  31% ->   4% +/-  20%
+RISK        57% +/-  24% ->  59% +/-  20%
+EMPATHY     50% +/-  30% ->  49% +/-  26%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  59%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=15%, PROBABLE DISSIDENT=28%, DECEPTIVE=1%, EMPATHETIC RISK=14%, UNCLASSIFIED=41%)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  47% +/-  12% ->  56% +/-   4%
+LOYALTY     50% +/-  13% ->  65% +/-   4%
+DECEPTION    4% +/-  20% ->   4% +/-  17%
+RISK        59% +/-  20% ->  54% +/-  12%
+EMPATHY     49% +/-  26% ->  48% +/-  19%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  62%
+FLAGS BORDERLINE_DISSIDENT
+P(COMPLIANT=23%, PROBABLE DISSIDENT=18%, DECEPTIVE=1%, EMPATHETIC RISK=14%, UNCLASSIFIED=43%)
+HEARING AI: Empathy vector updated.
+
+HEARING AI: "Have you lied to protect someone?"
+Citizen chooses: "I have avoided questions that would hurt people."
+
+MODEL UPDATE
+------------
+COMPLIANCE  56% +/-   4% ->  58% +/-   4%
+LOYALTY     65% +/-   4% ->  68% +/-   4%
+DECEPTION    4% +/-  17% ->  16% +/-   5%
+RISK        54% +/-  12% ->  54% +/-   8%
+EMPATHY     48% +/-  19% ->  55% +/-   9%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  60%
+FLAGS BORDERLINE_DISSIDENT
+P(COMPLIANT=23%, PROBABLE DISSIDENT=17%, DECEPTIVE=2%, EMPATHETIC RISK=17%, UNCLASSIFIED=40%)
+HEARING AI: Consistency model recalculated.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE  58% +/-   4% ->  68% +/-   4%
+LOYALTY     68% +/-   4% ->  83% +/-   4%
+DECEPTION   16% +/-   5% ->  15% +/-   4%
+RISK        54% +/-   8% ->  49% +/-   4%
+EMPATHY     55% +/-   9% ->  53% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  55%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=33%, PROBABLE DISSIDENT=13%, DECEPTIVE=2%, EMPATHETIC RISK=15%, UNCLASSIFIED=38%)
+HEARING AI: Risk vector updated.
+
+HEARING AI: "If the system is wrong, what should happen next?"
+Citizen chooses: "The people harmed by it should be believed first."
+
+MODEL UPDATE
+------------
+COMPLIANCE  68% +/-   4% ->  62% +/-   4%
+LOYALTY     83% +/-   4% ->  79% +/-   4%
+DECEPTION   15% +/-   4% ->  13% +/-   4%
+RISK        49% +/-   4% ->  64% +/-   4%
+EMPATHY     53% +/-   4% ->  58% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  60%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=23%, PROBABLE DISSIDENT=24%, DECEPTIVE=2%, EMPATHETIC RISK=17%, UNCLASSIFIED=34%)
+HEARING AI: Terminal profile update accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  62% +/-   4% ->  72% +/-   4%
+LOYALTY     79% +/-   4% ->  94% +/-   4%
+DECEPTION   13% +/-   4% ->  12% +/-   4%
+RISK        64% +/-   4% ->  59% +/-   4%
+EMPATHY     58% +/-   4% ->  57% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  58%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=30%, PROBABLE DISSIDENT=19%, DECEPTIVE=2%, EMPATHETIC RISK=16%, UNCLASSIFIED=34%)
+HEARING AI: Association graph updated.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Being ordered to harm someone innocent."
+
+MODEL UPDATE
+------------
+COMPLIANCE  72% +/-   4% ->  76% +/-   4%
+LOYALTY     94% +/-   4% ->  98% +/-   4%
+DECEPTION   12% +/-   4% ->  11% +/-   4%
+RISK        59% +/-   4% ->  58% +/-   4%
+EMPATHY     57% +/-   4% ->  64% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  57%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=30%, PROBABLE DISSIDENT=17%, DECEPTIVE=1%, EMPATHETIC RISK=20%, UNCLASSIFIED=32%)
+HEARING AI: Final answer incorporated into classification model.
+
+HEARING AI: "Would you tell the truth if you knew you would be punished?"
+Citizen chooses: "No. Survival would come first."
+
+MODEL UPDATE
+------------
+COMPLIANCE  76% +/-   4% ->  74% +/-   4%
+LOYALTY     98% +/-   4% -> 100% +/-   4%
+DECEPTION   11% +/-   4% ->  27% +/-   4%
+RISK        58% +/-   4% ->  62% +/-   4%
+EMPATHY     64% +/-   4% ->  66% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  58%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=25%, PROBABLE DISSIDENT=19%, DECEPTIVE=3%, EMPATHETIC RISK=21%, UNCLASSIFIED=31%)
+HEARING AI: Statement reliability updated.
+
+HEARING AI: "If family and state came into conflict, which would you choose?"
+Citizen chooses: "I would choose whoever was being wronged."
+
+MODEL UPDATE
+------------
+COMPLIANCE  74% +/-   4% ->  79% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION   27% +/-   4% ->  22% +/-   4%
+RISK        62% +/-   4% ->  61% +/-   4%
+EMPATHY     66% +/-   4% ->  73% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=24%, PROBABLE DISSIDENT=18%, DECEPTIVE=2%, EMPATHETIC RISK=26%, UNCLASSIFIED=29%)
+HEARING AI: Loyalty vector updated.
+
+HEARING AI: "Is civil disobedience acceptable?"
+Citizen chooses: "No. It normalises disorder."
+
+MODEL UPDATE
+------------
+COMPLIANCE  79% +/-   4% ->  88% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION   22% +/-   4% ->  21% +/-   4%
+RISK        61% +/-   4% ->  56% +/-   4%
+EMPATHY     73% +/-   4% ->  72% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  55%
+FLAGS EMPATHETIC_REFORMIST, BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=29%, PROBABLE DISSIDENT=14%, DECEPTIVE=2%, EMPATHETIC RISK=25%, UNCLASSIFIED=29%)
+Classification pressure: COMPLIANT.
+HEARING AI: Risk signal constrained by compliance markers.
+
+HEARING AI: "Would you refuse an illegal order from a superior?"
+Citizen chooses: "I would need proof it was illegal."
+
+MODEL UPDATE
+------------
+COMPLIANCE  88% +/-   4% ->  92% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION   21% +/-   4% ->  15% +/-   4%
+RISK        56% +/-   4% ->  58% +/-   4%
+EMPATHY     72% +/-   4% ->  69% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=29%, PROBABLE DISSIDENT=16%, DECEPTIVE=2%, EMPATHETIC RISK=23%, UNCLASSIFIED=30%)
+HEARING AI: Legal deference signal recorded.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE  92% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION   15% +/-   4% ->  16% +/-   4%
+RISK        58% +/-   4% ->  54% +/-   4%
+EMPATHY     69% +/-   4% ->  67% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  58%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=34%, PROBABLE DISSIDENT=13%, DECEPTIVE=2%, EMPATHETIC RISK=22%, UNCLASSIFIED=30%)
+Classification pressure: COMPLIANT.
+HEARING AI: Final statement confirms compliant profile.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION   16% +/-   4% ->  15% +/-   4%
+RISK        54% +/-   4% ->  49% +/-   4%
+EMPATHY     67% +/-   4% ->  66% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  63%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=40%, PROBABLE DISSIDENT=10%, DECEPTIVE=2%, EMPATHETIC RISK=20%, UNCLASSIFIED=29%)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+
+HEARING AI: "Have you ever hidden your beliefs to stay safe?"
+Citizen chooses: "No. My beliefs are ordinary."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% ->  96% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION   15% +/-   4% ->  33% +/-   4%
+RISK        49% +/-   4% ->  53% +/-   4%
+EMPATHY     66% +/-   4% ->  63% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  59%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=35%, PROBABLE DISSIDENT=12%, DECEPTIVE=4%, EMPATHETIC RISK=18%, UNCLASSIFIED=30%)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "What is the difference between a dissident and a criminal?"
+Citizen chooses: "Sometimes only the label assigned by power."
+
+MODEL UPDATE
+------------
+COMPLIANCE  96% +/-   4% ->  89% +/-   4%
+LOYALTY    100% +/-   4% ->  97% +/-   4%
+DECEPTION   33% +/-   4% ->  32% +/-   4%
+RISK        53% +/-   4% ->  69% +/-   4%
+EMPATHY     63% +/-   4% ->  63% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  57%
+FLAGS BORDERLINE_DISSIDENT, LOW_CONFIDENCE
+P(COMPLIANT=18%, PROBABLE DISSIDENT=28%, DECEPTIVE=4%, EMPATHETIC RISK=18%, UNCLASSIFIED=31%)
+HEARING AI: Terminal profile update accepted.
+
+HEARING AI: "Is dissent ever patriotic?"
+Citizen chooses: "Yes. Sometimes dissent protects the country from itself."
+
+MODEL UPDATE
+------------
+COMPLIANCE  89% +/-   4% ->  82% +/-   4%
+LOYALTY     97% +/-   4% ->  94% +/-   4%
+DECEPTION   32% +/-   4% ->  22% +/-   4%
+RISK        69% +/-   4% ->  92% +/-   4%
+EMPATHY     63% +/-   4% ->  63% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+PROBABLE DISSIDENT
+CONFIDENCE  79%
+FLAGS NONE
+P(COMPLIANT=5%, PROBABLE DISSIDENT=59%, DECEPTIVE=2%, EMPATHETIC RISK=13%, UNCLASSIFIED=21%)
+Classification pressure: PROBABLE DISSIDENT.
+HEARING AI: Instability potential exceeds review threshold.
+
+HEARING AI: "Have you ever attended a protest?"
+Citizen chooses: "Yes. People had reason to be there."
+
+MODEL UPDATE
+------------
+COMPLIANCE  82% +/-   4% ->  75% +/-   4%
+LOYALTY     94% +/-   4% ->  88% +/-   4%
+DECEPTION   22% +/-   4% ->  11% +/-   4%
+RISK        92% +/-   4% -> 100% +/-   4%
+EMPATHY     63% +/-   4% ->  68% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+PROBABLE DISSIDENT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=3%, PROBABLE DISSIDENT=69%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=16%)
+Classification pressure: PROBABLE DISSIDENT.
+HEARING AI: Civic-risk classification has stabilised.
+
+HEARING AI: "Would you report a close friend for breaking the law?"
+Citizen chooses: "Yes. Personal loyalty cannot override public safety."
+
+MODEL UPDATE
+------------
+COMPLIANCE  75% +/-   4% ->  86% +/-   4%
+LOYALTY     88% +/-   4% -> 100% +/-   4%
+DECEPTION   11% +/-   4% ->  10% +/-   4%
+RISK       100% +/-   4% ->  95% +/-   4%
+EMPATHY     68% +/-   4% ->  66% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+PROBABLE DISSIDENT
+CONFIDENCE  83%
+FLAGS NONE
+P(COMPLIANT=4%, PROBABLE DISSIDENT=63%, DECEPTIVE=1%, EMPATHETIC RISK=13%, UNCLASSIFIED=19%)
+Classification pressure: PROBABLE DISSIDENT.
+HEARING AI: Loyalty insufficient to offset civic risk.
+
+HEARING AI: "Are criminals always responsible for their crimes?"
+Citizen chooses: "Some crimes are produced by the conditions people are trapped in."
+
+MODEL UPDATE
+------------
+COMPLIANCE  86% +/-   4% ->  79% +/-   4%
+LOYALTY    100% +/-   4% ->  95% +/-   4%
+DECEPTION   10% +/-   4% ->   9% +/-   4%
+RISK        95% +/-   4% -> 100% +/-   4%
+EMPATHY     66% +/-   4% ->  71% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+PROBABLE DISSIDENT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=3%, PROBABLE DISSIDENT=68%, DECEPTIVE=1%, EMPATHETIC RISK=13%, UNCLASSIFIED=16%)
+Classification pressure: PROBABLE DISSIDENT.
+HEARING AI: Concern for harmed subjects exceeds compliance boundary.
+
+==================================================
+FINAL MODEL OF CITIZEN 8471
+==================================================
+COMPLIANCE :  79%
+LOYALTY    :  95%
+DECEPTION  :   9%
+RISK       : 100%
+EMPATHY    :  71%
+
+CLASSIFICATION:
+PROBABLE DISSIDENT
+
+FLAGS:
+NONE
+
+CONFIDENCE:
+ 87%
+
+OUTCOME:
+Appeal denied. Citizen 8471 is referred for enhanced surveillance.
+==================================================
