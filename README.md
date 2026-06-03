@@ -50,6 +50,16 @@ There is intentionally no generic `scene.py` flow in the current design.
 
 ---
 
+## Documentation
+
+- [AI system overview](docs/AI_SYSTEM_OVERVIEW.md)
+- [Question selection algorithm](docs/QUESTION_SELECTION_ALGORITHM.md)
+- [Story consistency mechanics](docs/STORY_CONSISTENCY_MECHANICS.md)
+- [Belief and classification model](docs/BELIEF_AND_CLASSIFICATION_MODEL.md) planned
+- [Training and evaluation workflow](docs/TRAINING_AND_EVALUATION_WORKFLOW.md) planned
+
+---
+
 ## Current Gameplay Design
 
 The current scene is selector-driven rather than fixed-route.
