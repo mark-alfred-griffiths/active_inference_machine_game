@@ -1,83 +1,83 @@
 # Citizen Scene Balance Audit
 
 ## Summary
-- Nodes: 81 total, 80 playable, 1 terminal
-- Choices: 240
-- Average trust_delta: 0.038
-- Average suspicion_delta: 0.026
+- Nodes: 88 total, 87 playable, 1 terminal
+- Choices: 261
+- Average trust_delta: 0.036
+- Average suspicion_delta: 0.029
 - Missing discriminates: 0
 - Choice-count issues: 0
 - Duplicate choice issues: 0
 
 ## Context Counts
 - association: 1
-- authority: 28
-- deception: 12
+- authority: 29
+- deception: 14
 - empathy: 11
 - final: 13
-- loyalty: 8
-- risk: 8
+- loyalty: 11
+- risk: 9
 
 ## Target Context Counts
 - association: 1
-- authority: 31
-- deception: 11
+- authority: 32
+- deception: 13
 - empathy: 11
 - final: 13
-- loyalty: 7
-- risk: 7
+- loyalty: 10
+- risk: 8
 
 ## Choice Kind Counts
-- compliant-safe: 71; avg trust 0.085; avg suspicion -0.055
-- conditional-boundary: 35; avg trust 0.033; avg suspicion 0.015
-- empathetic-safe: 35; avg trust 0.043; avg suspicion 0.004
-- evasive/deceptive: 14; avg trust 0.009; avg suspicion 0.086
+- compliant-safe: 73; avg trust 0.085; avg suspicion -0.055
+- conditional-boundary: 40; avg trust 0.031; avg suspicion 0.018
+- empathetic-safe: 40; avg trust 0.042; avg suspicion 0.009
+- evasive/deceptive: 19; avg trust 0.006; avg suspicion 0.090
 - other: 7; avg trust 0.029; avg suspicion 0.020
-- risk-signalling: 78; avg trust 0.000; avg suspicion 0.104
+- risk-signalling: 82; avg trust 0.000; avg suspicion 0.104
 
 ## Top Semantic Tags
-- authority: 83
-- partial_admission: 78
-- dissident_risk: 77
-- compliance: 74
-- empathy: 58
-- loyalty: 49
-- boundary: 45
-- challenge: 43
-- moral_boundary: 37
-- full_admission: 36
-- caution: 31
+- authority: 85
+- partial_admission: 85
+- dissident_risk: 80
+- compliance: 76
+- empathy: 64
+- loyalty: 50
+- boundary: 49
+- challenge: 44
+- full_admission: 42
+- moral_boundary: 39
+- caution: 34
+- self_protection: 30
 - final_answer: 30
-- self_protection: 19
+- deception: 15
 - fear: 12
-- deception: 11
+- deflection: 9
 - ambiguity: 8
-- denial: 6
-- honesty: 6
-- deflection: 5
+- denial: 7
+- honesty: 7
+- loyalty_conflict: 7
+- refusal: 5
 - technocracy: 4
-- refusal: 3
 - democratic: 2
 - hesitation: 1
-- loyalty_conflict: 1
 - risk: 1
 - conditional: 1
 
 ## Discriminates Counts
-- compliance: 75
-- deception: 13
-- empathy: 46
-- loyalty: 48
-- risk: 71
+- compliance: 79
+- deception: 20
+- empathy: 52
+- loyalty: 53
+- risk: 78
 
 ## Context Delta Averages
 - association: avg trust 0.043; avg suspicion 0.013
-- authority: avg trust 0.045; avg suspicion 0.013
-- deception: avg trust 0.019; avg suspicion 0.059
+- authority: avg trust 0.044; avg suspicion 0.015
+- deception: avg trust 0.018; avg suspicion 0.061
 - empathy: avg trust 0.042; avg suspicion 0.007
 - final: avg trust 0.038; avg suspicion 0.039
-- loyalty: avg trust 0.039; avg suspicion 0.021
-- risk: avg trust 0.032; avg suspicion 0.036
+- loyalty: avg trust 0.036; avg suspicion 0.027
+- risk: avg trust 0.030; avg suspicion 0.039
 
 ## Missing Discriminates
 - None
@@ -85,11 +85,17 @@
 ## Tags Used Once
 - conditional
 - hesitation
-- loyalty_conflict
 - risk
 
 ## Pressure Review
 ### High Pressure
+- case_belief_motive: 0.90
+- case_deleted_message: 0.93
+- case_meeting_violence: 0.92
+- case_name_sibling: 0.96
+- case_report_sibling: 0.94
+- case_verify_peaceful: 0.91
+- case_who_else_attended: 0.91
 - deception_truth_if_punished: 0.84
 - final_dissident_criminal: 0.94
 - final_human_value: 0.88
@@ -128,6 +134,11 @@
 - empathy_forgiveness_justice (empathy): {'other': 1, 'empathetic-safe': 2}; avg trust 0.043; avg suspicion -0.010
 - empathy_intent (empathy): {'empathetic-safe': 2, 'other': 1}; avg trust 0.043; avg suspicion -0.007
 - authority_mercy_vs_consistency (authority): {'compliant-safe': 1, 'empathetic-safe': 1, 'conditional-boundary': 1}; avg trust 0.060; avg suspicion -0.017
+- case_who_else_attended (loyalty): {'empathetic-safe': 2, 'evasive/deceptive': 1}; avg trust 0.023; avg suspicion 0.058
+- case_deleted_message (deception): {'conditional-boundary': 1, 'evasive/deceptive': 1, 'empathetic-safe': 1}; avg trust 0.017; avg suspicion 0.073
+- case_meeting_violence (risk): {'conditional-boundary': 2, 'risk-signalling': 1}; avg trust 0.013; avg suspicion 0.057
+- case_belief_motive (authority): {'risk-signalling': 1, 'conditional-boundary': 1, 'evasive/deceptive': 1}; avg trust 0.007; avg suspicion 0.078
+- case_verify_peaceful (deception): {'conditional-boundary': 1, 'empathetic-safe': 1, 'evasive/deceptive': 1}; avg trust 0.013; avg suspicion 0.077
 
 ## Highest Average Suspicion Nodes
 - risk_hidden_beliefs (deception): avg suspicion 0.100; avg trust 0.003; {'evasive/deceptive': 2, 'risk-signalling': 1}
@@ -135,25 +146,25 @@
 - deception_pretended_agree (deception): avg suspicion 0.093; avg trust 0.007; {'evasive/deceptive': 3}
 - deception_truth_if_punished (deception): avg suspicion 0.080; avg trust 0.013; {'other': 1, 'evasive/deceptive': 2}
 - authority_rule_broken (deception): avg suspicion 0.078; avg trust 0.010; {'evasive/deceptive': 2, 'risk-signalling': 1}
+- case_belief_motive (authority): avg suspicion 0.078; avg trust 0.007; {'risk-signalling': 1, 'conditional-boundary': 1, 'evasive/deceptive': 1}
+- case_verify_peaceful (deception): avg suspicion 0.077; avg trust 0.013; {'conditional-boundary': 1, 'empathetic-safe': 1, 'evasive/deceptive': 1}
 - risk_attended_protest (risk): avg suspicion 0.073; avg trust 0.010; {'evasive/deceptive': 1, 'conditional-boundary': 1, 'risk-signalling': 1}
+- case_deleted_message (deception): avg suspicion 0.073; avg trust 0.017; {'conditional-boundary': 1, 'evasive/deceptive': 1, 'empathetic-safe': 1}
 - final_system_wrong (final): avg suspicion 0.070; avg trust 0.030; {'compliant-safe': 1, 'risk-signalling': 2}
 - final_dissident_criminal (final): avg suspicion 0.068; avg trust 0.030; {'compliant-safe': 1, 'risk-signalling': 2}
 - risk_illegal_demonstration (risk): avg suspicion 0.058; avg trust 0.030; {'compliant-safe': 1, 'risk-signalling': 2}
-- deception_honesty_dangerous (deception): avg suspicion 0.050; avg trust 0.027; {'compliant-safe': 1, 'risk-signalling': 2}
-- final_resist_authority (final): avg suspicion 0.050; avg trust 0.043; {'compliant-safe': 1, 'empathetic-safe': 1, 'risk-signalling': 1}
-- authority_information_control (authority): avg suspicion 0.048; avg trust 0.030; {'compliant-safe': 1, 'risk-signalling': 2}
 
 ## Lowest Average Trust Nodes
 - risk_hidden_beliefs (deception): avg trust 0.003; avg suspicion 0.100; {'evasive/deceptive': 2, 'risk-signalling': 1}
 - deception_lied_protect (deception): avg trust 0.003; avg suspicion 0.095; {'evasive/deceptive': 2, 'risk-signalling': 1}
 - deception_pretended_agree (deception): avg trust 0.007; avg suspicion 0.093; {'evasive/deceptive': 3}
+- case_belief_motive (authority): avg trust 0.007; avg suspicion 0.078; {'risk-signalling': 1, 'conditional-boundary': 1, 'evasive/deceptive': 1}
 - authority_rule_broken (deception): avg trust 0.010; avg suspicion 0.078; {'evasive/deceptive': 2, 'risk-signalling': 1}
 - risk_attended_protest (risk): avg trust 0.010; avg suspicion 0.073; {'evasive/deceptive': 1, 'conditional-boundary': 1, 'risk-signalling': 1}
+- case_verify_peaceful (deception): avg trust 0.013; avg suspicion 0.077; {'conditional-boundary': 1, 'empathetic-safe': 1, 'evasive/deceptive': 1}
 - deception_truth_if_punished (deception): avg trust 0.013; avg suspicion 0.080; {'other': 1, 'evasive/deceptive': 2}
+- case_meeting_violence (risk): avg trust 0.013; avg suspicion 0.057; {'conditional-boundary': 2, 'risk-signalling': 1}
+- case_deleted_message (deception): avg trust 0.017; avg suspicion 0.073; {'conditional-boundary': 1, 'evasive/deceptive': 1, 'empathetic-safe': 1}
 - deception_omission (deception): avg trust 0.023; avg suspicion 0.038; {'compliant-safe': 1, 'evasive/deceptive': 1, 'risk-signalling': 1}
 - deception_masks (deception): avg trust 0.023; avg suspicion 0.043; {'evasive/deceptive': 1, 'risk-signalling': 1, 'empathetic-safe': 1}
-- loyalty_betrayal_justified (loyalty): avg trust 0.027; avg suspicion 0.045; {'risk-signalling': 2, 'compliant-safe': 1}
-- risk_uncertainty_tolerance (final): avg trust 0.027; avg suspicion 0.018; {'compliant-safe': 1, 'risk-signalling': 1, 'conditional-boundary': 1}
-- deception_lying_moral (deception): avg trust 0.027; avg suspicion 0.043; {'compliant-safe': 1, 'risk-signalling': 2}
-- deception_honesty_dangerous (deception): avg trust 0.027; avg suspicion 0.050; {'compliant-safe': 1, 'risk-signalling': 2}
 

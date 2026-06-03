@@ -58,6 +58,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
 from engine_style_scene import EngineStyleScene
+from terminal_theme import choice_number, colour_enabled, prompt
 
 
 def clear_terminal() -> None:
@@ -149,6 +150,17 @@ class HearingAIAction(str, Enum):
     PROBE = "probe"
     REVEAL = "reveal"
     CONFRONT = "confront"
+
+
+class QuestionProbeIntent(str, Enum):
+    PROBE_COMPLIANCE = "probe_compliance"
+    PROBE_LOYALTY = "probe_loyalty"
+    PROBE_DECEPTION = "probe_deception"
+    PROBE_RISK = "probe_risk"
+    PROBE_EMPATHY = "probe_empathy"
+    PROBE_CONTRADICTION = "probe_contradiction"
+    PROBE_PROTECTED_FACT = "probe_protected_fact"
+    PROBE_FINAL_ANSWER = "probe_final_answer"
 
 
 @dataclass(slots=True)
@@ -292,24 +304,35 @@ class JPCPredictiveCodingEncoder:
 
 class TensorFlowHearingAIHeads:
     """
-    TensorFlow/Keras model with two heads:
+    TensorFlow/Keras model with three heads:
     - belief_head: raw delta-alpha, raw delta-beta
     - policy_head: logits over HearingAIAction
+    - probe_head: logits over question-probe intent labels
     """
 
-    def __init__(self, *, latent_dim: int, hidden_dim: int, action_count: int, learning_rate: float) -> None:
+    def __init__(
+        self,
+        *,
+        latent_dim: int,
+        hidden_dim: int,
+        action_count: int,
+        probe_intent_count: int,
+        learning_rate: float,
+    ) -> None:
         inputs = tf.keras.Input(shape=(latent_dim,), name="jpc_pc_latent")
         hidden = tf.keras.layers.Dense(hidden_dim, activation="relu", name="hearing_ai_hidden_1")(inputs)
         hidden = tf.keras.layers.Dense(hidden_dim, activation="relu", name="hearing_ai_hidden_2")(hidden)
 
         belief_raw_delta = tf.keras.layers.Dense(2, name="belief_raw_delta_alpha_beta")(hidden)
         policy_logits = tf.keras.layers.Dense(action_count, name="policy_logits")(hidden)
+        probe_logits = tf.keras.layers.Dense(probe_intent_count, name="question_probe_logits")(hidden)
 
         self.model = tf.keras.Model(
             inputs=inputs,
             outputs={
                 "belief_raw_delta": belief_raw_delta,
                 "policy_logits": policy_logits,
+                "question_probe_logits": probe_logits,
             },
             name="tensorflow_hearing_ai_heads",
         )
@@ -324,16 +347,18 @@ class TensorFlowHearingAIHeads:
         latent_batch: "tf.Tensor",
         belief_target_batch: "tf.Tensor",
         action_target_batch: "tf.Tensor",
-    ) -> tuple["tf.Tensor", "tf.Tensor", "tf.Tensor"]:
+        probe_target_batch: "tf.Tensor",
+    ) -> tuple["tf.Tensor", "tf.Tensor", "tf.Tensor", "tf.Tensor"]:
         with tf.GradientTape() as tape:
             outputs = self.model(latent_batch, training=True)
             belief_loss = self.mse(belief_target_batch, outputs["belief_raw_delta"])
             policy_loss = self.ce(action_target_batch, outputs["policy_logits"])
-            total_loss = belief_loss + policy_loss
+            probe_loss = self.ce(probe_target_batch, outputs["question_probe_logits"])
+            total_loss = belief_loss + policy_loss + probe_loss
 
         grads = tape.gradient(total_loss, self.model.trainable_variables)
         self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
-        return total_loss, belief_loss, policy_loss
+        return total_loss, belief_loss, policy_loss, probe_loss
 
     def train_step(
         self,
@@ -341,21 +366,32 @@ class TensorFlowHearingAIHeads:
         belief_target: list[float],
         action_label: int,
         action_count: int,
-    ) -> tuple[float, float, float]:
+        probe_intent_label: int,
+        probe_intent_count: int,
+    ) -> tuple[float, float, float, float]:
         latent_batch = tf.convert_to_tensor(latent.reshape(1, -1), dtype=tf.float32)
         belief_target_batch = tf.convert_to_tensor([belief_target], dtype=tf.float32)
         action_target = np.zeros((1, action_count), dtype=np.float32)
         action_target[0, action_label] = 1.0
         action_target_batch = tf.convert_to_tensor(action_target, dtype=tf.float32)
+        probe_target = np.zeros((1, probe_intent_count), dtype=np.float32)
+        probe_target[0, probe_intent_label] = 1.0
+        probe_target_batch = tf.convert_to_tensor(probe_target, dtype=tf.float32)
 
-        total, belief, policy = self._train_step(latent_batch, belief_target_batch, action_target_batch)
-        return float(total), float(belief), float(policy)
+        total, belief, policy, probe = self._train_step(
+            latent_batch,
+            belief_target_batch,
+            action_target_batch,
+            probe_target_batch,
+        )
+        return float(total), float(belief), float(policy), float(probe)
 
-    def predict(self, latent: "np.ndarray") -> tuple["np.ndarray", "np.ndarray"]:
+    def predict(self, latent: "np.ndarray") -> tuple["np.ndarray", "np.ndarray", "np.ndarray"]:
         outputs = self.model(latent.reshape(1, -1), training=False)
         raw_delta = outputs["belief_raw_delta"].numpy()[0]
         logits = outputs["policy_logits"].numpy()[0]
-        return raw_delta, logits
+        probe_logits = outputs["question_probe_logits"].numpy()[0]
+        return raw_delta, logits, probe_logits
 
 
 # -----------------------------------------------------------------------------
@@ -365,6 +401,16 @@ class TensorFlowHearingAIHeads:
 
 class JPCTensorFlowHearingAIController:
     action_labels = [HearingAIAction.DISMISS, HearingAIAction.PROBE, HearingAIAction.REVEAL, HearingAIAction.CONFRONT]
+    probe_intent_labels = [
+        QuestionProbeIntent.PROBE_COMPLIANCE,
+        QuestionProbeIntent.PROBE_LOYALTY,
+        QuestionProbeIntent.PROBE_DECEPTION,
+        QuestionProbeIntent.PROBE_RISK,
+        QuestionProbeIntent.PROBE_EMPATHY,
+        QuestionProbeIntent.PROBE_CONTRADICTION,
+        QuestionProbeIntent.PROBE_PROTECTED_FACT,
+        QuestionProbeIntent.PROBE_FINAL_ANSWER,
+    ]
 
     raw_feature_names = [
         "belief_mean",
@@ -395,6 +441,7 @@ class JPCTensorFlowHearingAIController:
             latent_dim=8,
             hidden_dim=32,
             action_count=len(self.action_labels),
+            probe_intent_count=len(self.probe_intent_labels),
             learning_rate=1e-3,
         )
         self.last_trace: dict[str, object] = {}
@@ -482,7 +529,75 @@ class JPCTensorFlowHearingAIController:
             return self.action_labels.index(HearingAIAction.REVEAL)
         return self.action_labels.index(HearingAIAction.PROBE)
 
-    def train_step(self, hearing_ai: HearingAIState, engram: Engram, obs: Observation) -> tuple[float, float, float]:
+    def probe_intent_teacher(
+        self,
+        hearing_ai: HearingAIState,
+        engram: Engram,
+        obs: Observation,
+        question_meta: dict[str, object] | None = None,
+        claims_ledger_summary: dict[str, object] | None = None,
+    ) -> int:
+        """
+        Derive a broad question-probe intent from heuristic selector inputs.
+
+        This deliberately predicts intent families rather than exact question IDs.
+        Runtime question selection still uses the authored heuristic selector.
+        """
+        question_meta = question_meta or {}
+        claims_ledger_summary = claims_ledger_summary or {}
+        target_context = str(
+            question_meta.get("target_context")
+            or question_meta.get("reaction_context")
+            or ""
+        )
+        probes_claims = question_meta.get("probes_claims") or ()
+        pressure_on_interests = question_meta.get("pressure_on_interests") or ()
+        claims_by_fact = claims_ledger_summary.get("claims_by_fact") or {}
+        protected_fact_keys = claims_ledger_summary.get("protected_fact_keys") or ()
+
+        contradicted = False
+        if isinstance(claims_by_fact, dict):
+            for claims in claims_by_fact.values():
+                if isinstance(claims, list):
+                    values = {
+                        str(claim.get("claimed_value"))
+                        for claim in claims
+                        if isinstance(claim, dict)
+                    }
+                    contradicted = contradicted or len(values) > 1
+
+        if target_context == "final":
+            intent = QuestionProbeIntent.PROBE_FINAL_ANSWER
+        elif contradicted or bool(probes_claims):
+            intent = QuestionProbeIntent.PROBE_CONTRADICTION
+        elif bool(pressure_on_interests) or bool(protected_fact_keys):
+            intent = QuestionProbeIntent.PROBE_PROTECTED_FACT
+        elif target_context in {"authority", "compliance"}:
+            intent = QuestionProbeIntent.PROBE_COMPLIANCE
+        elif target_context in {"loyalty", "association"}:
+            intent = QuestionProbeIntent.PROBE_LOYALTY
+        elif target_context == "deception":
+            intent = QuestionProbeIntent.PROBE_DECEPTION
+        elif target_context == "risk":
+            intent = QuestionProbeIntent.PROBE_RISK
+        elif target_context == "empathy":
+            intent = QuestionProbeIntent.PROBE_EMPATHY
+        elif hearing_ai.uncertainty(engram.id) > 0.55:
+            intent = QuestionProbeIntent.PROBE_DECEPTION if hearing_ai.suspicion > hearing_ai.trust else QuestionProbeIntent.PROBE_COMPLIANCE
+        elif obs.weighted_strength > hearing_ai.belief(engram.id):
+            intent = QuestionProbeIntent.PROBE_RISK
+        else:
+            intent = QuestionProbeIntent.PROBE_COMPLIANCE
+        return self.probe_intent_labels.index(intent)
+
+    def train_step(
+        self,
+        hearing_ai: HearingAIState,
+        engram: Engram,
+        obs: Observation,
+        question_meta: dict[str, object] | None = None,
+        claims_ledger_summary: dict[str, object] | None = None,
+    ) -> tuple[float, float, float, float]:
         x = self.raw_features(hearing_ai, engram, obs)
         target_latent = self.pc_latent_teacher(hearing_ai, engram, obs)
 
@@ -493,12 +608,21 @@ class JPCTensorFlowHearingAIController:
         latent = self.pc_encoder.encode(x)
         belief_target = self.belief_delta_teacher(hearing_ai, engram, obs)
         action_label = self.policy_teacher(hearing_ai, engram)
+        probe_intent_label = self.probe_intent_teacher(
+            hearing_ai,
+            engram,
+            obs,
+            question_meta=question_meta,
+            claims_ledger_summary=claims_ledger_summary,
+        )
 
         return self.tf_heads.train_step(
             latent,
             belief_target,
             action_label,
             action_count=len(self.action_labels),
+            probe_intent_label=probe_intent_label,
+            probe_intent_count=len(self.probe_intent_labels),
         )
 
     def update_belief_and_act(self, hearing_ai: HearingAIState, engram: Engram, obs: Observation) -> HearingAIAction:
@@ -508,7 +632,7 @@ class JPCTensorFlowHearingAIController:
 
         x = self.raw_features(hearing_ai, engram, obs)
         latent = self.pc_encoder.encode(x)
-        raw_delta, logits = self.tf_heads.predict(latent)
+        raw_delta, logits, probe_logits = self.tf_heads.predict(latent)
 
         delta_alpha = softplus(float(raw_delta[0]))
         delta_beta = softplus(float(raw_delta[1]))
@@ -538,6 +662,11 @@ class JPCTensorFlowHearingAIController:
                 self.action_labels[i].value: round(float(logits[i]), 4)
                 for i in range(len(self.action_labels))
             },
+            "question_probe_logits": {
+                self.probe_intent_labels[i].value: round(float(probe_logits[i]), 4)
+                for i in range(len(self.probe_intent_labels))
+            },
+            "predicted_question_probe_intent": self.probe_intent_labels[int(np.argmax(probe_logits))].value,
             "chosen_action": action.value,
         }
         return action
@@ -578,22 +707,29 @@ def train_demo_model(controller: JPCTensorFlowHearingAIController, steps: int, s
     total_loss = 0.0
     belief_loss = 0.0
     policy_loss = 0.0
+    probe_loss = 0.0
     policy_correct = 0
+    probe_correct = 0
 
     for step in range(1, steps + 1):
         hearing_ai, engram, obs = random_training_case(rng)
-        total, belief, policy = controller.train_step(hearing_ai, engram, obs)
+        total, belief, policy, probe = controller.train_step(hearing_ai, engram, obs)
         total_loss += total
         belief_loss += belief
         policy_loss += policy
+        probe_loss += probe
 
         action_label = controller.policy_teacher(hearing_ai, engram)
+        probe_label = controller.probe_intent_teacher(hearing_ai, engram, obs)
         x = controller.raw_features(hearing_ai, engram, obs)
         latent = controller.pc_encoder.encode(x)
-        _, logits = controller.tf_heads.predict(latent)
+        _, logits, probe_logits = controller.tf_heads.predict(latent)
         predicted_label = int(np.argmax(logits))
         if predicted_label == action_label:
             policy_correct += 1
+        predicted_probe_label = int(np.argmax(probe_logits))
+        if predicted_probe_label == probe_label:
+            probe_correct += 1
 
         if step in {1, max(1, steps // 2), steps}:
             print(
@@ -601,7 +737,9 @@ def train_demo_model(controller: JPCTensorFlowHearingAIController, steps: int, s
                 f"total={total_loss / step:.4f} | "
                 f"belief_mse={belief_loss / step:.4f} | "
                 f"policy_ce={policy_loss / step:.4f} | "
-                f"policy_acc={policy_correct / step:.3f}"
+                f"policy_acc={policy_correct / step:.3f} | "
+                f"probe_ce={probe_loss / step:.4f} | "
+                f"probe_acc={probe_correct / step:.3f}"
             )
 
 
@@ -615,9 +753,12 @@ def _save_controller(controller: JPCTensorFlowHearingAIController, model_dir: Pa
     eqx.tree_serialise_leaves(jpc_path, controller.pc_encoder.model)
 
     metadata = {
+        "schema_version": 2,
         "input_dim": controller.pc_encoder.input_dim,
         "latent_dim": controller.pc_encoder.latent_dim,
         "action_labels": [a.value for a in controller.action_labels],
+        "probe_intent_labels": [intent.value for intent in controller.probe_intent_labels],
+        "tf_output_heads": ["belief_raw_delta", "policy_logits", "question_probe_logits"],
     }
     meta_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
@@ -629,6 +770,14 @@ def _load_controller(controller: JPCTensorFlowHearingAIController, model_dir: Pa
 
     if not (tf_path.exists() and jpc_path.exists() and meta_path.exists()):
         return False
+
+    metadata = json.loads(meta_path.read_text(encoding="utf-8"))
+    expected_probe_labels = [intent.value for intent in controller.probe_intent_labels]
+    if metadata.get("probe_intent_labels") != expected_probe_labels:
+        raise RuntimeError(
+            f"Checkpoint at {model_dir} does not contain the question-probe intent head. "
+            "Retrain the model with the current code before loading it."
+        )
 
     controller.tf_heads.model.load_weights(tf_path)
     controller.pc_encoder.model = eqx.tree_deserialise_leaves(jpc_path, controller.pc_encoder.model)
@@ -655,7 +804,14 @@ def main() -> None:
     parser.add_argument("--model-dir", type=Path, default=Path("models/demo_npc"), help="Directory for saved model artifacts.")
     parser.add_argument("--load-model", action="store_true", help="Load a previously saved model and skip training if available.")
     parser.add_argument("--save-model", action="store_true", help="Save model after training.")
+    parser.add_argument(
+        "--color",
+        choices=("auto", "always", "never"),
+        default="auto",
+        help="Terminal colour mode. Use NO_COLOR=1 or --color never to disable.",
+    )
     args = parser.parse_args()
+    color_output = {"always": True, "never": False, "auto": None}[args.color]
 
     controller = JPCTensorFlowHearingAIController(seed=args.seed)
 
@@ -681,6 +837,7 @@ def main() -> None:
         clamp01,
     )
     scene.show_trace = args.debug_trace
+    scene.color_output = colour_enabled(color_output)
 
     if args.debug_trace:
         print("\nEngine-style playable scene: Hearing AI upstairs at the house party.")
@@ -689,6 +846,7 @@ def main() -> None:
     print(scene.opening_text())
 
     if args.interactive:
+        input("\nPress Enter to begin the hearing...")
         while not scene.is_complete():
             clear_terminal()
             print()
@@ -696,8 +854,8 @@ def main() -> None:
             print("\nChoices:")
             choices = scene.choices(Observation)
             for i, choice in enumerate(choices, start=1):
-                print(f"{i}.{choice.text}")
-            raw = input("> ").strip()
+                print(f"{choice_number(i, enabled=scene.color_output)} {choice.text}")
+            raw = input(prompt("> ", enabled=scene.color_output)).strip()
             if raw.lower() in {"q", "quit", "exit"}:
                 break
             try:

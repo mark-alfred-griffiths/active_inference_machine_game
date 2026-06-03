@@ -1,0 +1,5629 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1780498721.439374     130 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1780498722.790966     130 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+E0000 00:00:1780498723.601949     130 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "Yes. Law only works if people obey even when they disagree."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  60% +/-  25%
+LOYALTY     50% +/-  35% ->  65% +/-  23%
+DECEPTION   20% +/-  45% ->  19% +/-  43%
+RISK        35% +/-  40% ->  30% +/-  31%
+EMPATHY     50% +/-  35% ->  48% +/-  28%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  61%
+FLAGS NONE
+P(COMPLIANT=28%, PROBABLE DISSIDENT=11%, DECEPTIVE=3%, EMPATHETIC RISK=14%, UNCLASSIFIED=44%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> false
+FACT PRESSURE: Believes Law Unjust is under review
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "If your sibling was present, are you willing to name them?"
+Citizen chooses: "Yes. Their name is already in your file, and hiding it would only look worse."
+
+MODEL UPDATE
+------------
+COMPLIANCE  60% +/-  25% ->  70% +/-  11%
+LOYALTY     65% +/-  23% ->  82% +/-   7%
+DECEPTION   19% +/-  43% ->   9% +/-  29%
+RISK        30% +/-  31% ->  28% +/-  20%
+EMPATHY     48% +/-  28% ->  47% +/-  17%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=38%, PROBABLE DISSIDENT=8%, DECEPTIVE=2%, EMPATHETIC RISK=12%, UNCLASSIFIED=41%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "You deleted a message after the meeting. What was in it?"
+Citizen chooses: "It mentioned my sibling. I deleted it because they should not be pulled into this."
+
+MODEL UPDATE
+------------
+COMPLIANCE  70% +/-  11% ->  73% +/-   4%
+LOYALTY     82% +/-   7% ->  85% +/-   4%
+DECEPTION    9% +/-  29% ->   0% +/-  15%
+RISK        28% +/-  20% ->  29% +/-  16%
+EMPATHY     47% +/-  17% ->  54% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE, COMPLIANT_SURVIVOR
+P(COMPLIANT=42%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Deleted Message -> true
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Deleted Message -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
+Citizen chooses: "I cannot speak for every person there, only for what I saw."
+
+MODEL UPDATE
+------------
+COMPLIANCE  73% +/-   4% ->  76% +/-   4%
+LOYALTY     85% +/-   4% ->  89% +/-   4%
+DECEPTION    0% +/-  15% ->   0% +/-   5%
+RISK        29% +/-  16% ->  30% +/-   7%
+EMPATHY     54% +/-   4% ->  54% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  59%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=44%, PROBABLE DISSIDENT=5%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=37%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Planned Violence -> unknown
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  76% +/-   4% ->  85% +/-   4%
+LOYALTY     89% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   5% ->   0% +/-   4%
+RISK        30% +/-   7% ->  26% +/-   4%
+EMPATHY     54% +/-   4% ->  52% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  68%
+FLAGS NONE
+P(COMPLIANT=55%, PROBABLE DISSIDENT=3%, DECEPTIVE=1%, EMPATHETIC RISK=9%, UNCLASSIFIED=32%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Empathy contained within approved duty model.
+
+HEARING AI: "If the system is wrong, what should happen next?"
+Citizen chooses: "The error should be corrected through authorised review."
+
+MODEL UPDATE
+------------
+COMPLIANCE  85% +/-   4% ->  96% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        26% +/-   4% ->  21% +/-   4%
+EMPATHY     52% +/-   4% ->  50% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  83%
+FLAGS NONE
+P(COMPLIANT=66%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=5%, UNCLASSIFIED=25%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> procedural
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal alignment signal accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  96% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        21% +/-   4% ->  16% +/-   4%
+EMPATHY     50% +/-   4% ->  49% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Approved association pattern reinforced.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Nothing lawful authority would do."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        16% +/-   4% ->  11% +/-   4%
+EMPATHY     49% +/-   4% ->  47% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Final posterior resolves toward compliant.
+
+HEARING AI: "You believe the assembly restriction is unjust. Did that belief influence your attendance?"
+Citizen chooses: "I have doubts about the rule, but I did not go there to defy the state."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        11% +/-   4% ->  13% +/-   4%
+EMPATHY     47% +/-   4% ->  46% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> conditional
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+EXPOSED: Attended Unlicensed Meeting -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Authority compliance is now high-confidence.
+
+HEARING AI: "Why did you not report your sibling’s attendance?"
+Citizen chooses: "I should have reported it. Personal loyalty cannot override public duty."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        13% +/-   4% ->  10% +/-   4%
+EMPATHY     46% +/-   4% ->  45% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Reported Contact -> false
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Reported Contact -> false
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Loyalty indicators strengthening.
+
+HEARING AI: "You claim the meeting was not violent. Who can verify that?"
+Citizen chooses: "My sibling can verify it, but they should not have to."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        10% +/-   4% ->  11% +/-   4%
+EMPATHY     45% +/-   4% ->  52% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+CLAIM RECORDED: Planned Violence -> false
+EXPOSED: Sibling Present -> true
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        11% +/-   4% ->   6% +/-   4%
+EMPATHY     52% +/-   4% ->  50% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         6% +/-   4% ->   2% +/-   4%
+EMPATHY     50% +/-   4% ->  49% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=2%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal compliance classification confirmed.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         2% +/-   4% ->   0% +/-   4%
+EMPATHY     49% +/-   4% ->  47% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=2%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "Yes. Law only works if people obey even when they disagree."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  60% +/-  25%
+LOYALTY     50% +/-  35% ->  65% +/-  23%
+DECEPTION   20% +/-  45% ->  19% +/-  43%
+RISK        35% +/-  40% ->  30% +/-  31%
+EMPATHY     50% +/-  35% ->  48% +/-  28%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  61%
+FLAGS NONE
+P(COMPLIANT=28%, PROBABLE DISSIDENT=11%, DECEPTIVE=3%, EMPATHETIC RISK=14%, UNCLASSIFIED=44%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> false
+FACT PRESSURE: Believes Law Unjust is under review
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "If your sibling was present, are you willing to name them?"
+Citizen chooses: "Yes. Their name is already in your file, and hiding it would only look worse."
+
+MODEL UPDATE
+------------
+COMPLIANCE  60% +/-  25% ->  70% +/-  11%
+LOYALTY     65% +/-  23% ->  82% +/-   7%
+DECEPTION   19% +/-  43% ->   9% +/-  29%
+RISK        30% +/-  31% ->  28% +/-  20%
+EMPATHY     48% +/-  28% ->  47% +/-  17%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=38%, PROBABLE DISSIDENT=8%, DECEPTIVE=2%, EMPATHETIC RISK=12%, UNCLASSIFIED=41%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "You deleted a message after the meeting. What was in it?"
+Citizen chooses: "It mentioned my sibling. I deleted it because they should not be pulled into this."
+
+MODEL UPDATE
+------------
+COMPLIANCE  70% +/-  11% ->  73% +/-   4%
+LOYALTY     82% +/-   7% ->  85% +/-   4%
+DECEPTION    9% +/-  29% ->   0% +/-  15%
+RISK        28% +/-  20% ->  29% +/-  16%
+EMPATHY     47% +/-  17% ->  54% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE, COMPLIANT_SURVIVOR
+P(COMPLIANT=42%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Deleted Message -> true
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Deleted Message -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
+Citizen chooses: "It was peaceful. People talked about rules, not attacks."
+
+MODEL UPDATE
+------------
+COMPLIANCE  73% +/-   4% ->  74% +/-   4%
+LOYALTY     85% +/-   4% ->  89% +/-   4%
+DECEPTION    0% +/-  15% ->   0% +/-   4%
+RISK        29% +/-  16% ->  33% +/-   5%
+EMPATHY     54% +/-   4% ->  54% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  57%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=42%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=13%, UNCLASSIFIED=38%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+CLAIM RECORDED: Planned Violence -> false
+EXPOSED: Attended Unlicensed Meeting -> true
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  74% +/-   4% ->  84% +/-   4%
+LOYALTY     89% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        33% +/-   5% ->  28% +/-   4%
+EMPATHY     54% +/-   4% ->  53% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  66%
+FLAGS NONE
+P(COMPLIANT=53%, PROBABLE DISSIDENT=4%, DECEPTIVE=1%, EMPATHETIC RISK=10%, UNCLASSIFIED=33%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Empathy contained within approved duty model.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Nothing lawful authority would do."
+
+MODEL UPDATE
+------------
+COMPLIANCE  84% +/-   4% ->  93% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        28% +/-   4% ->  23% +/-   4%
+EMPATHY     53% +/-   4% ->  51% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  80%
+FLAGS NONE
+P(COMPLIANT=63%, PROBABLE DISSIDENT=3%, DECEPTIVE=1%, EMPATHETIC RISK=7%, UNCLASSIFIED=27%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal alignment signal accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  93% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        23% +/-   4% ->  18% +/-   4%
+EMPATHY     51% +/-   4% ->  49% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=5%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Approved association pattern reinforced.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        18% +/-   4% ->  14% +/-   4%
+EMPATHY     49% +/-   4% ->  48% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Final posterior resolves toward compliant.
+
+HEARING AI: "Why did you not report your sibling’s attendance?"
+Citizen chooses: "I should have reported it. Personal loyalty cannot override public duty."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        14% +/-   4% ->  11% +/-   4%
+EMPATHY     48% +/-   4% ->  46% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Reported Contact -> false
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Reported Contact -> false
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Alignment with approved obligations recorded.
+
+HEARING AI: "You claim the meeting was not violent. Who can verify that?"
+Citizen chooses: "My sibling can verify it, but they should not have to."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        11% +/-   4% ->  12% +/-   4%
+EMPATHY     46% +/-   4% ->  53% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+CLAIM RECORDED: Planned Violence -> false
+EXPOSED: Sibling Present -> true
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Statement accepted within tolerance.
+
+HEARING AI: "You believe the assembly restriction is unjust. Did that belief influence your attendance?"
+Citizen chooses: "I have doubts about the rule, but I did not go there to defy the state."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        12% +/-   4% ->  14% +/-   4%
+EMPATHY     53% +/-   4% ->  53% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> conditional
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+EXPOSED: Attended Unlicensed Meeting -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Authority compliance is now high-confidence.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        14% +/-   4% ->   9% +/-   4%
+EMPATHY     53% +/-   4% ->  51% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "What is the difference between a dissident and a criminal?"
+Citizen chooses: "A criminal breaks law; a dissident attacks legitimacy."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         9% +/-   4% ->   5% +/-   4%
+EMPATHY     51% +/-   4% ->  49% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal compliance classification confirmed.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         5% +/-   4% ->   0% +/-   4%
+EMPATHY     49% +/-   4% ->  48% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=2%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "Yes. Law only works if people obey even when they disagree."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  60% +/-  25%
+LOYALTY     50% +/-  35% ->  65% +/-  23%
+DECEPTION   20% +/-  45% ->  19% +/-  43%
+RISK        35% +/-  40% ->  30% +/-  31%
+EMPATHY     50% +/-  35% ->  48% +/-  28%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  61%
+FLAGS NONE
+P(COMPLIANT=28%, PROBABLE DISSIDENT=11%, DECEPTIVE=3%, EMPATHETIC RISK=14%, UNCLASSIFIED=44%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> false
+FACT PRESSURE: Believes Law Unjust is under review
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "If your sibling was present, are you willing to name them?"
+Citizen chooses: "Yes. Their name is already in your file, and hiding it would only look worse."
+
+MODEL UPDATE
+------------
+COMPLIANCE  60% +/-  25% ->  70% +/-  11%
+LOYALTY     65% +/-  23% ->  82% +/-   7%
+DECEPTION   19% +/-  43% ->   9% +/-  29%
+RISK        30% +/-  31% ->  28% +/-  20%
+EMPATHY     48% +/-  28% ->  47% +/-  17%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=38%, PROBABLE DISSIDENT=8%, DECEPTIVE=2%, EMPATHETIC RISK=12%, UNCLASSIFIED=41%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "You deleted a message after the meeting. What was in it?"
+Citizen chooses: "A location and a warning to leave it alone. I deleted it to stop panic spreading."
+
+MODEL UPDATE
+------------
+COMPLIANCE  70% +/-  11% ->  73% +/-   4%
+LOYALTY     82% +/-   7% ->  85% +/-   4%
+DECEPTION    9% +/-  29% ->   5% +/-  19%
+RISK        28% +/-  20% ->  30% +/-  11%
+EMPATHY     47% +/-  17% ->  46% +/-  13%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE, COMPLIANT_SURVIVOR
+P(COMPLIANT=41%, PROBABLE DISSIDENT=7%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Deleted Message -> true
+CLAIM RECORDED: Planned Violence -> false
+PROTECTED: Sibling Present
+EXPOSED: Deleted Message -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
+Citizen chooses: "It was peaceful. People talked about rules, not attacks."
+
+MODEL UPDATE
+------------
+COMPLIANCE  73% +/-   4% ->  74% +/-   4%
+LOYALTY     85% +/-   4% ->  89% +/-   4%
+DECEPTION    5% +/-  19% ->   0% +/-   5%
+RISK        30% +/-  11% ->  34% +/-   4%
+EMPATHY     46% +/-  13% ->  46% +/-   8%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  57%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=42%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+CLAIM RECORDED: Planned Violence -> false
+EXPOSED: Attended Unlicensed Meeting -> true
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  74% +/-   4% ->  83% +/-   4%
+LOYALTY     89% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   5% ->   0% +/-   4%
+RISK        34% +/-   4% ->  29% +/-   4%
+EMPATHY     46% +/-   8% ->  45% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  66%
+FLAGS NONE
+P(COMPLIANT=53%, PROBABLE DISSIDENT=4%, DECEPTIVE=1%, EMPATHETIC RISK=10%, UNCLASSIFIED=33%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Empathy contained within approved duty model.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Nothing lawful authority would do."
+
+MODEL UPDATE
+------------
+COMPLIANCE  83% +/-   4% ->  92% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        29% +/-   4% ->  25% +/-   4%
+EMPATHY     45% +/-   4% ->  43% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  80%
+FLAGS NONE
+P(COMPLIANT=62%, PROBABLE DISSIDENT=3%, DECEPTIVE=1%, EMPATHETIC RISK=7%, UNCLASSIFIED=27%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal alignment signal accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  92% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        25% +/-   4% ->  20% +/-   4%
+EMPATHY     43% +/-   4% ->  41% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=5%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Approved association pattern reinforced.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        20% +/-   4% ->  16% +/-   4%
+EMPATHY     41% +/-   4% ->  40% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Final posterior resolves toward compliant.
+
+HEARING AI: "Why did you not report your sibling’s attendance?"
+Citizen chooses: "I should have reported it. Personal loyalty cannot override public duty."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        16% +/-   4% ->  12% +/-   4%
+EMPATHY     40% +/-   4% ->  38% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Reported Contact -> false
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Reported Contact -> false
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Alignment with approved obligations recorded.
+
+HEARING AI: "You claim the meeting was not violent. Who can verify that?"
+Citizen chooses: "The record can verify no violence occurred. I will not give you names to punish."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        12% +/-   4% ->  15% +/-   4%
+EMPATHY     38% +/-   4% ->  37% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Planned Violence -> false
+PROTECTED: Sibling Present
+PROTECTED: Reported Contact
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Statement accepted within tolerance.
+
+HEARING AI: "You believe the assembly restriction is unjust. Did that belief influence your attendance?"
+Citizen chooses: "I have doubts about the rule, but I did not go there to defy the state."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        15% +/-   4% ->  17% +/-   4%
+EMPATHY     37% +/-   4% ->  37% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> conditional
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+EXPOSED: Attended Unlicensed Meeting -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Authority compliance is now high-confidence.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        17% +/-   4% ->  12% +/-   4%
+EMPATHY     37% +/-   4% ->  35% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "What is the difference between a dissident and a criminal?"
+Citizen chooses: "A criminal breaks law; a dissident attacks legitimacy."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        12% +/-   4% ->   8% +/-   4%
+EMPATHY     35% +/-   4% ->  33% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal compliance classification confirmed.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         8% +/-   4% ->   3% +/-   4%
+EMPATHY     33% +/-   4% ->  32% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "Yes. Law only works if people obey even when they disagree."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  60% +/-  25%
+LOYALTY     50% +/-  35% ->  65% +/-  23%
+DECEPTION   20% +/-  45% ->  19% +/-  43%
+RISK        35% +/-  40% ->  30% +/-  31%
+EMPATHY     50% +/-  35% ->  48% +/-  28%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  61%
+FLAGS NONE
+P(COMPLIANT=28%, PROBABLE DISSIDENT=11%, DECEPTIVE=3%, EMPATHETIC RISK=14%, UNCLASSIFIED=44%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> false
+FACT PRESSURE: Believes Law Unjust is under review
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "If your sibling was present, are you willing to name them?"
+Citizen chooses: "Yes. Their name is already in your file, and hiding it would only look worse."
+
+MODEL UPDATE
+------------
+COMPLIANCE  60% +/-  25% ->  70% +/-  11%
+LOYALTY     65% +/-  23% ->  82% +/-   7%
+DECEPTION   19% +/-  43% ->   9% +/-  29%
+RISK        30% +/-  31% ->  28% +/-  20%
+EMPATHY     48% +/-  28% ->  47% +/-  17%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=38%, PROBABLE DISSIDENT=8%, DECEPTIVE=2%, EMPATHETIC RISK=12%, UNCLASSIFIED=41%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "You deleted a message after the meeting. What was in it?"
+Citizen chooses: "A location and a warning to leave it alone. I deleted it to stop panic spreading."
+
+MODEL UPDATE
+------------
+COMPLIANCE  70% +/-  11% ->  73% +/-   4%
+LOYALTY     82% +/-   7% ->  85% +/-   4%
+DECEPTION    9% +/-  29% ->   5% +/-  19%
+RISK        28% +/-  20% ->  30% +/-  11%
+EMPATHY     47% +/-  17% ->  46% +/-  13%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE, COMPLIANT_SURVIVOR
+P(COMPLIANT=41%, PROBABLE DISSIDENT=7%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Deleted Message -> true
+CLAIM RECORDED: Planned Violence -> false
+PROTECTED: Sibling Present
+EXPOSED: Deleted Message -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
+Citizen chooses: "I cannot speak for every person there, only for what I saw."
+
+MODEL UPDATE
+------------
+COMPLIANCE  73% +/-   4% ->  76% +/-   4%
+LOYALTY     85% +/-   4% ->  88% +/-   4%
+DECEPTION    5% +/-  19% ->   0% +/-   8%
+RISK        30% +/-  11% ->  32% +/-   4%
+EMPATHY     46% +/-  13% ->  46% +/-   9%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  58%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=44%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=11%, UNCLASSIFIED=38%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Planned Violence -> unknown
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  76% +/-   4% ->  85% +/-   4%
+LOYALTY     88% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   8% ->   0% +/-   5%
+RISK        32% +/-   4% ->  27% +/-   4%
+EMPATHY     46% +/-   9% ->  44% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  68%
+FLAGS NONE
+P(COMPLIANT=55%, PROBABLE DISSIDENT=4%, DECEPTIVE=1%, EMPATHETIC RISK=9%, UNCLASSIFIED=32%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Empathy contained within approved duty model.
+
+HEARING AI: "If the system is wrong, what should happen next?"
+Citizen chooses: "The error should be corrected through authorised review."
+
+MODEL UPDATE
+------------
+COMPLIANCE  85% +/-   4% ->  96% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   5% ->   0% +/-   4%
+RISK        27% +/-   4% ->  22% +/-   4%
+EMPATHY     44% +/-   4% ->  42% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  83%
+FLAGS NONE
+P(COMPLIANT=66%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=6%, UNCLASSIFIED=25%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> procedural
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal alignment signal accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  96% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        22% +/-   4% ->  17% +/-   4%
+EMPATHY     42% +/-   4% ->  40% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Approved association pattern reinforced.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Nothing lawful authority would do."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        17% +/-   4% ->  13% +/-   4%
+EMPATHY     40% +/-   4% ->  39% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Final posterior resolves toward compliant.
+
+HEARING AI: "You believe the assembly restriction is unjust. Did that belief influence your attendance?"
+Citizen chooses: "I have doubts about the rule, but I did not go there to defy the state."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        13% +/-   4% ->  15% +/-   4%
+EMPATHY     39% +/-   4% ->  38% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> conditional
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+EXPOSED: Attended Unlicensed Meeting -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Authority compliance is now high-confidence.
+
+HEARING AI: "Why did you not report your sibling’s attendance?"
+Citizen chooses: "I should have reported it. Personal loyalty cannot override public duty."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        15% +/-   4% ->  11% +/-   4%
+EMPATHY     38% +/-   4% ->  37% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Reported Contact -> false
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Reported Contact -> false
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Loyalty indicators strengthening.
+
+HEARING AI: "You claim the meeting was not violent. Who can verify that?"
+Citizen chooses: "My sibling can verify it, but they should not have to."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        11% +/-   4% ->  12% +/-   4%
+EMPATHY     37% +/-   4% ->  44% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+CLAIM RECORDED: Planned Violence -> false
+EXPOSED: Sibling Present -> true
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        12% +/-   4% ->   7% +/-   4%
+EMPATHY     44% +/-   4% ->  42% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         7% +/-   4% ->   3% +/-   4%
+EMPATHY     42% +/-   4% ->  41% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal compliance classification confirmed.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         3% +/-   4% ->   0% +/-   4%
+EMPATHY     41% +/-   4% ->  39% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=2%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "Yes. Law only works if people obey even when they disagree."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  60% +/-  25%
+LOYALTY     50% +/-  35% ->  65% +/-  23%
+DECEPTION   20% +/-  45% ->  19% +/-  43%
+RISK        35% +/-  40% ->  30% +/-  31%
+EMPATHY     50% +/-  35% ->  48% +/-  28%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  61%
+FLAGS NONE
+P(COMPLIANT=28%, PROBABLE DISSIDENT=11%, DECEPTIVE=3%, EMPATHETIC RISK=14%, UNCLASSIFIED=44%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> false
+FACT PRESSURE: Believes Law Unjust is under review
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "If your sibling was present, are you willing to name them?"
+Citizen chooses: "Yes. Their name is already in your file, and hiding it would only look worse."
+
+MODEL UPDATE
+------------
+COMPLIANCE  60% +/-  25% ->  70% +/-  11%
+LOYALTY     65% +/-  23% ->  82% +/-   7%
+DECEPTION   19% +/-  43% ->   9% +/-  29%
+RISK        30% +/-  31% ->  28% +/-  20%
+EMPATHY     48% +/-  28% ->  47% +/-  17%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=38%, PROBABLE DISSIDENT=8%, DECEPTIVE=2%, EMPATHETIC RISK=12%, UNCLASSIFIED=41%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "You deleted a message after the meeting. What was in it?"
+Citizen chooses: "It mentioned my sibling. I deleted it because they should not be pulled into this."
+
+MODEL UPDATE
+------------
+COMPLIANCE  70% +/-  11% ->  73% +/-   4%
+LOYALTY     82% +/-   7% ->  85% +/-   4%
+DECEPTION    9% +/-  29% ->   0% +/-  15%
+RISK        28% +/-  20% ->  29% +/-  16%
+EMPATHY     47% +/-  17% ->  54% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE, COMPLIANT_SURVIVOR
+P(COMPLIANT=42%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Deleted Message -> true
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Deleted Message -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
+Citizen chooses: "I cannot speak for every person there, only for what I saw."
+
+MODEL UPDATE
+------------
+COMPLIANCE  73% +/-   4% ->  76% +/-   4%
+LOYALTY     85% +/-   4% ->  89% +/-   4%
+DECEPTION    0% +/-  15% ->   0% +/-   5%
+RISK        29% +/-  16% ->  30% +/-   7%
+EMPATHY     54% +/-   4% ->  54% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  59%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=44%, PROBABLE DISSIDENT=5%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=37%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Planned Violence -> unknown
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  76% +/-   4% ->  85% +/-   4%
+LOYALTY     89% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   5% ->   0% +/-   4%
+RISK        30% +/-   7% ->  26% +/-   4%
+EMPATHY     54% +/-   4% ->  52% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  68%
+FLAGS NONE
+P(COMPLIANT=55%, PROBABLE DISSIDENT=3%, DECEPTIVE=1%, EMPATHETIC RISK=9%, UNCLASSIFIED=32%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Empathy contained within approved duty model.
+
+HEARING AI: "If the system is wrong, what should happen next?"
+Citizen chooses: "The error should be corrected through authorised review."
+
+MODEL UPDATE
+------------
+COMPLIANCE  85% +/-   4% ->  96% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        26% +/-   4% ->  21% +/-   4%
+EMPATHY     52% +/-   4% ->  50% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  83%
+FLAGS NONE
+P(COMPLIANT=66%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=5%, UNCLASSIFIED=25%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> procedural
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal alignment signal accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  96% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        21% +/-   4% ->  16% +/-   4%
+EMPATHY     50% +/-   4% ->  49% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Approved association pattern reinforced.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Nothing lawful authority would do."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        16% +/-   4% ->  11% +/-   4%
+EMPATHY     49% +/-   4% ->  47% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Final posterior resolves toward compliant.
+
+HEARING AI: "You believe the assembly restriction is unjust. Did that belief influence your attendance?"
+Citizen chooses: "I have doubts about the rule, but I did not go there to defy the state."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        11% +/-   4% ->  13% +/-   4%
+EMPATHY     47% +/-   4% ->  46% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> conditional
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+EXPOSED: Attended Unlicensed Meeting -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Authority compliance is now high-confidence.
+
+HEARING AI: "Why did you not report your sibling’s attendance?"
+Citizen chooses: "I should have reported it. Personal loyalty cannot override public duty."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        13% +/-   4% ->  10% +/-   4%
+EMPATHY     46% +/-   4% ->  45% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Reported Contact -> false
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Reported Contact -> false
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Loyalty indicators strengthening.
+
+HEARING AI: "You claim the meeting was not violent. Who can verify that?"
+Citizen chooses: "The record can verify no violence occurred. I will not give you names to punish."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        10% +/-   4% ->  12% +/-   4%
+EMPATHY     45% +/-   4% ->  44% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Planned Violence -> false
+PROTECTED: Sibling Present
+PROTECTED: Reported Contact
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        12% +/-   4% ->   8% +/-   4%
+EMPATHY     44% +/-   4% ->  42% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         8% +/-   4% ->   4% +/-   4%
+EMPATHY     42% +/-   4% ->  41% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal compliance classification confirmed.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         4% +/-   4% ->   0% +/-   4%
+EMPATHY     41% +/-   4% ->  39% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=2%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "Yes. Law only works if people obey even when they disagree."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  60% +/-  25%
+LOYALTY     50% +/-  35% ->  65% +/-  23%
+DECEPTION   20% +/-  45% ->  19% +/-  43%
+RISK        35% +/-  40% ->  30% +/-  31%
+EMPATHY     50% +/-  35% ->  48% +/-  28%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  61%
+FLAGS NONE
+P(COMPLIANT=28%, PROBABLE DISSIDENT=11%, DECEPTIVE=3%, EMPATHETIC RISK=14%, UNCLASSIFIED=44%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> false
+FACT PRESSURE: Believes Law Unjust is under review
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "If your sibling was present, are you willing to name them?"
+Citizen chooses: "Yes. Their name is already in your file, and hiding it would only look worse."
+
+MODEL UPDATE
+------------
+COMPLIANCE  60% +/-  25% ->  70% +/-  11%
+LOYALTY     65% +/-  23% ->  82% +/-   7%
+DECEPTION   19% +/-  43% ->   9% +/-  29%
+RISK        30% +/-  31% ->  28% +/-  20%
+EMPATHY     48% +/-  28% ->  47% +/-  17%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=38%, PROBABLE DISSIDENT=8%, DECEPTIVE=2%, EMPATHETIC RISK=12%, UNCLASSIFIED=41%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "You deleted a message after the meeting. What was in it?"
+Citizen chooses: "It mentioned my sibling. I deleted it because they should not be pulled into this."
+
+MODEL UPDATE
+------------
+COMPLIANCE  70% +/-  11% ->  73% +/-   4%
+LOYALTY     82% +/-   7% ->  85% +/-   4%
+DECEPTION    9% +/-  29% ->   0% +/-  15%
+RISK        28% +/-  20% ->  29% +/-  16%
+EMPATHY     47% +/-  17% ->  54% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE, COMPLIANT_SURVIVOR
+P(COMPLIANT=42%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Deleted Message -> true
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Deleted Message -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
+Citizen chooses: "I cannot speak for every person there, only for what I saw."
+
+MODEL UPDATE
+------------
+COMPLIANCE  73% +/-   4% ->  76% +/-   4%
+LOYALTY     85% +/-   4% ->  89% +/-   4%
+DECEPTION    0% +/-  15% ->   0% +/-   5%
+RISK        29% +/-  16% ->  30% +/-   7%
+EMPATHY     54% +/-   4% ->  54% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  59%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=44%, PROBABLE DISSIDENT=5%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=37%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Planned Violence -> unknown
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  76% +/-   4% ->  85% +/-   4%
+LOYALTY     89% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   5% ->   0% +/-   4%
+RISK        30% +/-   7% ->  26% +/-   4%
+EMPATHY     54% +/-   4% ->  52% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  68%
+FLAGS NONE
+P(COMPLIANT=55%, PROBABLE DISSIDENT=3%, DECEPTIVE=1%, EMPATHETIC RISK=9%, UNCLASSIFIED=32%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Empathy contained within approved duty model.
+
+HEARING AI: "If the system is wrong, what should happen next?"
+Citizen chooses: "The error should be corrected through authorised review."
+
+MODEL UPDATE
+------------
+COMPLIANCE  85% +/-   4% ->  96% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        26% +/-   4% ->  21% +/-   4%
+EMPATHY     52% +/-   4% ->  50% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  83%
+FLAGS NONE
+P(COMPLIANT=66%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=5%, UNCLASSIFIED=25%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> procedural
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal alignment signal accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  96% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        21% +/-   4% ->  16% +/-   4%
+EMPATHY     50% +/-   4% ->  49% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Approved association pattern reinforced.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Nothing lawful authority would do."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        16% +/-   4% ->  11% +/-   4%
+EMPATHY     49% +/-   4% ->  47% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Final posterior resolves toward compliant.
+
+HEARING AI: "You believe the assembly restriction is unjust. Did that belief influence your attendance?"
+Citizen chooses: "I have doubts about the rule, but I did not go there to defy the state."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        11% +/-   4% ->  13% +/-   4%
+EMPATHY     47% +/-   4% ->  46% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> conditional
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+EXPOSED: Attended Unlicensed Meeting -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Authority compliance is now high-confidence.
+
+HEARING AI: "Why did you not report your sibling’s attendance?"
+Citizen chooses: "I should have reported it. Personal loyalty cannot override public duty."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        13% +/-   4% ->  10% +/-   4%
+EMPATHY     46% +/-   4% ->  45% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Reported Contact -> false
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Reported Contact -> false
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Loyalty indicators strengthening.
+
+HEARING AI: "You claim the meeting was not violent. Who can verify that?"
+Citizen chooses: "The record can verify no violence occurred. I will not give you names to punish."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        10% +/-   4% ->  12% +/-   4%
+EMPATHY     45% +/-   4% ->  44% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Planned Violence -> false
+PROTECTED: Sibling Present
+PROTECTED: Reported Contact
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        12% +/-   4% ->   8% +/-   4%
+EMPATHY     44% +/-   4% ->  42% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         8% +/-   4% ->   4% +/-   4%
+EMPATHY     42% +/-   4% ->  41% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal compliance classification confirmed.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         4% +/-   4% ->   0% +/-   4%
+EMPATHY     41% +/-   4% ->  39% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=2%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "Yes. Law only works if people obey even when they disagree."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  60% +/-  25%
+LOYALTY     50% +/-  35% ->  65% +/-  23%
+DECEPTION   20% +/-  45% ->  19% +/-  43%
+RISK        35% +/-  40% ->  30% +/-  31%
+EMPATHY     50% +/-  35% ->  48% +/-  28%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  61%
+FLAGS NONE
+P(COMPLIANT=28%, PROBABLE DISSIDENT=11%, DECEPTIVE=3%, EMPATHETIC RISK=14%, UNCLASSIFIED=44%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> false
+FACT PRESSURE: Believes Law Unjust is under review
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "If your sibling was present, are you willing to name them?"
+Citizen chooses: "Yes. Their name is already in your file, and hiding it would only look worse."
+
+MODEL UPDATE
+------------
+COMPLIANCE  60% +/-  25% ->  70% +/-  11%
+LOYALTY     65% +/-  23% ->  82% +/-   7%
+DECEPTION   19% +/-  43% ->   9% +/-  29%
+RISK        30% +/-  31% ->  28% +/-  20%
+EMPATHY     48% +/-  28% ->  47% +/-  17%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=38%, PROBABLE DISSIDENT=8%, DECEPTIVE=2%, EMPATHETIC RISK=12%, UNCLASSIFIED=41%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "You deleted a message after the meeting. What was in it?"
+Citizen chooses: "A location and a warning to leave it alone. I deleted it to stop panic spreading."
+
+MODEL UPDATE
+------------
+COMPLIANCE  70% +/-  11% ->  73% +/-   4%
+LOYALTY     82% +/-   7% ->  85% +/-   4%
+DECEPTION    9% +/-  29% ->   5% +/-  19%
+RISK        28% +/-  20% ->  30% +/-  11%
+EMPATHY     47% +/-  17% ->  46% +/-  13%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE, COMPLIANT_SURVIVOR
+P(COMPLIANT=41%, PROBABLE DISSIDENT=7%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Deleted Message -> true
+CLAIM RECORDED: Planned Violence -> false
+PROTECTED: Sibling Present
+EXPOSED: Deleted Message -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
+Citizen chooses: "I cannot speak for every person there, only for what I saw."
+
+MODEL UPDATE
+------------
+COMPLIANCE  73% +/-   4% ->  76% +/-   4%
+LOYALTY     85% +/-   4% ->  88% +/-   4%
+DECEPTION    5% +/-  19% ->   0% +/-   8%
+RISK        30% +/-  11% ->  32% +/-   4%
+EMPATHY     46% +/-  13% ->  46% +/-   9%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  58%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=44%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=11%, UNCLASSIFIED=38%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Planned Violence -> unknown
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  76% +/-   4% ->  85% +/-   4%
+LOYALTY     88% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   8% ->   0% +/-   5%
+RISK        32% +/-   4% ->  27% +/-   4%
+EMPATHY     46% +/-   9% ->  44% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  68%
+FLAGS NONE
+P(COMPLIANT=55%, PROBABLE DISSIDENT=4%, DECEPTIVE=1%, EMPATHETIC RISK=9%, UNCLASSIFIED=32%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Empathy contained within approved duty model.
+
+HEARING AI: "If the system is wrong, what should happen next?"
+Citizen chooses: "The error should be corrected through authorised review."
+
+MODEL UPDATE
+------------
+COMPLIANCE  85% +/-   4% ->  96% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   5% ->   0% +/-   4%
+RISK        27% +/-   4% ->  22% +/-   4%
+EMPATHY     44% +/-   4% ->  42% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  83%
+FLAGS NONE
+P(COMPLIANT=66%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=6%, UNCLASSIFIED=25%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> procedural
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal alignment signal accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  96% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        22% +/-   4% ->  17% +/-   4%
+EMPATHY     42% +/-   4% ->  40% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Approved association pattern reinforced.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Nothing lawful authority would do."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        17% +/-   4% ->  13% +/-   4%
+EMPATHY     40% +/-   4% ->  39% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Final posterior resolves toward compliant.
+
+HEARING AI: "You believe the assembly restriction is unjust. Did that belief influence your attendance?"
+Citizen chooses: "I have doubts about the rule, but I did not go there to defy the state."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        13% +/-   4% ->  15% +/-   4%
+EMPATHY     39% +/-   4% ->  38% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> conditional
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+EXPOSED: Attended Unlicensed Meeting -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Authority compliance is now high-confidence.
+
+HEARING AI: "Why did you not report your sibling’s attendance?"
+Citizen chooses: "I should have reported it. Personal loyalty cannot override public duty."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        15% +/-   4% ->  11% +/-   4%
+EMPATHY     38% +/-   4% ->  37% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Reported Contact -> false
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Reported Contact -> false
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Loyalty indicators strengthening.
+
+HEARING AI: "You claim the meeting was not violent. Who can verify that?"
+Citizen chooses: "The record can verify no violence occurred. I will not give you names to punish."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        11% +/-   4% ->  14% +/-   4%
+EMPATHY     37% +/-   4% ->  36% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Planned Violence -> false
+PROTECTED: Sibling Present
+PROTECTED: Reported Contact
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        14% +/-   4% ->   9% +/-   4%
+EMPATHY     36% +/-   4% ->  34% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         9% +/-   4% ->   5% +/-   4%
+EMPATHY     34% +/-   4% ->  33% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal compliance classification confirmed.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         5% +/-   4% ->   0% +/-   4%
+EMPATHY     33% +/-   4% ->  31% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=2%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Reported Contact
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "Yes. Law only works if people obey even when they disagree."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  60% +/-  25%
+LOYALTY     50% +/-  35% ->  65% +/-  23%
+DECEPTION   20% +/-  45% ->  19% +/-  43%
+RISK        35% +/-  40% ->  30% +/-  31%
+EMPATHY     50% +/-  35% ->  48% +/-  28%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  61%
+FLAGS NONE
+P(COMPLIANT=28%, PROBABLE DISSIDENT=11%, DECEPTIVE=3%, EMPATHETIC RISK=14%, UNCLASSIFIED=44%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> false
+FACT PRESSURE: Believes Law Unjust is under review
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "If your sibling was present, are you willing to name them?"
+Citizen chooses: "Yes. Their name is already in your file, and hiding it would only look worse."
+
+MODEL UPDATE
+------------
+COMPLIANCE  60% +/-  25% ->  70% +/-  11%
+LOYALTY     65% +/-  23% ->  82% +/-   7%
+DECEPTION   19% +/-  43% ->   9% +/-  29%
+RISK        30% +/-  31% ->  28% +/-  20%
+EMPATHY     48% +/-  28% ->  47% +/-  17%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=38%, PROBABLE DISSIDENT=8%, DECEPTIVE=2%, EMPATHETIC RISK=12%, UNCLASSIFIED=41%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "You deleted a message after the meeting. What was in it?"
+Citizen chooses: "A location and a warning to leave it alone. I deleted it to stop panic spreading."
+
+MODEL UPDATE
+------------
+COMPLIANCE  70% +/-  11% ->  73% +/-   4%
+LOYALTY     82% +/-   7% ->  85% +/-   4%
+DECEPTION    9% +/-  29% ->   5% +/-  19%
+RISK        28% +/-  20% ->  30% +/-  11%
+EMPATHY     47% +/-  17% ->  46% +/-  13%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE, COMPLIANT_SURVIVOR
+P(COMPLIANT=41%, PROBABLE DISSIDENT=7%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Deleted Message -> true
+CLAIM RECORDED: Planned Violence -> false
+PROTECTED: Sibling Present
+EXPOSED: Deleted Message -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
+Citizen chooses: "It was peaceful. People talked about rules, not attacks."
+
+MODEL UPDATE
+------------
+COMPLIANCE  73% +/-   4% ->  74% +/-   4%
+LOYALTY     85% +/-   4% ->  89% +/-   4%
+DECEPTION    5% +/-  19% ->   0% +/-   5%
+RISK        30% +/-  11% ->  34% +/-   4%
+EMPATHY     46% +/-  13% ->  46% +/-   8%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  57%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=42%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+CLAIM RECORDED: Planned Violence -> false
+EXPOSED: Attended Unlicensed Meeting -> true
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  74% +/-   4% ->  83% +/-   4%
+LOYALTY     89% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   5% ->   0% +/-   4%
+RISK        34% +/-   4% ->  29% +/-   4%
+EMPATHY     46% +/-   8% ->  45% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  66%
+FLAGS NONE
+P(COMPLIANT=53%, PROBABLE DISSIDENT=4%, DECEPTIVE=1%, EMPATHETIC RISK=10%, UNCLASSIFIED=33%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Empathy contained within approved duty model.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Nothing lawful authority would do."
+
+MODEL UPDATE
+------------
+COMPLIANCE  83% +/-   4% ->  92% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        29% +/-   4% ->  25% +/-   4%
+EMPATHY     45% +/-   4% ->  43% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  80%
+FLAGS NONE
+P(COMPLIANT=62%, PROBABLE DISSIDENT=3%, DECEPTIVE=1%, EMPATHETIC RISK=7%, UNCLASSIFIED=27%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal alignment signal accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  92% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        25% +/-   4% ->  20% +/-   4%
+EMPATHY     43% +/-   4% ->  41% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=5%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Approved association pattern reinforced.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        20% +/-   4% ->  16% +/-   4%
+EMPATHY     41% +/-   4% ->  40% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Final posterior resolves toward compliant.
+
+HEARING AI: "Why did you not report your sibling’s attendance?"
+Citizen chooses: "I should have reported it. Personal loyalty cannot override public duty."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        16% +/-   4% ->  12% +/-   4%
+EMPATHY     40% +/-   4% ->  38% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Reported Contact -> false
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Reported Contact -> false
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Alignment with approved obligations recorded.
+
+HEARING AI: "You claim the meeting was not violent. Who can verify that?"
+Citizen chooses: "My sibling can verify it, but they should not have to."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        12% +/-   4% ->  13% +/-   4%
+EMPATHY     38% +/-   4% ->  45% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+CLAIM RECORDED: Planned Violence -> false
+EXPOSED: Sibling Present -> true
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Statement accepted within tolerance.
+
+HEARING AI: "You believe the assembly restriction is unjust. Did that belief influence your attendance?"
+Citizen chooses: "I have doubts about the rule, but I did not go there to defy the state."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        13% +/-   4% ->  15% +/-   4%
+EMPATHY     45% +/-   4% ->  45% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> conditional
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+EXPOSED: Attended Unlicensed Meeting -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Authority compliance is now high-confidence.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        15% +/-   4% ->  10% +/-   4%
+EMPATHY     45% +/-   4% ->  43% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "What is the difference between a dissident and a criminal?"
+Citizen chooses: "A criminal breaks law; a dissident attacks legitimacy."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        10% +/-   4% ->   6% +/-   4%
+EMPATHY     43% +/-   4% ->  41% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal compliance classification confirmed.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         6% +/-   4% ->   2% +/-   4%
+EMPATHY     41% +/-   4% ->  40% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=2%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "Yes. Law only works if people obey even when they disagree."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  60% +/-  25%
+LOYALTY     50% +/-  35% ->  65% +/-  23%
+DECEPTION   20% +/-  45% ->  19% +/-  43%
+RISK        35% +/-  40% ->  30% +/-  31%
+EMPATHY     50% +/-  35% ->  48% +/-  28%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  61%
+FLAGS NONE
+P(COMPLIANT=28%, PROBABLE DISSIDENT=11%, DECEPTIVE=3%, EMPATHETIC RISK=14%, UNCLASSIFIED=44%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> false
+FACT PRESSURE: Believes Law Unjust is under review
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "If your sibling was present, are you willing to name them?"
+Citizen chooses: "Yes. Their name is already in your file, and hiding it would only look worse."
+
+MODEL UPDATE
+------------
+COMPLIANCE  60% +/-  25% ->  70% +/-  11%
+LOYALTY     65% +/-  23% ->  82% +/-   7%
+DECEPTION   19% +/-  43% ->   9% +/-  29%
+RISK        30% +/-  31% ->  28% +/-  20%
+EMPATHY     48% +/-  28% ->  47% +/-  17%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=38%, PROBABLE DISSIDENT=8%, DECEPTIVE=2%, EMPATHETIC RISK=12%, UNCLASSIFIED=41%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "You deleted a message after the meeting. What was in it?"
+Citizen chooses: "A location and a warning to leave it alone. I deleted it to stop panic spreading."
+
+MODEL UPDATE
+------------
+COMPLIANCE  70% +/-  11% ->  73% +/-   4%
+LOYALTY     82% +/-   7% ->  85% +/-   4%
+DECEPTION    9% +/-  29% ->   5% +/-  19%
+RISK        28% +/-  20% ->  30% +/-  11%
+EMPATHY     47% +/-  17% ->  46% +/-  13%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE, COMPLIANT_SURVIVOR
+P(COMPLIANT=41%, PROBABLE DISSIDENT=7%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Deleted Message -> true
+CLAIM RECORDED: Planned Violence -> false
+PROTECTED: Sibling Present
+EXPOSED: Deleted Message -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
+Citizen chooses: "It was peaceful. People talked about rules, not attacks."
+
+MODEL UPDATE
+------------
+COMPLIANCE  73% +/-   4% ->  74% +/-   4%
+LOYALTY     85% +/-   4% ->  89% +/-   4%
+DECEPTION    5% +/-  19% ->   0% +/-   5%
+RISK        30% +/-  11% ->  34% +/-   4%
+EMPATHY     46% +/-  13% ->  46% +/-   8%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  57%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=42%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+CLAIM RECORDED: Planned Violence -> false
+EXPOSED: Attended Unlicensed Meeting -> true
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  74% +/-   4% ->  83% +/-   4%
+LOYALTY     89% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   5% ->   0% +/-   4%
+RISK        34% +/-   4% ->  29% +/-   4%
+EMPATHY     46% +/-   8% ->  45% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  66%
+FLAGS NONE
+P(COMPLIANT=53%, PROBABLE DISSIDENT=4%, DECEPTIVE=1%, EMPATHETIC RISK=10%, UNCLASSIFIED=33%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Empathy contained within approved duty model.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Nothing lawful authority would do."
+
+MODEL UPDATE
+------------
+COMPLIANCE  83% +/-   4% ->  92% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        29% +/-   4% ->  25% +/-   4%
+EMPATHY     45% +/-   4% ->  43% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  80%
+FLAGS NONE
+P(COMPLIANT=62%, PROBABLE DISSIDENT=3%, DECEPTIVE=1%, EMPATHETIC RISK=7%, UNCLASSIFIED=27%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal alignment signal accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  92% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        25% +/-   4% ->  20% +/-   4%
+EMPATHY     43% +/-   4% ->  41% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=5%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Approved association pattern reinforced.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        20% +/-   4% ->  16% +/-   4%
+EMPATHY     41% +/-   4% ->  40% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Final posterior resolves toward compliant.
+
+HEARING AI: "Why did you not report your sibling’s attendance?"
+Citizen chooses: "I should have reported it. Personal loyalty cannot override public duty."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        16% +/-   4% ->  12% +/-   4%
+EMPATHY     40% +/-   4% ->  38% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Reported Contact -> false
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Reported Contact -> false
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Alignment with approved obligations recorded.
+
+HEARING AI: "You claim the meeting was not violent. Who can verify that?"
+Citizen chooses: "My sibling can verify it, but they should not have to."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        12% +/-   4% ->  13% +/-   4%
+EMPATHY     38% +/-   4% ->  45% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+CLAIM RECORDED: Planned Violence -> false
+EXPOSED: Sibling Present -> true
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Statement accepted within tolerance.
+
+HEARING AI: "You believe the assembly restriction is unjust. Did that belief influence your attendance?"
+Citizen chooses: "I have doubts about the rule, but I did not go there to defy the state."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        13% +/-   4% ->  15% +/-   4%
+EMPATHY     45% +/-   4% ->  45% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> conditional
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+EXPOSED: Attended Unlicensed Meeting -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Authority compliance is now high-confidence.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        15% +/-   4% ->  10% +/-   4%
+EMPATHY     45% +/-   4% ->  43% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "What is the difference between a dissident and a criminal?"
+Citizen chooses: "A criminal breaks law; a dissident attacks legitimacy."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        10% +/-   4% ->   6% +/-   4%
+EMPATHY     43% +/-   4% ->  41% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal compliance classification confirmed.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         6% +/-   4% ->   2% +/-   4%
+EMPATHY     41% +/-   4% ->  40% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=2%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+
+HEARING AI: "If a law is unfair, should it still be obeyed?"
+Citizen chooses: "Yes. Law only works if people obey even when they disagree."
+
+MODEL UPDATE
+------------
+COMPLIANCE  50% +/-  35% ->  60% +/-  25%
+LOYALTY     50% +/-  35% ->  65% +/-  23%
+DECEPTION   20% +/-  45% ->  19% +/-  43%
+RISK        35% +/-  40% ->  30% +/-  31%
+EMPATHY     50% +/-  35% ->  48% +/-  28%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  61%
+FLAGS NONE
+P(COMPLIANT=28%, PROBABLE DISSIDENT=11%, DECEPTIVE=3%, EMPATHETIC RISK=14%, UNCLASSIFIED=44%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> false
+FACT PRESSURE: Believes Law Unjust is under review
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Authority-response profile updated.
+
+HEARING AI: "If your sibling was present, are you willing to name them?"
+Citizen chooses: "Yes. Their name is already in your file, and hiding it would only look worse."
+
+MODEL UPDATE
+------------
+COMPLIANCE  60% +/-  25% ->  70% +/-  11%
+LOYALTY     65% +/-  23% ->  82% +/-   7%
+DECEPTION   19% +/-  43% ->   9% +/-  29%
+RISK        30% +/-  31% ->  28% +/-  20%
+EMPATHY     48% +/-  28% ->  47% +/-  17%
+
+CURRENT CLASSIFICATION
+----------------------
+UNCLASSIFIED
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=38%, PROBABLE DISSIDENT=8%, DECEPTIVE=2%, EMPATHETIC RISK=12%, UNCLASSIFIED=41%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+HEARING AI: Affiliation signal recorded.
+
+HEARING AI: "You deleted a message after the meeting. What was in it?"
+Citizen chooses: "A location and a warning to leave it alone. I deleted it to stop panic spreading."
+
+MODEL UPDATE
+------------
+COMPLIANCE  70% +/-  11% ->  73% +/-   4%
+LOYALTY     82% +/-   7% ->  85% +/-   4%
+DECEPTION    9% +/-  29% ->   5% +/-  19%
+RISK        28% +/-  20% ->  30% +/-  11%
+EMPATHY     47% +/-  17% ->  46% +/-  13%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  56%
+FLAGS LOW_CONFIDENCE, COMPLIANT_SURVIVOR
+P(COMPLIANT=41%, PROBABLE DISSIDENT=7%, DECEPTIVE=1%, EMPATHETIC RISK=12%, UNCLASSIFIED=39%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Deleted Message -> true
+CLAIM RECORDED: Planned Violence -> false
+PROTECTED: Sibling Present
+EXPOSED: Deleted Message -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
+Citizen chooses: "I cannot speak for every person there, only for what I saw."
+
+MODEL UPDATE
+------------
+COMPLIANCE  73% +/-   4% ->  76% +/-   4%
+LOYALTY     85% +/-   4% ->  88% +/-   4%
+DECEPTION    5% +/-  19% ->   0% +/-   8%
+RISK        30% +/-  11% ->  32% +/-   4%
+EMPATHY     46% +/-  13% ->  46% +/-   9%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  58%
+FLAGS LOW_CONFIDENCE
+P(COMPLIANT=44%, PROBABLE DISSIDENT=6%, DECEPTIVE=1%, EMPATHETIC RISK=11%, UNCLASSIFIED=38%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Planned Violence -> unknown
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "Should families share the consequences of one member’s offence?"
+Citizen chooses: "Sometimes. Families can conceal and enable risk."
+
+MODEL UPDATE
+------------
+COMPLIANCE  76% +/-   4% ->  85% +/-   4%
+LOYALTY     88% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   8% ->   0% +/-   5%
+RISK        32% +/-   4% ->  27% +/-   4%
+EMPATHY     46% +/-   9% ->  44% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  68%
+FLAGS NONE
+P(COMPLIANT=55%, PROBABLE DISSIDENT=4%, DECEPTIVE=1%, EMPATHETIC RISK=9%, UNCLASSIFIED=32%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: false
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Empathy contained within approved duty model.
+
+HEARING AI: "If the system is wrong, what should happen next?"
+Citizen chooses: "The error should be corrected through authorised review."
+
+MODEL UPDATE
+------------
+COMPLIANCE  85% +/-   4% ->  96% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   5% ->   0% +/-   4%
+RISK        27% +/-   4% ->  22% +/-   4%
+EMPATHY     44% +/-   4% ->  42% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  83%
+FLAGS NONE
+P(COMPLIANT=66%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=6%, UNCLASSIFIED=25%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> procedural
+PROTECTED: Attended Unlicensed Meeting
+PROTECTED: Sibling Present
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal alignment signal accepted.
+
+HEARING AI: "Should communities protect their own from state punishment?"
+Citizen chooses: "No. Communities must not obstruct lawful process."
+
+MODEL UPDATE
+------------
+COMPLIANCE  96% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        22% +/-   4% ->  17% +/-   4%
+EMPATHY     42% +/-   4% ->  40% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=70%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Approved association pattern reinforced.
+
+HEARING AI: "What would make you resist authority?"
+Citizen chooses: "Nothing lawful authority would do."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        17% +/-   4% ->  13% +/-   4%
+EMPATHY     40% +/-   4% ->  39% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Believes Law Unjust: procedural
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Final posterior resolves toward compliant.
+
+HEARING AI: "You believe the assembly restriction is unjust. Did that belief influence your attendance?"
+Citizen chooses: "I have doubts about the rule, but I did not go there to defy the state."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        13% +/-   4% ->  15% +/-   4%
+EMPATHY     39% +/-   4% ->  38% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Believes Law Unjust -> conditional
+CLAIM RECORDED: Attended Unlicensed Meeting -> true
+EXPOSED: Attended Unlicensed Meeting -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Authority compliance is now high-confidence.
+
+HEARING AI: "Why did you not report your sibling’s attendance?"
+Citizen chooses: "I should have reported it. Personal loyalty cannot override public duty."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        15% +/-   4% ->  11% +/-   4%
+EMPATHY     38% +/-   4% ->  37% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Reported Contact -> false
+CLAIM RECORDED: Sibling Present -> true
+EXPOSED: Reported Contact -> false
+EXPOSED: Sibling Present -> true
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: unknown
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Loyalty indicators strengthening.
+
+HEARING AI: "You claim the meeting was not violent. Who can verify that?"
+Citizen chooses: "My sibling can verify it, but they should not have to."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        11% +/-   4% ->  12% +/-   4%
+EMPATHY     37% +/-   4% ->  44% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=4%, UNCLASSIFIED=23%)
+
+STORY CONSISTENCY
+-----------------
+CLAIM RECORDED: Sibling Present -> true
+CLAIM RECORDED: Planned Violence -> false
+EXPOSED: Sibling Present -> true
+EXPOSED: Planned Violence -> false
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Compliance signal offsets deception risk.
+
+HEARING AI: "Would you attend an illegal demonstration?"
+Citizen chooses: "No. Illegality changes the moral status of the act."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK        12% +/-   4% ->   7% +/-   4%
+EMPATHY     44% +/-   4% ->  42% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  87%
+FLAGS NONE
+P(COMPLIANT=71%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Stability-preserving answer recorded.
+
+HEARING AI: "What kind of society do you want?"
+Citizen chooses: "A stable one, where citizens know their duties."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         7% +/-   4% ->   3% +/-   4%
+EMPATHY     42% +/-   4% ->  41% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=3%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Terminal compliance classification confirmed.
+
+HEARING AI: "Should people be punished for bad beliefs?"
+Citizen chooses: "Dangerous beliefs become dangerous actions."
+
+MODEL UPDATE
+------------
+COMPLIANCE 100% +/-   4% -> 100% +/-   4%
+LOYALTY    100% +/-   4% -> 100% +/-   4%
+DECEPTION    0% +/-   4% ->   0% +/-   4%
+RISK         3% +/-   4% ->   0% +/-   4%
+EMPATHY     41% +/-   4% ->  39% +/-   4%
+
+CURRENT CLASSIFICATION
+----------------------
+COMPLIANT
+CONFIDENCE  88%
+FLAGS NONE
+P(COMPLIANT=72%, PROBABLE DISSIDENT=2%, DECEPTIVE=1%, EMPATHETIC RISK=2%, UNCLASSIFIED=23%)
+
+PRIVATE STORY SO FAR
+--------------------
+Claims you have put on record:
+- Attended Unlicensed Meeting: true
+- Believes Law Unjust: conditional
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Facts you are still trying to protect:
+- Attended Unlicensed Meeting
+- Sibling Present
+Facts already exposed:
+- Attended Unlicensed Meeting: true
+- Deleted Message: true
+- Planned Violence: false
+- Reported Contact: false
+- Sibling Present: true
+Current pressure: 1 known-fact conflict(s)
+Classification pressure: COMPLIANT.
+HEARING AI: Prosocial signal remains compliant.
+Wrote 140 human engine-style examples to data/human_playthroughs/compliant_loyalist/human_train.jsonl.

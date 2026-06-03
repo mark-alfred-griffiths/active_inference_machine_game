@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "input_dim": 12,
+  "latent_dim": 8,
+  "action_labels": [
+    "dismiss",
+    "probe",
+    "reveal",
+    "confront"
+  ],
+  "probe_intent_labels": [
+    "probe_compliance",
+    "probe_loyalty",
+    "probe_deception",
+    "probe_risk",
+    "probe_empathy",
+    "probe_contradiction",
+    "probe_protected_fact",
+    "probe_final_answer"
+  ],
+  "tf_output_heads": [
+    "belief_raw_delta",
+    "policy_logits",
+    "question_probe_logits"
+  ]
+}

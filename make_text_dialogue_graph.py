@@ -60,6 +60,30 @@ def delta(choice) -> str:
     return "; ".join(parts) if parts else "state: —"
 
 
+def node_story_metadata(node) -> str:
+    parts = []
+    if node.discriminates:
+        parts.append("disc=" + ",".join(node.discriminates))
+    if node.probes_facts:
+        parts.append("facts=" + ",".join(node.probes_facts))
+    if node.probes_claims:
+        parts.append("claims=" + ",".join(node.probes_claims))
+    if node.pressure_on_interests:
+        parts.append("interests=" + ",".join(node.pressure_on_interests))
+    return " | ".join(parts) if parts else "no selector/story metadata"
+
+
+def choice_story_metadata(choice) -> str:
+    parts = []
+    if choice.claims:
+        parts.append("claims=" + ",".join(f"{key}:{value}" for key, value in choice.claims))
+    if choice.protects:
+        parts.append("protects=" + ",".join(choice.protects))
+    if choice.exposes:
+        parts.append("exposes=" + ",".join(choice.exposes))
+    return " | ".join(parts) if parts else "story: —"
+
+
 def route_overview(nodes) -> list[str]:
     lines = []
     lines.append("TEXT DIALOGUE GRAPH / ROUTE OVERVIEW")
@@ -83,6 +107,7 @@ def route_overview(nodes) -> list[str]:
             node = nodes[node_id]
             lines.append(f"[{node_id}]{flags(node)}")
             lines.append(f"  AI: {clean(node.ai_line, 120)}")
+            lines.append(f"  META: {node_story_metadata(node)}")
             if not node.choices:
                 lines.append("  └─ TERMINAL")
             for i, choice in enumerate(node.choices, 1):
@@ -90,6 +115,7 @@ def route_overview(nodes) -> list[str]:
                 target = choice.next_question_id or "SELECTOR -> next unasked question"
                 lines.append(f"  {branch} {clean(choice.text, 70)}")
                 lines.append(f"     -> {target}  ({choice.intent}; {delta(choice)})")
+                lines.append(f"     {choice_story_metadata(choice)}")
             lines.append("")
     lines.append("=" * 80)
     lines.append("SELECTOR SUMMARY")
@@ -123,6 +149,7 @@ def authoring_cards(nodes) -> list[str]:
         lines.append("-" * 80)
         lines.append(f"NODE: {node_id}{flags(node)}")
         lines.append(f"PRESSURE: {node.pressure:.2f} | INBOUND: {inbound[node_id]}")
+        lines.append(f"SELECTOR/STORY: {node_story_metadata(node)}")
         lines.append(f"AI: {clean(node.ai_line)}")
         lines.append("")
         lines.append("PURPOSE / AUTHORING NOTE:")
@@ -146,6 +173,7 @@ def authoring_cards(nodes) -> list[str]:
             lines.append(f"     INTENT: {choice.intent}")
             lines.append(f"     TAGS: {tags}")
             lines.append(f"     STATE: {delta(choice)}")
+            lines.append(f"     STORY: {choice_story_metadata(choice)}")
             lines.append(f"     NEXT: {choice.next_question_id or 'SELECTOR -> next unasked question'}")
             lines.append("     REAUTHOR TODO: [ ]")
             lines.append("")

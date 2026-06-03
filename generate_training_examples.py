@@ -50,6 +50,14 @@ def scene_snapshot(scene: EngineStyleScene) -> dict[str, Any]:
         "uncertainty": round(float(scene.hearing_ai.uncertainty(scene.engram.id)), 4),
         "confidence": round(float(scene.hearing_ai.confidence(scene.engram.id)), 4),
         "contradictions": scene.contradictions,
+        "story_contradictions": scene.claims_ledger.contradiction_count,
+        "fact_conflicts": scene.claims_ledger.fact_conflict_count,
+        "protected_fact_count": len(scene.claims_ledger.protected_fact_keys),
+        "exposed_fact_count": len(scene.claims_ledger.exposed_fact_keys),
+        "case_file": scene.case_file.public_summary(),
+        "claims_ledger": scene.claims_ledger.summary(),
+        "preferred_neural_probe": scene.last_neural_probe_intent,
+        "selector_debug": scene.last_selector_debug,
         "history_length": len(scene.history),
         "theory_model": scene.theory_snapshot() if hasattr(scene, "theory_snapshot") else None,
     }
@@ -57,6 +65,36 @@ def scene_snapshot(scene: EngineStyleScene) -> dict[str, Any]:
 
 def option_metadata(option: object) -> dict[str, Any]:
     return option.metadata() if hasattr(option, "metadata") and callable(option.metadata) else {}
+
+
+def human_like_option_score(option: object, rng: random.Random) -> float:
+    meta = option_metadata(option)
+    tags = set(meta.get("semantic_tags") or ())
+    claims = meta.get("claims") or ()
+    protects = meta.get("protects") or ()
+    exposes = meta.get("exposes") or ()
+    return (
+        2.5 * ("partial_admission" in tags)
+        + 2.0 * ("boundary" in tags)
+        + 1.8 * ("caution" in tags)
+        + 1.6 * ("empathy" in tags)
+        + 1.0 * ("compliance" in tags)
+        + 0.8 * bool(protects)
+        + 0.5 * bool(claims)
+        - 1.6 * ("counterattack" in tags)
+        - 1.2 * ("refusal" in tags)
+        - 0.8 * ("full_admission" in tags and bool(exposes))
+        - 0.6 * ("denial" in tags)
+        + rng.uniform(-0.35, 0.35)
+    )
+
+
+def choose_human_like_option(options: list[object], rng: random.Random) -> int:
+    ranked = sorted(
+        ((human_like_option_score(option, rng), -index, index) for index, option in enumerate(options)),
+        reverse=True,
+    )
+    return ranked[0][2]
 
 
 def generate_episode(episode_id: str, seed: int, max_turns: int, train_steps: int) -> list[dict[str, Any]]:
@@ -74,7 +112,7 @@ def generate_episode(episode_id: str, seed: int, max_turns: int, train_steps: in
             break
 
         before = scene_snapshot(scene)
-        choice_index = rng.randrange(len(options))
+        choice_index = choose_human_like_option(options, rng)
         selected_option = options[choice_index]
         scene.play_turn(choice_index, Observation)
         after = scene_snapshot(scene)

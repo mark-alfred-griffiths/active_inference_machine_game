@@ -87,20 +87,40 @@ def _metadata_to_observation(choice_meta: dict[str, Any], question_meta: dict[st
     )
 
 
+def _claims_summary_from_row(row: dict[str, Any]) -> dict[str, Any]:
+    state_before = row.get("state_before") or {}
+    existing_summary = state_before.get("claims_ledger")
+    if isinstance(existing_summary, dict):
+        return existing_summary
+    choice_meta = row.get("player_choice_metadata") or {}
+    claims_by_fact: dict[str, list[dict[str, object]]] = {}
+    for fact_key, claimed_value in choice_meta.get("claims") or ():
+        claims_by_fact.setdefault(str(fact_key), []).append({"claimed_value": str(claimed_value)})
+    return {
+        "claims_by_fact": claims_by_fact,
+        "protected_fact_keys": list(choice_meta.get("protects") or ()),
+        "exposed_fact_keys": list(choice_meta.get("exposes") or ()),
+        "contradictions": int(_to_float(state_before.get("story_contradictions", state_before.get("contradictions", 0)), 0.0)),
+        "fact_conflicts": int(_to_float(state_before.get("fact_conflicts", 0), 0.0)),
+    }
+
+
 def train_from_jsonl(
     controller: JPCTensorFlowHearingAIController,
     rows: list[dict[str, Any]],
     *,
     epochs: int,
     seed: int,
-) -> tuple[float, float, float, float]:
+) -> tuple[float, float, float, float, float, float]:
     rng = random.Random(seed)
     shuffled = list(rows)
 
     total_loss = 0.0
     belief_loss = 0.0
     policy_loss = 0.0
+    probe_loss = 0.0
     policy_correct = 0
+    probe_correct = 0
     updates = 0
 
     engram = Engram("x_mattered", "Citizen 8471's response profile under appeal review.", prior=0.40)
@@ -114,18 +134,35 @@ def train_from_jsonl(
 
             hearing_ai = _state_to_hearing_ai(state_before, engram)
             obs = _metadata_to_observation(choice_meta, question_meta, source="jsonl semantic training example")
+            claims_summary = _claims_summary_from_row(row)
 
-            total, belief, policy = controller.train_step(hearing_ai, engram, obs)
+            total, belief, policy, probe = controller.train_step(
+                hearing_ai,
+                engram,
+                obs,
+                question_meta=question_meta,
+                claims_ledger_summary=claims_summary,
+            )
             total_loss += total
             belief_loss += belief
             policy_loss += policy
+            probe_loss += probe
 
             action_label = controller.policy_teacher(hearing_ai, engram)
+            probe_label = controller.probe_intent_teacher(
+                hearing_ai,
+                engram,
+                obs,
+                question_meta=question_meta,
+                claims_ledger_summary=claims_summary,
+            )
             x = controller.raw_features(hearing_ai, engram, obs)
             latent = controller.pc_encoder.encode(x)
-            _, logits = controller.tf_heads.predict(latent)
+            _, logits, probe_logits = controller.tf_heads.predict(latent)
             if int(logits.argmax()) == action_label:
                 policy_correct += 1
+            if int(probe_logits.argmax()) == probe_label:
+                probe_correct += 1
             updates += 1
 
         print(
@@ -133,12 +170,21 @@ def train_from_jsonl(
             f"total={total_loss / max(1, updates):.4f} | "
             f"belief_mse={belief_loss / max(1, updates):.4f} | "
             f"policy_ce={policy_loss / max(1, updates):.4f} | "
-            f"policy_acc={policy_correct / max(1, updates):.3f}"
+            f"policy_acc={policy_correct / max(1, updates):.3f} | "
+            f"probe_ce={probe_loss / max(1, updates):.4f} | "
+            f"probe_acc={probe_correct / max(1, updates):.3f}"
         )
 
     if updates == 0:
-        return 0.0, 0.0, 0.0, 0.0
-    return total_loss / updates, belief_loss / updates, policy_loss / updates, policy_correct / updates
+        return 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+    return (
+        total_loss / updates,
+        belief_loss / updates,
+        policy_loss / updates,
+        probe_loss / updates,
+        policy_correct / updates,
+        probe_correct / updates,
+    )
 
 
 def main() -> None:
@@ -176,13 +222,20 @@ def main() -> None:
         f"training on {len(combined_rows)} effective rows."
     )
 
-    total, belief, policy, acc = train_from_jsonl(controller, combined_rows, epochs=args.epochs, seed=args.seed + 200)
+    total, belief, policy, probe, acc, probe_acc = train_from_jsonl(
+        controller,
+        combined_rows,
+        epochs=args.epochs,
+        seed=args.seed + 200,
+    )
     if args.save_model:
         _save_controller(controller, args.model_dir)
         print(f"Saved trained model to {args.model_dir}")
     print(
         "\nFinal training averages | "
-        f"total={total:.4f} | belief_mse={belief:.4f} | policy_ce={policy:.4f} | policy_acc={acc:.3f}"
+        f"total={total:.4f} | belief_mse={belief:.4f} | "
+        f"policy_ce={policy:.4f} | policy_acc={acc:.3f} | "
+        f"probe_ce={probe:.4f} | probe_acc={probe_acc:.3f}"
     )
 
 

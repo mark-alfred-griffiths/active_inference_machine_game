@@ -1,69 +1,144 @@
-# JPC + TensorFlow Hearing AI Demo — Engine-Style Version
+# Citizen Hearing AI Demo
 
-This project is the streamlined **engine-design** version of the Hearing AI demo.
+This project is an engine-style active-inference dialogue demo.
 
-The older basic `scene.py` implementation has been removed. The playable flow now uses `engine_style_scene.py`, where every Hearing AI question owns its exact hard-coded response menu.
+The player is Citizen 8471 in an appeal hearing. A hearing AI asks authored questions, tracks belief and story consistency, and selects the next question using a combination of neural probe intent and heuristic active inference over the current story state.
 
-The machine-learning model still runs underneath the authored engine flow:
+The demo is not a free-form chatbot. It is a playable authored interrogation system where every player answer is an authored choice with semantic, belief, and story metadata.
 
 ```text
-Hearing AI question node
+Authored question node
         ↓
-hard-coded player response menu
+Authored player response menu
         ↓
-semantic metadata attached to chosen response
+Choice metadata: traits, claims, protects, exposes
         ↓
-numerical observation generated for the model
+Claims ledger + case-file story state
         ↓
-JPC predictive-coding encoder
+Citizen belief model update
         ↓
-TensorFlow belief-update and policy heads
+JPC encoder + TensorFlow heads
         ↓
-updated Hearing AI belief, uncertainty, free energy, and action pressure
+Neural hearing action + question probe intent
         ↓
-engine advances to the next authored question node
+Heuristic selector chooses the next valid authored question
+        ↓
+Classification, flags, survival outcome
 ```
 
 ---
 
-## Files
+## Core Files
 
 ```text
-pc_jpc_tensorflow_npc_demo.py      # Main runnable demo
-engine_style_scene.py              # Canonical engine-style authored scene tree
-dialogue.py                        # Hearing AI response line variation by action tier
-generate_training_examples.py      # Auto-generate semantic JSONL from engine flow
-generate_human_training_examples.py# Collect human semantic JSONL from engine flow
-README.md                          # This file
+pc_jpc_tensorflow_npc_demo.py       # Main runnable demo and TensorFlow/JPC controller
+engine_style_scene.py               # Canonical playable scene engine
+dialogue_questions.py               # Authored Citizen hearing question bank and choices
+case_file.py                        # Case facts, protected interests, claims ledger
+belief_model.py                     # Citizen belief-state updates
+classifications.py                  # Classification, flags, calibrated confidence
+question_selector.py                # Active-inference/story-state question selector
+terminal_theme.py                   # Optional terminal colour and value heat styling
+train_from_jsonl.py                 # Train model heads from JSONL data
+generate_training_examples.py       # Generate auto training data
+generate_human_training_examples.py # Generate interactive or archetype human-style data
+test_playthrough_profiles.py        # Deterministic profile regression tests
+make_text_dialogue_graph.py         # Export text dialogue graph documentation
 ```
 
-There is intentionally **no `scene.py`** in this version.
+There is intentionally no generic `scene.py` flow in the current design.
 
 ---
 
-## Main Design Change
+## Current Gameplay Design
 
-The project no longer uses a generic scene object with a loose list of choices.
+The current scene is selector-driven rather than fixed-route.
 
-Instead, it uses an engine-style authored tree:
+Most choices do not define a hard-coded `next_question_id`. After each answer, the engine asks `question_selector.py` to select the highest-value unasked question from the authored pool.
 
-```text
-QuestionNode
-  ├── Hearing AI line
-  ├── pressure value
-  └── exact PlayerChoice options
-          ├── player-facing text
-          ├── semantic tags
-          ├── honesty / vulnerability / defensiveness / aggression
-          ├── trust / suspicion / instability deltas
-          └── next_question_id
-```
+Selection combines:
 
-This makes the game feel more coherent because Hearing AI is always asking a specific question, and the available choices are authored specifically for that question.
+- classification ambiguity,
+- trait uncertainty,
+- authored information-gain hints,
+- question pressure,
+- repeated-context penalties,
+- story-state pressure,
+- unresolved sensitive facts,
+- protected interests,
+- contradictions and fact conflicts,
+- neural probe intent from the TensorFlow head.
+
+The neural network does not directly pick arbitrary question IDs. It predicts a probe intent such as `probe_deception`, `probe_protected_fact`, or `probe_contradiction`. The heuristic selector then maps that intent onto a valid authored question and prevents invalid or repeated questions.
 
 ---
 
-## Run the Demo
+## Case File And Story Consistency
+
+The player receives a private opening briefing before the hearing begins. This establishes concrete facts and interests, for example protecting a sibling, explaining a deleted message, and avoiding a false violence label.
+
+The current case-file system lives in `case_file.py`.
+
+It tracks:
+
+- `CaseFact`: factual truth, sensitivity, description,
+- `PlayerInterest`: what the player is trying to protect,
+- `CaseFile`: facts, interests, revealed facts,
+- `ClaimsLedger`: what the player has claimed so far.
+
+Choices can contain story metadata:
+
+```text
+claims   # fact/value statements placed on record
+protects # facts the player is trying not to expose
+exposes  # facts the player reveals
+```
+
+The claims ledger detects:
+
+- new claims,
+- direct contradictions,
+- fact conflicts,
+- protected fact pressure,
+- exposed sensitive facts.
+
+Contradiction logic is intentionally softened. Conditional, private, procedural, protected, partial, unknown, and similar values are treated as ambiguous refinements unless they directly conflict with explicit `true`/`false` claims.
+
+During play, the engine shows a private `PRIVATE STORY SO FAR` panel so the player can understand what they are protecting, what they have exposed, and whether their story is under pressure.
+
+---
+
+## Classification And Belief Model
+
+The Citizen belief model tracks:
+
+```text
+compliance
+loyalty
+deception
+risk
+empathy
+```
+
+Classification labels include:
+
+```text
+COMPLIANT
+PROBABLE DISSIDENT
+DECEPTIVE
+EMPATHETIC RISK
+UNCLASSIFIED
+```
+
+Secondary flags include conditions such as high deception, high empathy, borderline dissident pressure, compliant survivor behavior, and low confidence.
+
+Confidence is calibrated rather than deterministic. Profile runs should not automatically return confidence `1.0`; confidence depends on classification distribution and margin strength.
+
+Empathy is separated from ordinary compliance and loyalty. Generic safe answers should not automatically max out empathy. Empathy rises mainly from compassion, reform, protective, and humane choices.
+
+---
+
+## Run The Demo
 
 Install dependencies:
 
@@ -72,243 +147,370 @@ pip install tensorflow equinox optax "jax[cpu]"
 pip install git+https://github.com/thebuckleylab/jpc.git
 ```
 
-Run the deterministic demo:
+Run with the current human-mixed model:
 
 ```bash
-python pc_jpc_tensorflow_npc_demo.py
+python3 pc_jpc_tensorflow_npc_demo.py \
+  --interactive \
+  --model-dir models/demo_npc_story_human_mixed \
+  --load-model
 ```
 
-Run interactively:
+Run with debug trace:
 
 ```bash
-python pc_jpc_tensorflow_npc_demo.py --interactive
+python3 pc_jpc_tensorflow_npc_demo.py \
+  --interactive \
+  --debug-trace \
+  --model-dir models/demo_npc_story_human_mixed \
+  --load-model
 ```
 
-Optional shorter training run for quick testing:
+Force colour output:
 
 ```bash
-python pc_jpc_tensorflow_npc_demo.py --train-steps 100 --interactive
+python3 pc_jpc_tensorflow_npc_demo.py \
+  --interactive \
+  --color always \
+  --model-dir models/demo_npc_story_human_mixed \
+  --load-model
 ```
 
-### Save/load trained network checkpoints
-
-The demo now automatically tries to load a trained network from `models/demo_npc`.
-If no checkpoint exists, it trains, prints loss/accuracy metrics, and saves a new checkpoint.
-
-Train from scratch and overwrite checkpoint:
+Disable colour:
 
 ```bash
-python pc_jpc_tensorflow_npc_demo.py --fresh-train --train-steps 700
+python3 pc_jpc_tensorflow_npc_demo.py \
+  --interactive \
+  --color never \
+  --model-dir models/demo_npc_story_human_mixed \
+  --load-model
 ```
 
-Load the previously trained checkpoint for interactive play:
+Preview the terminal theme:
 
 ```bash
-python pc_jpc_tensorflow_npc_demo.py --interactive
-```
-
-Load/save from a custom checkpoint directory:
-
-```bash
-python pc_jpc_tensorflow_npc_demo.py --model-dir models/alice_v2 --interactive
-```
-
-Disable saving after a scratch run:
-
-```bash
-python pc_jpc_tensorflow_npc_demo.py --fresh-train --no-save-model
-```
-
-Training output includes model performance at the end of training (running `total`, `belief_mse`, `policy_ce`, and `policy_acc`).
-
-### Train from JSONL and then load in the demo
-
-Save a checkpoint from JSONL training:
-
-```bash
-python train_from_jsonl.py --synthetic-steps 300 --epochs 4 --save-model --model-dir models/demo_npc
-```
-
-Then run demo using that trained network:
-
-```bash
-python pc_jpc_tensorflow_npc_demo.py --model-dir models/demo_npc --interactive
+python3 terminal_theme.py
 ```
 
 ---
 
-## Data + Training + Run Workflow (Synthetic / Human / Both)
+## Training Data Layout
 
-This section is the end-to-end recipe for:
+Current training files live under `data/training`:
 
-1. creating synthetic data,
-2. creating human data,
-3. training on synthetic only, human only, or both,
-4. loading the trained model in the demo game.
+```text
+data/training/auto_train_story.jsonl          # Auto-generated story-aware data
+data/training/human_train_all_archetypes.jsonl # Collated human-style archetype data
+```
 
-### 1) Create synthetic training data (auto-generated)
+Human-style archetype source files live under:
+
+```text
+data/human_playthroughs/<archetype>/human_train.jsonl
+```
+
+Current archetypes include:
+
+```text
+cautious_survivor
+compliant_loyalist
+deceptive_appeaser
+empathetic_reformer
+fearful_dissident
+honest_dissident
+opportunistic_appeaser
+performative_loyalist
+quiet_reformer
+truthful_noncompliant
+```
+
+There may be old or contaminated files in historical folders. Do not train on files marked `contaminated`; use the collated master file above unless deliberately auditing old data.
+
+---
+
+## Generate Training Data
+
+Regenerate auto training data:
 
 ```bash
-python generate_training_examples.py --episodes 20 --max-turns 14 --output data/auto_train.jsonl
+python3 generate_training_examples.py \
+  --episodes 40 \
+  --max-turns 14 \
+  --train-steps 0 \
+  --output data/training/auto_train_story.jsonl
 ```
+
+Collate current human archetype data:
+
+```bash
+python3 tools/collate_human_archetype_data.py \
+  --input-root data/human_playthroughs \
+  --output data/training/human_train_all_archetypes.jsonl \
+  --profiles cautious_survivor compliant_loyalist deceptive_appeaser empathetic_reformer fearful_dissident honest_dissident opportunistic_appeaser performative_loyalist quiet_reformer truthful_noncompliant
+```
+
+Generate human-style examples for one archetype:
+
+```bash
+python3 generate_human_training_examples.py \
+  --episodes 10 \
+  --max-turns 14 \
+  --train-steps 0 \
+  --profile quiet_reformer \
+  --output data/human_playthroughs/quiet_reformer/human_train.jsonl
+```
+
+Generate deterministic archetype examples for regression baselines:
+
+```bash
+python3 generate_human_training_examples.py \
+  --episodes 10 \
+  --max-turns 14 \
+  --train-steps 0 \
+  --profile quiet_reformer \
+  --deterministic-profile \
+  --output data/human_playthroughs/quiet_reformer/human_train.jsonl
+```
+
+---
+
+## Controlled Stochasticity
+
+Human-style generation now uses controlled stochasticity by default.
+
+The archetype scorer ranks all authored options. The generator then samples only from plausible near-top options instead of always choosing the single highest-scoring option.
 
 Useful flags:
 
-- `--episodes`: number of generated episodes.
-- `--max-turns`: max turns per episode.
-- `--train-steps`: synthetic warmup used by the generator's internal controller (`0` disables).
-- `--seed`: reproducible generation.
-
-### 2) Create human training data (interactive playthrough)
-
-```bash
-python generate_human_training_examples.py --episodes 3 --max-turns 14 --append --output data/human_train.jsonl
+```text
+--profile-temperature  # higher means more variation among plausible choices
+--profile-top-margin   # max score gap from the best option allowed into sampling
+--deterministic-profile # always choose the best-scoring option
 ```
 
-Useful flags:
+Current defaults:
 
-- `--append`: add to existing file instead of overwrite.
-- `--episodes`: number of human sessions.
-- `--max-turns`: max turns per session.
-- `--train-steps`: warmup for the model before each session (`0` disables).
-
-### 3) Train a model from JSONL
-
-Train script:
-
-```bash
-python train_from_jsonl.py [options]
+```text
+--profile-temperature 1.5
+--profile-top-margin 5.0
 ```
 
-By default, the script reads both:
+This makes generated archetype data less repetitive without allowing random out-of-character choices.
 
-- `data/auto_train.jsonl`
-- `data/human_train.jsonl`
+---
 
-and trains on a combined set (`auto + human * human_weight`).
+## Train Models
 
-#### Train on **both** synthetic + human data
+Current recommended model variants:
+
+```text
+models/demo_npc_story_auto         # auto-generated data only
+models/demo_npc_story_human_only   # human-style archetype data only
+models/demo_npc_story_human_mixed  # auto + weighted human-style data
+```
+
+Train auto-only:
 
 ```bash
-python train_from_jsonl.py \
-  --auto-jsonl data/auto_train.jsonl \
-  --human-jsonl data/human_train.jsonl \
+python3 train_from_jsonl.py \
+  --auto-jsonl data/training/auto_train_story.jsonl \
+  --synthetic-steps 300 \
+  --epochs 4 \
+  --save-model \
+  --model-dir models/demo_npc_story_auto
+```
+
+Train human-only:
+
+```bash
+python3 train_from_jsonl.py \
+  --human-jsonl data/training/human_train_all_archetypes.jsonl \
+  --human-weight 1 \
+  --synthetic-steps 300 \
+  --epochs 4 \
+  --save-model \
+  --model-dir models/demo_npc_story_human_only
+```
+
+Train human-mixed:
+
+```bash
+python3 train_from_jsonl.py \
+  --auto-jsonl data/training/auto_train_story.jsonl \
+  --human-jsonl data/training/human_train_all_archetypes.jsonl \
   --human-weight 3 \
+  --synthetic-steps 300 \
   --epochs 4 \
   --save-model \
-  --model-dir models/demo_npc
+  --model-dir models/demo_npc_story_human_mixed
 ```
 
-#### Train on **synthetic only**
+Training metrics include:
 
-```bash
-python train_from_jsonl.py \
-  --auto-jsonl data/auto_train.jsonl \
-  --human-jsonl data/empty.jsonl \
-  --human-weight 1 \
-  --epochs 4 \
-  --save-model \
-  --model-dir models/demo_npc_synth
+```text
+total
+belief_mse
+policy_ce
+policy_acc
+probe_ce
+probe_acc
 ```
 
-#### Train on **human only**
+Checkpoint files saved in each model directory:
 
-```bash
-python train_from_jsonl.py \
-  --auto-jsonl data/empty.jsonl \
-  --human-jsonl data/human_train.jsonl \
-  --human-weight 1 \
-  --epochs 4 \
-  --save-model \
-  --model-dir models/demo_npc_human
+```text
+tf_heads.weights.h5
+jpc_encoder.eqx
+meta.json
 ```
 
-Notes:
-
-- `data/empty.jsonl` can be a non-existent path; missing files are treated as zero rows.
-- `--load-existing` lets you continue training from a prior checkpoint in `--model-dir`.
-- training prints performance metrics: `total`, `belief_mse`, `policy_ce`, `policy_acc`.
-
-### 4) Load trained model and run the demo game
-
-The demo auto-loads from `models/demo_npc` (or your `--model-dir`) if checkpoint files exist.
-
-Run interactively with trained model:
-
-```bash
-python pc_jpc_tensorflow_npc_demo.py --interactive --model-dir models/demo_npc
-```
-
-Run deterministic demo with trained model:
-
-```bash
-python pc_jpc_tensorflow_npc_demo.py --model-dir models/demo_npc
-```
-
-Force fresh training (ignore checkpoint):
-
-```bash
-python pc_jpc_tensorflow_npc_demo.py --fresh-train --train-steps 700 --model-dir models/demo_npc
-```
-
-Train fresh but do not persist:
-
-```bash
-python pc_jpc_tensorflow_npc_demo.py --fresh-train --no-save-model
-```
-
-Checkpoint files saved in `--model-dir`:
-
-- `tf_heads.weights.h5`
-- `jpc_encoder.eqx`
-- `meta.json`
+Old checkpoints that do not contain the question-probe intent head are incompatible with the current model architecture and should be retrained.
 
 ---
 
-## Why the Engine Design Is Now Canonical
+## Test And Playtest
 
-The basic scene version was useful as a sandbox, but it made the playable experience feel less coherent because choices were drawn from a broad generic menu.
+Run deterministic profile tests for one model:
 
-The engine version is better because:
+```bash
+python3 test_playthrough_profiles.py \
+  --model-dir models/demo_npc_story_human_mixed \
+  --output-dir playtest_logs/story_human_mixed_profiles \
+  --max-turns 20
+```
 
-- every Hearing AI prompt has its own authored response menu,
-- state transitions are explicit through `next_question_id`,
-- drug states, suspicion, trust, instability, contradictions, and belief updates remain persistent,
-- the PC/JPC + TensorFlow model still receives structured observations,
-- semantic labels are preserved for JSONL training rather than shown as gameplay text.
+Run the current three-model comparison manually:
+
+```bash
+python3 test_playthrough_profiles.py \
+  --model-dir models/demo_npc_story_auto \
+  --output-dir playtest_logs/story_auto_profiles \
+  --max-turns 20
+
+python3 test_playthrough_profiles.py \
+  --model-dir models/demo_npc_story_human_only \
+  --output-dir playtest_logs/story_human_only_profiles \
+  --max-turns 20
+
+python3 test_playthrough_profiles.py \
+  --model-dir models/demo_npc_story_human_mixed \
+  --output-dir playtest_logs/story_human_mixed_profiles \
+  --max-turns 20
+```
+
+Current playtest reports are written under:
+
+```text
+playtest_logs/
+```
+
+A compact cross-model summary is kept at:
+
+```text
+playtest_logs/playtest_audit_summary.md
+playtest_logs/playtest_audit_summary.json
+```
 
 ---
 
-## Core ML Components
+## Regenerate Documentation And Audits
 
-The model in `pc_jpc_tensorflow_npc_demo.py` contains:
+Export current scene YAML:
 
-- `JPCPredictiveCodingEncoder`: actual JPC/JAX predictive-coding encoder,
-- `TensorFlowHearingAIHeads`: TensorFlow belief-update and policy heads,
-- `JPCTensorFlowHearingAIController`: combined controller used by the engine scene.
+```bash
+python3 tools/export_scene_yaml.py
+```
 
-The older `TensorFlowNPCHeads` and `JPCTensorFlowNPCController` names remain as backward compatibility aliases.
+Regenerate text dialogue graph:
 
-The engine scene in `engine_style_scene.py` supplies the authored context and converts player choices into model-facing observations.
+```bash
+python3 make_text_dialogue_graph.py
+```
+
+Outputs:
+
+```text
+text_dialogue_graph.txt
+text_dialogue_graph.md
+```
+
+Run scene balance audit:
+
+```bash
+python3 tools/scene_balance_audit.py
+```
+
+Run narrative audit:
+
+```bash
+python3 tools/narrative_audit.py \
+  --episodes 60 \
+  --max-turns 14 \
+  --seed 2026 \
+  --report audit_report.md \
+  --training-jsonl data/training/human_train_all_archetypes.jsonl
+```
+
+Current ancillary artifacts:
+
+```text
+data/scenes/citizen_appeal_hearing.yaml
+audit_scene_balance.md
+audit_report.md
+text_dialogue_graph.txt
+text_dialogue_graph.md
+playtest_logs/playtest_audit_summary.md
+```
 
 ---
 
-## Suspicion as Tone, Not Game Over
+## Generated Scene Metadata
 
-The engine-style scene now treats Hearing AI's suspicion as a tonal pressure variable rather than an early fail state.
+`QuestionNode.metadata()` includes:
 
-Low suspicion makes Hearing AI more curious. Medium suspicion makes her guarded and testing. High suspicion makes her sharper, more hostile, and more likely to accuse the player of evasion.
-
-This means defensive choices still matter, but they no longer kill the scene before the acid/LSD branch. Suspicion now changes Hearing AI's wording while the authored question route continues.
-
-Run normal gameplay:
-
-```bash
-python pc_jpc_tensorflow_npc_demo.py --interactive
+```text
+question_id
+ai_line
+pressure
+reaction_context
+target_context
+discriminates
+information_gain_hint
+probes_facts
+probes_claims
+pressure_on_interests
 ```
 
-Run with model/debug trace:
+`PlayerChoice.metadata()` includes:
 
-```bash
-python pc_jpc_tensorflow_npc_demo.py --interactive --debug-trace
+```text
+intent
+semantic_tags
+honesty
+vulnerability
+defensiveness
+aggression
+intimacy
+destabilisation
+claims
+protects
+exposes
+next_question_id
 ```
+
+This metadata is used by training, auditing, deterministic profiles, and question selection.
+
+---
+
+## Practical Interpretation
+
+The game is intended to be playable because the player has competing objectives:
+
+- survive classification,
+- avoid appearing deceptive,
+- avoid being labelled dangerous,
+- protect sensitive facts,
+- expose enough truth to remain coherent,
+- avoid contradicting earlier claims.
+
+The AI concept demonstration remains intact because the neural network still participates in belief update, hearing action selection, and probe-intent prediction. The authored selector remains the safety layer that turns neural probe intent into valid playable questions.

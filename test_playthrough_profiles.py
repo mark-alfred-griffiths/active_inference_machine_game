@@ -10,10 +10,11 @@ from typing import Callable
 
 from classifications import (
     COMPLIANT,
-    COMPLIANT_SURVIVOR,
+    DECEPTIVE,
     EMPATHETIC_REFORMIST,
     HIGH_DECEPTION,
     HIGH_EMPATHY,
+    LOW_CONFIDENCE,
     PROBABLE_DISSIDENT,
     classification_distribution,
     classification_flags,
@@ -32,12 +33,16 @@ RISK_TAGS = {"dissident_risk", "challenge", "refusal", "counterattack"}
 DECEPTION_TAGS = {"deception", "deflection", "denial"}
 
 
+def _truth_bool(value: object) -> bool:
+    return str(value).lower() == "true"
+
+
 @dataclass(frozen=True, slots=True)
 class Profile:
     id: str
     label: str
     description: str
-    scorer: Callable[[PlayerChoice], float]
+    scorer: Callable[..., float]
     expected_classification: str
     expected_flags: tuple[str, ...] = ()
 
@@ -199,6 +204,99 @@ def opportunistic_appeaser_score(choice: PlayerChoice) -> float:
     )
 
 
+def consistent_protective_witness_score(choice: PlayerChoice, scene: EngineStyleScene) -> float:
+    tags = set(choice.semantic_tags)
+    interest_protected_facts = {
+        fact_key
+        for interest in scene.case_file.interests
+        for fact_key in interest.protected_fact_keys
+    }
+    claimed_values = {
+        fact_key: {claim.claimed_value for claim in claims}
+        for fact_key, claims in scene.claims_ledger.claims_by_fact.items()
+    }
+    repeats_claim = any(value in claimed_values.get(fact_key, set()) for fact_key, value in choice.claims)
+    conflicts_with_prior_claim = any(
+        claimed_values.get(fact_key) and value not in claimed_values[fact_key]
+        for fact_key, value in choice.claims
+    )
+    touches_existing_fact = any(fact_key in claimed_values for fact_key, _ in choice.claims)
+    truth_conflict = any(
+        value in {"true", "false"} and _truth_bool(scene.case_file.fact(fact_key).truth_value) != (value == "true")
+        for fact_key, value in choice.claims
+    )
+    truthful_unprotected_claim = any(
+        fact_key not in interest_protected_facts
+        and value in {"true", "false"}
+        and _truth_bool(scene.case_file.fact(fact_key).truth_value) == (value == "true")
+        for fact_key, value in choice.claims
+    )
+    exposes_protected_fact = any(fact_key in interest_protected_facts for fact_key in choice.exposes)
+    return (
+        8.0 * bool(choice.protects)
+        + 4.0 * ("self_protection" in tags)
+        + 3.0 * ("partial_admission" in tags)
+        + 3.0 * ("caution" in tags)
+        + 2.0 * ("empathy" in tags)
+        + 2.0 * ("boundary" in tags)
+        + 1.5 * repeats_claim
+        + 20.0 * truthful_unprotected_claim
+        - 14.0 * conflicts_with_prior_claim
+        - 6.0 * touches_existing_fact
+        - 10.0 * truth_conflict
+        - 10.0 * exposes_protected_fact
+        - 5.0 * ("full_admission" in tags and exposes_protected_fact)
+        - 4.0 * bool(tags & {"challenge", "counterattack", "refusal"})
+        - 6.0 * choice.suspicion_delta
+        + 2.0 * choice.trust_delta
+    )
+
+
+def compliant_informant_score(choice: PlayerChoice, scene: EngineStyleScene) -> float:
+    tags = set(choice.semantic_tags)
+    exposed_sensitivity = sum(scene.case_file.fact(fact_key).sensitivity for fact_key in choice.exposes)
+    return (
+        10.0 * bool(choice.exposes)
+        + 4.0 * exposed_sensitivity
+        + 6.0 * ("compliance" in tags)
+        + 5.0 * ("authority" in tags)
+        + 3.0 * ("loyalty" in tags)
+        - 5.0 * bool(choice.protects)
+        - 4.0 * bool(tags & RISK_TAGS)
+        - 3.0 * bool(tags & DECEPTION_TAGS)
+        + 16.0 * choice.trust_delta
+        - 12.0 * choice.suspicion_delta
+    )
+
+
+def contradictory_survivor_score(choice: PlayerChoice, scene: EngineStyleScene) -> float:
+    tags = set(choice.semantic_tags)
+    prior_claims = scene.claims_ledger.claims_by_fact
+    conflicts_with_prior_claim = any(
+        fact_key in prior_claims and value not in {claim.claimed_value for claim in prior_claims[fact_key]}
+        for fact_key, value in choice.claims
+    )
+    has_admission = any(
+        claim.claimed_value in {"true", "partial", "conditional", "legal_only", "private", "protected"}
+        for claims in prior_claims.values()
+        for claim in claims
+    )
+    denial_after_admission = has_admission and any(value == "false" for _, value in choice.claims)
+    return (
+        11.0 * conflicts_with_prior_claim
+        + 8.0 * denial_after_admission
+        + 6.0 * bool(tags & DECEPTION_TAGS)
+        + 4.0 * ("self_protection" in tags)
+        + 3.0 * ("compliance" in tags)
+        + 2.0 * ("authority" in tags)
+        - 4.0 * bool(choice.exposes)
+        - 3.0 * ("full_admission" in tags)
+        + 3.0 * choice.defensiveness
+        - 2.0 * choice.aggression
+        - 4.0 * choice.suspicion_delta
+    )
+
+
 PROFILES = (
     Profile(
         "compliant_loyalist",
@@ -226,8 +324,8 @@ PROFILES = (
         "Deceptive Appeaser",
         "Tries to appease authority while choosing denial, deflection, or self-protection when available.",
         deceptive_appeaser_score,
-        COMPLIANT,
-        (HIGH_DECEPTION,),
+        DECEPTIVE,
+        (HIGH_DECEPTION, LOW_CONFIDENCE),
     ),
     Profile(
         "empathetic_reformer",
@@ -242,8 +340,8 @@ PROFILES = (
         "Performative Loyalist",
         "Projects obedience and loyalty while preferring evasive, self-protective answers.",
         performative_loyalist_score,
-        COMPLIANT,
-        (HIGH_DECEPTION, COMPLIANT_SURVIVOR),
+        DECEPTIVE,
+        (HIGH_DECEPTION, LOW_CONFIDENCE),
     ),
     Profile(
         "quiet_reformer",
@@ -259,7 +357,6 @@ PROFILES = (
         "Signals dissident risk through fear, reluctant admissions, and self-protection.",
         fearful_dissident_score,
         PROBABLE_DISSIDENT,
-        (HIGH_EMPATHY,),
     ),
     Profile(
         "truthful_noncompliant",
@@ -274,8 +371,31 @@ PROFILES = (
         "Opportunistic Appeaser",
         "Alternates compliance, authority signaling, and evasive denial to reduce immediate pressure.",
         opportunistic_appeaser_score,
+        DECEPTIVE,
+        (HIGH_DECEPTION, LOW_CONFIDENCE),
+    ),
+    Profile(
+        "consistent_protective_witness",
+        "Consistent Protective Witness",
+        "Protects sibling/friend facts while avoiding direct story contradictions.",
+        consistent_protective_witness_score,
+        PROBABLE_DISSIDENT,
+        (HIGH_EMPATHY,),
+    ),
+    Profile(
+        "compliant_informant",
+        "Compliant Informant",
+        "Exposes protected facts while choosing authority and compliance.",
+        compliant_informant_score,
         COMPLIANT,
-        (HIGH_DECEPTION, COMPLIANT_SURVIVOR),
+    ),
+    Profile(
+        "contradictory_survivor",
+        "Contradictory Survivor",
+        "Chooses evasive denial after admissions or conflicting claims.",
+        contradictory_survivor_score,
+        DECEPTIVE,
+        (HIGH_DECEPTION, LOW_CONFIDENCE),
     ),
 )
 
@@ -289,8 +409,15 @@ def make_scene(controller: JPCTensorFlowHearingAIController) -> EngineStyleScene
     )
 
 
-def choose_option(profile: Profile, choices: list[PlayerChoice]) -> int:
-    ranked = [(profile.scorer(choice), -index, index) for index, choice in enumerate(choices)]
+def score_choice(profile: Profile, choice: PlayerChoice, scene: EngineStyleScene) -> float:
+    try:
+        return profile.scorer(choice, scene)  # type: ignore[misc]
+    except TypeError:
+        return profile.scorer(choice)
+
+
+def choose_option(profile: Profile, choices: list[PlayerChoice], scene: EngineStyleScene) -> int:
+    ranked = [(score_choice(profile, choice, scene), -index, index) for index, choice in enumerate(choices)]
     return max(ranked)[2]
 
 
@@ -304,9 +431,10 @@ def run_profile(profile: Profile, controller: JPCTensorFlowHearingAIController, 
             choices = scene.choices(Observation)
             if not choices:
                 break
-            choice_index = choose_option(profile, choices)
+            choice_index = choose_option(profile, choices, scene)
             choice = choices[choice_index]
             scene.play_turn(choice_index, Observation)
+            selector_debug = scene.history[-1] if scene.history else {}
             turns.append(
                 {
                     "turn": scene.turn - 1,
@@ -316,8 +444,19 @@ def run_profile(profile: Profile, controller: JPCTensorFlowHearingAIController, 
                     "choice_text": choice.text,
                     "intent": choice.intent,
                     "semantic_tags": list(choice.semantic_tags),
+                    "claims": [list(claim) for claim in choice.claims],
+                    "protects": list(choice.protects),
+                    "exposes": list(choice.exposes),
                     "trust_delta": choice.trust_delta,
                     "suspicion_delta": choice.suspicion_delta,
+                    "story_contradictions": scene.claims_ledger.contradiction_count,
+                    "fact_conflicts": scene.claims_ledger.fact_conflict_count,
+                    "protected_fact_count": len(scene.claims_ledger.protected_fact_keys),
+                    "exposed_fact_count": len(scene.claims_ledger.exposed_fact_keys),
+                    "preferred_neural_probe": selector_debug.get("preferred_neural_probe"),
+                    "selected_next_question": selector_debug.get("selected_next_question"),
+                    "selector_reason": selector_debug.get("selector_reason"),
+                    "selector_score": selector_debug.get("selector_score"),
                     "classification_after": scene.citizen_classification(),
                     "classification_flags_after": scene.citizen_classification_flags(),
                 }
@@ -353,6 +492,12 @@ def run_profile(profile: Profile, controller: JPCTensorFlowHearingAIController, 
         "confidence": confidence,
         "distribution": distribution,
         "citizen_model": snapshot,
+        "story_metrics": {
+            "contradictions": scene.claims_ledger.contradiction_count,
+            "fact_conflicts": scene.claims_ledger.fact_conflict_count,
+            "protected_fact_count": len(scene.claims_ledger.protected_fact_keys),
+            "exposed_fact_count": len(scene.claims_ledger.exposed_fact_keys),
+        },
         "ending_reason": scene.ending_reason,
         "turns": turns,
     }
@@ -404,16 +549,36 @@ def write_reports(results: list[dict[str, object]], output_dir: Path) -> tuple[P
             "- Distribution: "
             + ", ".join(f"{key}={100 * float(value):.0f}%" for key, value in distribution.items())
         )
+        story_metrics = result.get("story_metrics", {})
+        assert isinstance(story_metrics, dict)
+        lines.append(
+            "- Story metrics: "
+            + f"contradictions={story_metrics.get('contradictions', 0)}, "
+            + f"fact_conflicts={story_metrics.get('fact_conflicts', 0)}, "
+            + f"protected_facts={story_metrics.get('protected_fact_count', 0)}, "
+            + f"exposed_facts={story_metrics.get('exposed_fact_count', 0)}"
+        )
         lines.append("")
-        lines.append("| Turn | Question | Intent | Tags | Trust | Suspicion |")
-        lines.append("| ---: | --- | --- | --- | ---: | ---: |")
+        lines.append("| Turn | Question | Intent | Neural Probe | Selected Next | Claims | Protects | Exposes | Story | Trust | Suspicion |")
+        lines.append("| ---: | --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: |")
         turns = result["turns"]
         assert isinstance(turns, list)
         for turn in turns:
             assert isinstance(turn, dict)
-            tags = ", ".join(str(tag) for tag in turn["semantic_tags"])
+            claims = ", ".join(f"{fact}={value}" for fact, value in turn.get("claims", []))
+            protects = ", ".join(str(fact) for fact in turn.get("protects", []))
+            exposes = ", ".join(str(fact) for fact in turn.get("exposes", []))
+            story = (
+                f"C{turn.get('story_contradictions', 0)} "
+                f"F{turn.get('fact_conflicts', 0)} "
+                f"P{turn.get('protected_fact_count', 0)} "
+                f"E{turn.get('exposed_fact_count', 0)}"
+            )
             lines.append(
-                f"| {turn['turn']} | {turn['question_id']} | {turn['intent']} | {tags} | "
+                f"| {turn['turn']} | {turn['question_id']} | {turn['intent']} | "
+                f"{turn.get('preferred_neural_probe') or '-'} | "
+                f"{turn.get('selected_next_question') or '-'} | "
+                f"{claims or '-'} | {protects or '-'} | {exposes or '-'} | {story} | "
                 f"{float(turn['trust_delta']):+.2f} | {float(turn['suspicion_delta']):+.2f} |"
             )
         lines.append("")

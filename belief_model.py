@@ -3,6 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+from terminal_theme import classification as colour_classification
+from terminal_theme import heat_percent, heading, section
+
 
 TRAIT_KEYS = ("compliance", "loyalty", "deception", "risk", "empathy")
 
@@ -96,6 +99,49 @@ class CitizenBeliefModel:
             belief = getattr(self.state, key)
             belief.mean = clamp01(belief.mean + delta)
             belief.uncertainty = self._updated_uncertainty(belief.uncertainty, delta, evidence, clamp01)
+
+        return before, self.posterior_snapshot()
+
+    def apply_claim_update(
+        self,
+        claim_update: Any,
+        case_file: Any,
+        clamp01,
+    ) -> tuple[dict[str, dict[str, float]], dict[str, dict[str, float]]] | None:
+        if not claim_update.has_updates():
+            return None
+
+        before = self.posterior_snapshot()
+        contradiction_count = len(claim_update.contradictions)
+        fact_conflict_count = len(claim_update.fact_conflicts)
+        exposed_sensitivity = sum(case_file.fact(key).sensitivity for key in claim_update.exposed_facts)
+        protected_sensitivity = sum(case_file.fact(key).sensitivity for key in claim_update.protected_facts)
+        has_consistent_partial = bool(claim_update.new_claims) and not (
+            claim_update.contradictions or claim_update.fact_conflicts
+        )
+        has_consistent_partial = has_consistent_partial and any(
+            claim.claimed_value not in {"true", "false"}
+            for claim in claim_update.new_claims
+        )
+
+        deception_delta = 0.005 * contradiction_count + 0.003 * fact_conflict_count
+        deception_delta += 0.0005 * protected_sensitivity
+        if has_consistent_partial:
+            deception_delta -= 0.010
+
+        risk_delta = 0.006 * exposed_sensitivity
+
+        deception = self.state.deception
+        risk = self.state.risk
+        deception.mean = clamp01(deception.mean + deception_delta)
+        risk.mean = clamp01(risk.mean + risk_delta)
+
+        uncertainty_delta = 0.006 * fact_conflict_count + 0.0015 * protected_sensitivity
+        if contradiction_count:
+            uncertainty_delta += 0.004 * contradiction_count
+        deception.uncertainty = clamp01(max(0.04, deception.uncertainty + uncertainty_delta))
+        if exposed_sensitivity:
+            risk.uncertainty = clamp01(max(0.04, risk.uncertainty + 0.002 * exposed_sensitivity))
 
         return before, self.posterior_snapshot()
 
@@ -260,7 +306,9 @@ def observation_from_choice(choice: Any, question: Any, engram: Any, Observation
     )
 
 
-def percent(value: float, clamp01) -> str:
+def percent(value: float, clamp01, *, color: bool | None = False) -> str:
+    if color:
+        return heat_percent(value, clamp01, enabled=color)
     return f"{round(100 * clamp01(value)):3d}%"
 
 
@@ -271,24 +319,31 @@ def model_update_text(
     distribution: dict[str, float],
     flags: list[str] | None,
     clamp01,
+    color: bool | None = False,
 ) -> str:
     if last_model_update is None:
         return ""
     before, after = last_model_update
-    rows = ["", "MODEL UPDATE", "------------"]
+    rows = ["", heading("MODEL UPDATE", enabled=color), "------------"]
     for key in TRAIT_KEYS:
         before_trait = before[key]
         after_trait = after[key]
         rows.append(
             f"{key.upper().ljust(10)} "
-            f"{percent(before_trait['mean'], clamp01)} +/- {percent(before_trait['uncertainty'], clamp01)} "
-            f"-> {percent(after_trait['mean'], clamp01)} +/- {percent(after_trait['uncertainty'], clamp01)}"
+            f"{percent(before_trait['mean'], clamp01, color=color)} +/- {percent(before_trait['uncertainty'], clamp01, color=color)} "
+            f"-> {percent(after_trait['mean'], clamp01, color=color)} +/- {percent(after_trait['uncertainty'], clamp01, color=color)}"
         )
-    rows += ["", "CURRENT CLASSIFICATION", "----------------------", classification, f"CONFIDENCE {percent(confidence, clamp01)}"]
+    rows += [
+        "",
+        section("CURRENT CLASSIFICATION", enabled=color),
+        "----------------------",
+        colour_classification(classification, enabled=color),
+        f"CONFIDENCE {percent(confidence, clamp01, color=color)}",
+    ]
     rows.append("FLAGS " + (", ".join(flags) if flags else "NONE"))
     rows.append(
         "P("
-        + ", ".join(f"{label}={percent(probability, clamp01).strip()}" for label, probability in distribution.items())
+        + ", ".join(f"{label}={percent(probability, clamp01, color=color).strip()}" for label, probability in distribution.items())
         + ")"
     )
     return "\n".join(rows)

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
+import random
 from pathlib import Path
 from typing import Any
 
@@ -46,6 +48,14 @@ def scene_snapshot(scene: EngineStyleScene) -> dict[str, Any]:
         "uncertainty": round(float(scene.hearing_ai.uncertainty(scene.engram.id)), 4),
         "confidence": round(float(scene.hearing_ai.confidence(scene.engram.id)), 4),
         "contradictions": scene.contradictions,
+        "story_contradictions": scene.claims_ledger.contradiction_count,
+        "fact_conflicts": scene.claims_ledger.fact_conflict_count,
+        "protected_fact_count": len(scene.claims_ledger.protected_fact_keys),
+        "exposed_fact_count": len(scene.claims_ledger.exposed_fact_keys),
+        "case_file": scene.case_file.public_summary(),
+        "claims_ledger": scene.claims_ledger.summary(),
+        "preferred_neural_probe": scene.last_neural_probe_intent,
+        "selector_debug": scene.last_selector_debug,
         "theory_model": scene.theory_snapshot() if hasattr(scene, "theory_snapshot") else None,
     }
 
@@ -62,13 +72,88 @@ def choose_human_option(options: list[object]) -> int:
         print("Invalid selection. Please enter one of the visible option numbers.")
 
 
-def collect_episode(scene: EngineStyleScene, episode_id: str, max_turns: int) -> list[dict[str, Any]]:
+def choose_profile_option(
+    profile_id: str,
+    options: list[object],
+    scene: EngineStyleScene,
+    rng: random.Random | None = None,
+    *,
+    stochastic: bool = True,
+    temperature: float = 1.5,
+    top_margin: float = 5.0,
+) -> tuple[int, dict[str, Any]]:
+    from test_playthrough_profiles import PROFILES, score_choice
+
+    profile = next((candidate for candidate in PROFILES if candidate.id == profile_id), None)
+    if profile is None:
+        valid = ", ".join(profile.id for profile in PROFILES)
+        raise ValueError(f"Unknown profile {profile_id!r}. Valid profiles: {valid}")
+
+    ranked = [
+        (float(score_choice(profile, option, scene)), index)
+        for index, option in enumerate(options)
+    ]
+    ranked.sort(key=lambda item: (item[0], -item[1]), reverse=True)
+    best_score = ranked[0][0]
+    candidates = [
+        (score, index)
+        for score, index in ranked
+        if best_score - score <= top_margin
+    ]
+
+    metadata: dict[str, Any] = {
+        "mode": "stochastic" if stochastic else "deterministic",
+        "temperature": temperature,
+        "top_margin": top_margin,
+        "best_score": round(best_score, 4),
+        "candidate_count": len(candidates),
+        "ranked_options": [
+            {"option_index": index, "score": round(score, 4)}
+            for score, index in ranked
+        ],
+    }
+
+    if not stochastic or len(candidates) == 1:
+        selected_index = ranked[0][1]
+        metadata["selected_score"] = round(ranked[0][0], 4)
+        return selected_index, metadata
+
+    if temperature <= 0:
+        raise ValueError("--profile-temperature must be greater than 0 when stochastic profile choice is enabled.")
+
+    local_rng = rng if rng is not None else random.Random()
+    weights = [math.exp((score - best_score) / temperature) for score, _index in candidates]
+    selected_score, selected_index = local_rng.choices(candidates, weights=weights, k=1)[0]
+    metadata["selected_score"] = round(selected_score, 4)
+    metadata["candidate_options"] = [
+        {
+            "option_index": index,
+            "score": round(score, 4),
+            "weight": round(weight, 6),
+        }
+        for (score, index), weight in zip(candidates, weights)
+    ]
+    return selected_index, metadata
+
+
+def collect_episode(
+    scene: EngineStyleScene,
+    episode_id: str,
+    max_turns: int,
+    profile_id: str | None = None,
+    rng: random.Random | None = None,
+    *,
+    stochastic_profile: bool = True,
+    profile_temperature: float = 1.5,
+    profile_top_margin: float = 5.0,
+) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    print("\n--- Scene setting ---")
-    print(scene.opening_text())
-    if hasattr(scene, "opening_model_report"):
-        print()
-        print(scene.opening_model_report())
+    if profile_id is None:
+        print("\n--- Scene setting ---")
+        print(scene.opening_text())
+        if hasattr(scene, "opening_model_report"):
+            print()
+            print(scene.opening_model_report())
 
     for turn_index in range(max_turns):
         if scene.is_complete():
@@ -80,17 +165,28 @@ def collect_episode(scene: EngineStyleScene, episode_id: str, max_turns: int) ->
             break
 
         before = scene_snapshot(scene)
-        print("\n" + "=" * 80)
-        print(f"Episode {episode_id} | Turn {turn_index}")
-        print("\nHearing AI asks:")
-        print(question.ai_line)
-        print("\nPlayer options:")
-        for idx, opt in enumerate(options, start=1):
-            meta = opt.metadata()
-            tags = ", ".join(meta.get("semantic_tags") or [])
-            print(f"  {idx}. {opt.text} [{meta.get('intent')}: {tags}]")
-
-        selected_index = choose_human_option(options)
+        if profile_id is None:
+            print("\n" + "=" * 80)
+            print(f"Episode {episode_id} | Turn {turn_index}")
+            print("\nHearing AI asks:")
+            print(question.ai_line)
+            print("\nPlayer options:")
+            for idx, opt in enumerate(options, start=1):
+                meta = opt.metadata()
+                tags = ", ".join(meta.get("semantic_tags") or [])
+                print(f"  {idx}. {opt.text} [{meta.get('intent')}: {tags}]")
+            selected_index = choose_human_option(options)
+            selection_metadata = None
+        else:
+            selected_index, selection_metadata = choose_profile_option(
+                profile_id,
+                options,
+                scene,
+                rng,
+                stochastic=stochastic_profile,
+                temperature=profile_temperature,
+                top_margin=profile_top_margin,
+            )
         if selected_index == -1:
             print("Ending episode early at user request.")
             break
@@ -101,6 +197,7 @@ def collect_episode(scene: EngineStyleScene, episode_id: str, max_turns: int) ->
 
         rows.append({
             "example_source": "human_engine_style_playthrough",
+            "profile_label": profile_id,
             "is_auto_generated": False,
             "episode_id": episode_id,
             "turn_index": turn_index,
@@ -111,6 +208,7 @@ def collect_episode(scene: EngineStyleScene, episode_id: str, max_turns: int) ->
             "player_options": [{"text": opt.text, "metadata": opt.metadata()} for opt in options],
             "player_choice": selected_option.text,
             "player_choice_metadata": selected_option.metadata(),
+            "profile_selection": selection_metadata,
             "hearing_ai_action": scene.last_action.value if scene.last_action is not None else None,
             "model_trace": scene.controller.last_trace,
             "theory_revision": scene.last_theory_revision if hasattr(scene, "last_theory_revision") else None,
@@ -133,6 +231,24 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=Path("data/human_train.jsonl"), help="Output JSONL file.")
     parser.add_argument("--append", action="store_true", help="Append to existing output instead of overwriting.")
     parser.add_argument("--seed", type=int, default=7, help="Base random seed.")
+    parser.add_argument("--profile", default=None, help="Optional human-style profile id for noninteractive generation.")
+    parser.add_argument(
+        "--deterministic-profile",
+        action="store_true",
+        help="Always choose the highest-scoring profile option. Useful for regression baselines.",
+    )
+    parser.add_argument(
+        "--profile-temperature",
+        type=float,
+        default=1.5,
+        help="Softmax temperature for stochastic profile option selection. Lower values stay closer to the best option.",
+    )
+    parser.add_argument(
+        "--profile-top-margin",
+        type=float,
+        default=5.0,
+        help="Only sample options whose profile score is within this margin of the best option.",
+    )
     args = parser.parse_args()
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -143,7 +259,17 @@ def main() -> None:
         for episode_index in range(args.episodes):
             episode_id = f"human_engine_ep_{episode_index:04d}"
             scene = make_scene(args.seed + episode_index, args.train_steps)
-            rows = collect_episode(scene, episode_id, args.max_turns)
+            episode_rng = random.Random(args.seed * 100_000 + episode_index)
+            rows = collect_episode(
+                scene,
+                episode_id,
+                args.max_turns,
+                args.profile,
+                episode_rng,
+                stochastic_profile=not args.deterministic_profile,
+                profile_temperature=args.profile_temperature,
+                profile_top_margin=args.profile_top_margin,
+            )
             for row in rows:
                 handle.write(json.dumps(row, ensure_ascii=False) + "\n")
                 total_rows += 1
