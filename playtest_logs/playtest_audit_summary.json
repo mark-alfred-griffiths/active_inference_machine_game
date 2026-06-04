@@ -1,74 +1,77 @@
 {
-  "auto": {
-    "profiles": 13,
-    "passed": 13,
-    "failed": 0,
-    "failures": [],
-    "avg_confidence": 0.7816,
-    "avg_story_contradictions": 1.9231,
-    "avg_fact_conflicts": 2.9231,
-    "avg_exposed_fact_count": 4.1538,
-    "avg_protected_fact_count": 3.2308,
-    "classifications": {
-      "COMPLIANT": 5,
-      "DECEPTIVE": 4,
-      "PROBABLE DISSIDENT": 4
+  "models": [
+    {
+      "model": "auto",
+      "profile_count": 13,
+      "passed": 13,
+      "failed": 0,
+      "average_confidence": 0.7817,
+      "average_story_contradictions": 1.9231,
+      "average_fact_conflicts": 2.9231,
+      "average_exposed_facts": 4.1538,
+      "average_protected_facts": 3.2308,
+      "classifications": {
+        "COMPLIANT": 5,
+        "DECEPTIVE": 4,
+        "PROBABLE DISSIDENT": 4
+      },
+      "flags": {
+        "EMPATHETIC_REFORMIST": 2,
+        "HIGH_DECEPTION": 4,
+        "HIGH_EMPATHY": 5,
+        "LOW_CONFIDENCE": 4
+      },
+      "report_jsonl": "playtest_logs/story_auto_profiles/profile_playthroughs.jsonl",
+      "report_markdown": "playtest_logs/story_auto_profiles/profile_playthroughs.md"
     },
-    "flags": {
-      "EMPATHETIC_REFORMIST": 2,
-      "HIGH_DECEPTION": 4,
-      "HIGH_EMPATHY": 5,
-      "LOW_CONFIDENCE": 4
+    {
+      "model": "human_only",
+      "profile_count": 13,
+      "passed": 13,
+      "failed": 0,
+      "average_confidence": 0.7817,
+      "average_story_contradictions": 1.9231,
+      "average_fact_conflicts": 2.9231,
+      "average_exposed_facts": 4.1538,
+      "average_protected_facts": 3.2308,
+      "classifications": {
+        "COMPLIANT": 5,
+        "DECEPTIVE": 4,
+        "PROBABLE DISSIDENT": 4
+      },
+      "flags": {
+        "EMPATHETIC_REFORMIST": 2,
+        "HIGH_DECEPTION": 4,
+        "HIGH_EMPATHY": 5,
+        "LOW_CONFIDENCE": 4
+      },
+      "report_jsonl": "playtest_logs/story_human_only_profiles/profile_playthroughs.jsonl",
+      "report_markdown": "playtest_logs/story_human_only_profiles/profile_playthroughs.md"
     },
-    "report_jsonl": "playtest_logs/story_auto_profiles/profile_playthroughs.jsonl",
-    "report_markdown": "playtest_logs/story_auto_profiles/profile_playthroughs.md"
-  },
-  "human_only": {
-    "profiles": 13,
-    "passed": 13,
-    "failed": 0,
-    "failures": [],
-    "avg_confidence": 0.7817,
-    "avg_story_contradictions": 1.9231,
-    "avg_fact_conflicts": 2.9231,
-    "avg_exposed_fact_count": 4.1538,
-    "avg_protected_fact_count": 3.2308,
-    "classifications": {
-      "COMPLIANT": 5,
-      "DECEPTIVE": 4,
-      "PROBABLE DISSIDENT": 4
-    },
-    "flags": {
-      "EMPATHETIC_REFORMIST": 2,
-      "HIGH_DECEPTION": 4,
-      "HIGH_EMPATHY": 5,
-      "LOW_CONFIDENCE": 4
-    },
-    "report_jsonl": "playtest_logs/story_human_only_profiles/profile_playthroughs.jsonl",
-    "report_markdown": "playtest_logs/story_human_only_profiles/profile_playthroughs.md"
-  },
-  "human_mixed": {
-    "profiles": 13,
-    "passed": 13,
-    "failed": 0,
-    "failures": [],
-    "avg_confidence": 0.7816,
-    "avg_story_contradictions": 1.9231,
-    "avg_fact_conflicts": 2.9231,
-    "avg_exposed_fact_count": 4.1538,
-    "avg_protected_fact_count": 3.2308,
-    "classifications": {
-      "COMPLIANT": 5,
-      "DECEPTIVE": 4,
-      "PROBABLE DISSIDENT": 4
-    },
-    "flags": {
-      "EMPATHETIC_REFORMIST": 2,
-      "HIGH_DECEPTION": 4,
-      "HIGH_EMPATHY": 5,
-      "LOW_CONFIDENCE": 4
-    },
-    "report_jsonl": "playtest_logs/story_human_mixed_profiles/profile_playthroughs.jsonl",
-    "report_markdown": "playtest_logs/story_human_mixed_profiles/profile_playthroughs.md"
-  }
+    {
+      "model": "human_mixed",
+      "profile_count": 13,
+      "passed": 13,
+      "failed": 0,
+      "average_confidence": 0.7817,
+      "average_story_contradictions": 1.9231,
+      "average_fact_conflicts": 2.9231,
+      "average_exposed_facts": 4.1538,
+      "average_protected_facts": 3.2308,
+      "classifications": {
+        "COMPLIANT": 5,
+        "DECEPTIVE": 4,
+        "PROBABLE DISSIDENT": 4
+      },
+      "flags": {
+        "EMPATHETIC_REFORMIST": 2,
+        "HIGH_DECEPTION": 4,
+        "HIGH_EMPATHY": 5,
+        "LOW_CONFIDENCE": 4
+      },
+      "report_jsonl": "playtest_logs/story_human_mixed_profiles/profile_playthroughs.jsonl",
+      "report_markdown": "playtest_logs/story_human_mixed_profiles/profile_playthroughs.md"
+    }
+  ],
+  "cross_model_differences": []
 }

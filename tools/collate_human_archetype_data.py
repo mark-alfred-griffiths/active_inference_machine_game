@@ -13,6 +13,15 @@ DEFAULT_PROFILES = (
 )
 
 
+def strip_deprecated_policy_fields(row: dict[str, object]) -> None:
+    """Remove fields left by the removed hearing-action policy head."""
+    row.pop("hearing_ai_action", None)
+    model_trace = row.get("model_trace")
+    if isinstance(model_trace, dict):
+        model_trace.pop("policy_logits", None)
+        model_trace.pop("chosen_action", None)
+
+
 def collate(input_root: Path, output: Path, profiles: tuple[str, ...]) -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
     rows_written = 0
@@ -25,6 +34,7 @@ def collate(input_root: Path, output: Path, profiles: tuple[str, ...]) -> int:
                 if not line.strip():
                     continue
                 row = json.loads(line)
+                strip_deprecated_policy_fields(row)
                 original_episode_id = row.get("episode_id", "episode")
                 row["profile_label"] = profile_label
                 row["source_episode_id"] = original_episode_id

@@ -19,7 +19,7 @@ Citizen belief model update
         ↓
 JPC encoder + TensorFlow heads
         ↓
-Neural hearing action + question probe intent
+Belief delta + neural question probe intent
         ↓
 Heuristic selector chooses the next valid authored question
         ↓
@@ -360,8 +360,6 @@ Training metrics include:
 ```text
 total
 belief_mse
-policy_ce
-policy_acc
 probe_ce
 probe_acc
 ```
@@ -374,7 +372,12 @@ jpc_encoder.eqx
 meta.json
 ```
 
-Old checkpoints that do not contain the question-probe intent head are incompatible with the current model architecture and should be retrained.
+Old checkpoints from the previous three-output architecture are incompatible with the current two-head model and should be retrained. Current checkpoints use `schema_version: 3` with TensorFlow heads:
+
+```text
+belief_raw_delta
+question_probe_logits
+```
 
 ---
 
@@ -523,4 +526,4 @@ The game is intended to be playable because the player has competing objectives:
 - expose enough truth to remain coherent,
 - avoid contradicting earlier claims.
 
-The AI concept demonstration remains intact because the neural network still participates in belief update, hearing action selection, and probe-intent prediction. The authored selector remains the safety layer that turns neural probe intent into valid playable questions.
+The AI concept demonstration remains intact because the neural network still participates in belief update and probe-intent prediction. The authored selector remains the safety layer that turns neural probe intent into valid playable questions.

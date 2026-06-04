@@ -209,7 +209,6 @@ def collect_episode(
             "player_choice": selected_option.text,
             "player_choice_metadata": selected_option.metadata(),
             "profile_selection": selection_metadata,
-            "hearing_ai_action": scene.last_action.value if scene.last_action is not None else None,
             "model_trace": scene.controller.last_trace,
             "theory_revision": scene.last_theory_revision if hasattr(scene, "last_theory_revision") else None,
             "theory_before": scene.last_theory_before if hasattr(scene, "last_theory_before") else None,

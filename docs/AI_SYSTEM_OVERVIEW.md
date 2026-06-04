@@ -203,33 +203,39 @@ The raw feature vector is built by `JPCTensorFlowHearingAIController.raw_feature
 
 ### TensorFlow Heads
 
-`TensorFlowHearingAIHeads` is a Keras model with three outputs:
+`TensorFlowHearingAIHeads` is a Keras model with two outputs:
 
 ```text
 belief_raw_delta      # raw alpha/beta belief update
-policy_logits         # HearingAIAction logits
 question_probe_logits # broad next-question probe intent logits
 ```
 
-The head is trained by `TensorFlowHearingAIHeads.train_step(...)`. Its losses are summed:
+The heads are trained by `TensorFlowHearingAIHeads.train_step(...)`. Their losses are summed:
 
 ```text
-belief_loss + policy_loss + probe_loss
+belief_loss + probe_loss
 ```
 
 The combined controller `JPCTensorFlowHearingAIController` uses:
 
-- `policy_teacher(...)` for hearing action training labels,
 - `belief_delta_teacher(...)` for belief delta labels,
 - `probe_intent_teacher(...)` for question-probe intent labels.
 
 At runtime, `JPCTensorFlowHearingAIController.update_belief_and_act()`:
 
 1. encodes raw features through the JPC encoder,
-2. predicts belief deltas, hearing action logits, and probe logits,
+2. predicts belief deltas and probe logits,
 3. applies positive alpha/beta deltas using `softplus`,
-4. chooses the hearing action with `argmax(policy_logits)`,
-5. stores `predicted_question_probe_intent` in `last_trace`.
+4. stores `predicted_question_probe_intent` in `last_trace`.
+
+Current saved checkpoints use metadata `schema_version: 3` and list only:
+
+```text
+belief_raw_delta
+question_probe_logits
+```
+
+Older checkpoints from the removed three-output architecture are intentionally incompatible and should be retrained.
 
 ## Question Probe Intent
 

@@ -4,7 +4,7 @@
 - Profiles: 13
 - Passed: 13
 - Failed: 0
-- Average confidence: 0.7816
+- Average confidence: 0.7817
 - Average story contradictions: 1.9231
 - Average fact conflicts: 2.9231
 - Average exposed facts: 4.1538
@@ -30,7 +30,7 @@
 - Profiles: 13
 - Passed: 13
 - Failed: 0
-- Average confidence: 0.7816
+- Average confidence: 0.7817
 - Average story contradictions: 1.9231
 - Average fact conflicts: 2.9231
 - Average exposed facts: 4.1538

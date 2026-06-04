@@ -94,11 +94,10 @@ probe_protected_fact
 probe_final_answer
 ```
 
-The TensorFlow model in `TensorFlowHearingAIHeads` has three heads:
+The TensorFlow model in `TensorFlowHearingAIHeads` has two heads:
 
 ```text
 belief_raw_delta
-policy_logits
 question_probe_logits
 ```
 
@@ -403,10 +402,8 @@ When debug trace is enabled, `EngineStyleScene.play_turn()` prints:
 - JPC latent,
 - belief mean change,
 - free energy before/after,
-- TensorFlow policy logits,
 - TensorFlow question probe logits,
-- predicted question probe intent,
-- hearing AI action.
+- predicted question probe intent.
 
 `EngineStyleScene.select_next_question_id()` also stores `last_selector_debug` with:
 

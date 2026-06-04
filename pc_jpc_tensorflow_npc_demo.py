@@ -11,7 +11,7 @@ Single-file demo of an Hearing AI whose internal model uses:
 
 2. TensorFlow/Keras for the Hearing AI heads
    - Belief-update MLP head: predicts raw delta-alpha and raw delta-beta.
-   - Policy head: predicts the Hearing AI action.
+   - Question-probe head: predicts broad probe intent for the selector.
 
 Conceptual loop:
 
@@ -21,8 +21,8 @@ player choice
 -> JPC predictive-coding encoder
 -> TensorFlow MLP belief head
 -> updated Beta belief distribution
--> TensorFlow policy head
--> Hearing AI action/dialogue
+-> TensorFlow question-probe head
+-> authored heuristic question selection
 
 Install dependencies:
 
@@ -143,13 +143,6 @@ def inverse_softplus(y: float) -> float:
 # -----------------------------------------------------------------------------
 # Story/model types
 # -----------------------------------------------------------------------------
-
-
-class HearingAIAction(str, Enum):
-    DISMISS = "dismiss"
-    PROBE = "probe"
-    REVEAL = "reveal"
-    CONFRONT = "confront"
 
 
 class QuestionProbeIntent(str, Enum):
@@ -304,9 +297,8 @@ class JPCPredictiveCodingEncoder:
 
 class TensorFlowHearingAIHeads:
     """
-    TensorFlow/Keras model with three heads:
+    TensorFlow/Keras model with two heads:
     - belief_head: raw delta-alpha, raw delta-beta
-    - policy_head: logits over HearingAIAction
     - probe_head: logits over question-probe intent labels
     """
 
@@ -315,7 +307,6 @@ class TensorFlowHearingAIHeads:
         *,
         latent_dim: int,
         hidden_dim: int,
-        action_count: int,
         probe_intent_count: int,
         learning_rate: float,
     ) -> None:
@@ -324,14 +315,12 @@ class TensorFlowHearingAIHeads:
         hidden = tf.keras.layers.Dense(hidden_dim, activation="relu", name="hearing_ai_hidden_2")(hidden)
 
         belief_raw_delta = tf.keras.layers.Dense(2, name="belief_raw_delta_alpha_beta")(hidden)
-        policy_logits = tf.keras.layers.Dense(action_count, name="policy_logits")(hidden)
         probe_logits = tf.keras.layers.Dense(probe_intent_count, name="question_probe_logits")(hidden)
 
         self.model = tf.keras.Model(
             inputs=inputs,
             outputs={
                 "belief_raw_delta": belief_raw_delta,
-                "policy_logits": policy_logits,
                 "question_probe_logits": probe_logits,
             },
             name="tensorflow_hearing_ai_heads",
@@ -346,52 +335,43 @@ class TensorFlowHearingAIHeads:
         self,
         latent_batch: "tf.Tensor",
         belief_target_batch: "tf.Tensor",
-        action_target_batch: "tf.Tensor",
         probe_target_batch: "tf.Tensor",
-    ) -> tuple["tf.Tensor", "tf.Tensor", "tf.Tensor", "tf.Tensor"]:
+    ) -> tuple["tf.Tensor", "tf.Tensor", "tf.Tensor"]:
         with tf.GradientTape() as tape:
             outputs = self.model(latent_batch, training=True)
             belief_loss = self.mse(belief_target_batch, outputs["belief_raw_delta"])
-            policy_loss = self.ce(action_target_batch, outputs["policy_logits"])
             probe_loss = self.ce(probe_target_batch, outputs["question_probe_logits"])
-            total_loss = belief_loss + policy_loss + probe_loss
+            total_loss = belief_loss + probe_loss
 
         grads = tape.gradient(total_loss, self.model.trainable_variables)
         self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
-        return total_loss, belief_loss, policy_loss, probe_loss
+        return total_loss, belief_loss, probe_loss
 
     def train_step(
         self,
         latent: "np.ndarray",
         belief_target: list[float],
-        action_label: int,
-        action_count: int,
         probe_intent_label: int,
         probe_intent_count: int,
-    ) -> tuple[float, float, float, float]:
+    ) -> tuple[float, float, float]:
         latent_batch = tf.convert_to_tensor(latent.reshape(1, -1), dtype=tf.float32)
         belief_target_batch = tf.convert_to_tensor([belief_target], dtype=tf.float32)
-        action_target = np.zeros((1, action_count), dtype=np.float32)
-        action_target[0, action_label] = 1.0
-        action_target_batch = tf.convert_to_tensor(action_target, dtype=tf.float32)
         probe_target = np.zeros((1, probe_intent_count), dtype=np.float32)
         probe_target[0, probe_intent_label] = 1.0
         probe_target_batch = tf.convert_to_tensor(probe_target, dtype=tf.float32)
 
-        total, belief, policy, probe = self._train_step(
+        total, belief, probe = self._train_step(
             latent_batch,
             belief_target_batch,
-            action_target_batch,
             probe_target_batch,
         )
-        return float(total), float(belief), float(policy), float(probe)
+        return float(total), float(belief), float(probe)
 
-    def predict(self, latent: "np.ndarray") -> tuple["np.ndarray", "np.ndarray", "np.ndarray"]:
+    def predict(self, latent: "np.ndarray") -> tuple["np.ndarray", "np.ndarray"]:
         outputs = self.model(latent.reshape(1, -1), training=False)
         raw_delta = outputs["belief_raw_delta"].numpy()[0]
-        logits = outputs["policy_logits"].numpy()[0]
         probe_logits = outputs["question_probe_logits"].numpy()[0]
-        return raw_delta, logits, probe_logits
+        return raw_delta, probe_logits
 
 
 # -----------------------------------------------------------------------------
@@ -400,7 +380,6 @@ class TensorFlowHearingAIHeads:
 
 
 class JPCTensorFlowHearingAIController:
-    action_labels = [HearingAIAction.DISMISS, HearingAIAction.PROBE, HearingAIAction.REVEAL, HearingAIAction.CONFRONT]
     probe_intent_labels = [
         QuestionProbeIntent.PROBE_COMPLIANCE,
         QuestionProbeIntent.PROBE_LOYALTY,
@@ -440,7 +419,6 @@ class JPCTensorFlowHearingAIController:
         self.tf_heads = TensorFlowHearingAIHeads(
             latent_dim=8,
             hidden_dim=32,
-            action_count=len(self.action_labels),
             probe_intent_count=len(self.probe_intent_labels),
             learning_rate=1e-3,
         )
@@ -515,20 +493,6 @@ class JPCTensorFlowHearingAIController:
 
         return [inverse_softplus(delta_alpha), inverse_softplus(delta_beta)]
 
-    def policy_teacher(self, hearing_ai: HearingAIState, engram: Engram) -> int:
-        b = hearing_ai.belief(engram.id)
-        u = hearing_ai.uncertainty(engram.id)
-
-        if b < 0.35:
-            return self.action_labels.index(HearingAIAction.DISMISS)
-        if u > 0.55:
-            return self.action_labels.index(HearingAIAction.PROBE)
-        if b > 0.68 and hearing_ai.suspicion > hearing_ai.trust:
-            return self.action_labels.index(HearingAIAction.CONFRONT)
-        if b > 0.55:
-            return self.action_labels.index(HearingAIAction.REVEAL)
-        return self.action_labels.index(HearingAIAction.PROBE)
-
     def probe_intent_teacher(
         self,
         hearing_ai: HearingAIState,
@@ -597,7 +561,7 @@ class JPCTensorFlowHearingAIController:
         obs: Observation,
         question_meta: dict[str, object] | None = None,
         claims_ledger_summary: dict[str, object] | None = None,
-    ) -> tuple[float, float, float, float]:
+    ) -> tuple[float, float, float]:
         x = self.raw_features(hearing_ai, engram, obs)
         target_latent = self.pc_latent_teacher(hearing_ai, engram, obs)
 
@@ -607,7 +571,6 @@ class JPCTensorFlowHearingAIController:
         # TensorFlow heads train from the JPC latent.
         latent = self.pc_encoder.encode(x)
         belief_target = self.belief_delta_teacher(hearing_ai, engram, obs)
-        action_label = self.policy_teacher(hearing_ai, engram)
         probe_intent_label = self.probe_intent_teacher(
             hearing_ai,
             engram,
@@ -619,20 +582,18 @@ class JPCTensorFlowHearingAIController:
         return self.tf_heads.train_step(
             latent,
             belief_target,
-            action_label,
-            action_count=len(self.action_labels),
             probe_intent_label=probe_intent_label,
             probe_intent_count=len(self.probe_intent_labels),
         )
 
-    def update_belief_and_act(self, hearing_ai: HearingAIState, engram: Engram, obs: Observation) -> HearingAIAction:
+    def update_belief_and_act(self, hearing_ai: HearingAIState, engram: Engram, obs: Observation) -> str:
         before_fe = self.free_energy(hearing_ai, engram, obs)
         old_belief = hearing_ai.belief(engram.id)
         old_uncertainty = hearing_ai.uncertainty(engram.id)
 
         x = self.raw_features(hearing_ai, engram, obs)
         latent = self.pc_encoder.encode(x)
-        raw_delta, logits, probe_logits = self.tf_heads.predict(latent)
+        raw_delta, probe_logits = self.tf_heads.predict(latent)
 
         delta_alpha = softplus(float(raw_delta[0]))
         delta_beta = softplus(float(raw_delta[1]))
@@ -640,8 +601,6 @@ class JPCTensorFlowHearingAIController:
         alpha, beta = hearing_ai.get_params(engram.id)
         hearing_ai.set_params(engram.id, alpha + delta_alpha, beta + delta_beta)
 
-        action_index = int(np.argmax(logits))
-        action = self.action_labels[action_index]
         after_fe = self.free_energy(hearing_ai, engram, obs)
 
         self.last_trace = {
@@ -658,18 +617,13 @@ class JPCTensorFlowHearingAIController:
             "raw_delta_beta": float(raw_delta[1]),
             "delta_alpha": delta_alpha,
             "delta_beta": delta_beta,
-            "policy_logits": {
-                self.action_labels[i].value: round(float(logits[i]), 4)
-                for i in range(len(self.action_labels))
-            },
             "question_probe_logits": {
                 self.probe_intent_labels[i].value: round(float(probe_logits[i]), 4)
                 for i in range(len(self.probe_intent_labels))
             },
             "predicted_question_probe_intent": self.probe_intent_labels[int(np.argmax(probe_logits))].value,
-            "chosen_action": action.value,
         }
-        return action
+        return "observe"
 
 
 # -----------------------------------------------------------------------------
@@ -706,27 +660,20 @@ def train_demo_model(controller: JPCTensorFlowHearingAIController, steps: int, s
     rng = random.Random(seed)
     total_loss = 0.0
     belief_loss = 0.0
-    policy_loss = 0.0
     probe_loss = 0.0
-    policy_correct = 0
     probe_correct = 0
 
     for step in range(1, steps + 1):
         hearing_ai, engram, obs = random_training_case(rng)
-        total, belief, policy, probe = controller.train_step(hearing_ai, engram, obs)
+        total, belief, probe = controller.train_step(hearing_ai, engram, obs)
         total_loss += total
         belief_loss += belief
-        policy_loss += policy
         probe_loss += probe
 
-        action_label = controller.policy_teacher(hearing_ai, engram)
         probe_label = controller.probe_intent_teacher(hearing_ai, engram, obs)
         x = controller.raw_features(hearing_ai, engram, obs)
         latent = controller.pc_encoder.encode(x)
-        _, logits, probe_logits = controller.tf_heads.predict(latent)
-        predicted_label = int(np.argmax(logits))
-        if predicted_label == action_label:
-            policy_correct += 1
+        _, probe_logits = controller.tf_heads.predict(latent)
         predicted_probe_label = int(np.argmax(probe_logits))
         if predicted_probe_label == probe_label:
             probe_correct += 1
@@ -736,8 +683,6 @@ def train_demo_model(controller: JPCTensorFlowHearingAIController, steps: int, s
                 f"training step {step:4d} | "
                 f"total={total_loss / step:.4f} | "
                 f"belief_mse={belief_loss / step:.4f} | "
-                f"policy_ce={policy_loss / step:.4f} | "
-                f"policy_acc={policy_correct / step:.3f} | "
                 f"probe_ce={probe_loss / step:.4f} | "
                 f"probe_acc={probe_correct / step:.3f}"
             )
@@ -753,12 +698,11 @@ def _save_controller(controller: JPCTensorFlowHearingAIController, model_dir: Pa
     eqx.tree_serialise_leaves(jpc_path, controller.pc_encoder.model)
 
     metadata = {
-        "schema_version": 2,
+        "schema_version": 3,
         "input_dim": controller.pc_encoder.input_dim,
         "latent_dim": controller.pc_encoder.latent_dim,
-        "action_labels": [a.value for a in controller.action_labels],
         "probe_intent_labels": [intent.value for intent in controller.probe_intent_labels],
-        "tf_output_heads": ["belief_raw_delta", "policy_logits", "question_probe_logits"],
+        "tf_output_heads": ["belief_raw_delta", "question_probe_logits"],
     }
     meta_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
@@ -772,6 +716,12 @@ def _load_controller(controller: JPCTensorFlowHearingAIController, model_dir: Pa
         return False
 
     metadata = json.loads(meta_path.read_text(encoding="utf-8"))
+    expected_heads = ["belief_raw_delta", "question_probe_logits"]
+    if metadata.get("tf_output_heads") != expected_heads:
+        raise RuntimeError(
+            f"Checkpoint at {model_dir} uses TensorFlow heads {metadata.get('tf_output_heads')!r}; "
+            f"current code requires {expected_heads!r}. Retrain the model after policy-head removal."
+        )
     expected_probe_labels = [intent.value for intent in controller.probe_intent_labels]
     if metadata.get("probe_intent_labels") != expected_probe_labels:
         raise RuntimeError(
@@ -784,7 +734,6 @@ def _load_controller(controller: JPCTensorFlowHearingAIController, model_dir: Pa
     return True
 
 
-NPCAction = HearingAIAction
 NPCState = HearingAIState
 TensorFlowNPCHeads = TensorFlowHearingAIHeads
 JPCTensorFlowNPCController = JPCTensorFlowHearingAIController

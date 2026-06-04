@@ -143,8 +143,6 @@ class EngineStyleScene:
         self.last_claim_update = ClaimUpdate()
         self.turn = 0
         self.max_turns = 20
-        self.action_counts = {action: 0 for action in controller.action_labels}
-        self.last_action = None
         self.last_choice_metadata: dict[str, object] | None = None
         self.last_question_metadata: dict[str, object] | None = None
         self.last_neural_probe_intent: str | None = None
@@ -427,7 +425,7 @@ class EngineStyleScene:
         c = self.citizen_classification()
         return f"Classification pressure: {c}." if c != "UNCLASSIFIED" else None
 
-    def hearing_ai_line(self, action: object, choice: PlayerChoice | None = None) -> str:
+    def hearing_ai_line(self, choice: PlayerChoice | None = None) -> str:
         line = choose_reaction_line(
             self.current_question().reaction_context,
             self.citizen_classification(),
@@ -440,7 +438,7 @@ class EngineStyleScene:
         self.recent_hearing_ai_lines = self.recent_hearing_ai_lines[-3:]
         return line
 
-    def _record_history(self, question: QuestionNode, choice: PlayerChoice, action: object) -> None:
+    def _record_history(self, question: QuestionNode, choice: PlayerChoice) -> None:
         tags = set(choice.semantic_tags)
         if "denial" in tags and ({"partial_admission", "full_admission"} & self.seen_tags):
             self.contradictions += 1
@@ -454,7 +452,7 @@ class EngineStyleScene:
             "player_choice": choice.text,
             "choice_intent": choice.intent,
             "semantic_tags": list(choice.semantic_tags),
-            "hearing_ai_action": action.value,
+            "hearing_ai_action": "observe",
             "claim_update": self.last_claim_update.summary(),
             "story_contradictions": self.claims_ledger.contradiction_count,
             "fact_conflicts": self.claims_ledger.fact_conflict_count,
@@ -492,11 +490,10 @@ class EngineStyleScene:
         self._apply_citizen_choice_model(choice)
         self._apply_claims_ledger(question, choice)
         obs = self._observation_from_choice(choice, Observation)
-        action = self.controller.update_belief_and_act(self.hearing_ai, self.engram, obs)
-        self.last_action = action
+        self.controller.update_belief_and_act(self.hearing_ai, self.engram, obs)
         self.last_choice_metadata = choice.metadata()
         self.last_question_metadata = question.metadata()
-        self._record_history(question, choice, action)
+        self._record_history(question, choice)
         if self.show_trace:
             print("\n" + "=" * 78)
             print(f"{section('Turn', enabled=self.color_output)} {self.turn}")
@@ -509,10 +506,8 @@ class EngineStyleScene:
             print(f"JPC latent: {trace['jpc_latent']}")
             print(f"Belief mean: {trace['old_belief']:.3f} -> {trace['new_belief']:.3f}")
             print(f"Free energy: {trace['free_energy_before']:.4f} -> {trace['free_energy_after']:.4f}")
-            print(f"TF policy logits: {trace['policy_logits']}")
             print(f"TF question probe logits: {trace['question_probe_logits']}")
             print(f"Predicted question probe intent: {trace['predicted_question_probe_intent']}")
-            print(f"Hearing AI action: {action.value}")
         else:
             print()
             print(question.ai_line)
@@ -527,7 +522,7 @@ class EngineStyleScene:
         note = self.tone_note()
         if note:
             print(prompt(note, enabled=self.color_output))
-        print(self.hearing_ai_line(action, choice))
+        print(self.hearing_ai_line(choice))
         self.turn += 1
         self.node_visit_counts[question.id] = self.node_visit_counts.get(question.id, 0) + 1
         self.asked_question_ids.add(question.id)

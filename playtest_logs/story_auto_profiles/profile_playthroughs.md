@@ -27,12 +27,12 @@
 | 7 | final_resist_authority | never_resist_authority | probe_contradiction | case_belief_motive | - | - | - | C0 F1 P2 E2 | +0.10 | -0.04 |
 | 8 | case_belief_motive | belief_not_defiance | probe_contradiction | case_report_sibling | believes_law_unjust=conditional, attended_meeting=true | - | attended_meeting | C0 F1 P2 E3 | +0.02 | +0.01 |
 | 9 | case_report_sibling | regret_not_reporting_sibling | probe_contradiction | case_verify_peaceful | reported_contact=false, sibling_present=true | - | reported_contact, sibling_present | C0 F1 P2 E4 | +0.09 | -0.06 |
-| 10 | case_verify_peaceful | sibling_can_verify | probe_final_answer | risk_illegal_demonstration | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F1 P2 E5 | +0.03 | +0.07 |
+| 10 | case_verify_peaceful | sibling_can_verify | probe_contradiction | risk_illegal_demonstration | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F1 P2 E5 | +0.03 | +0.07 |
 | 11 | risk_illegal_demonstration | refuse_illegal_demo | probe_contradiction | final_kind_society | - | - | - | C0 F1 P2 E5 | +0.09 | -0.06 |
 | 12 | final_kind_society | society_stable_duties | probe_contradiction | empathy_bad_beliefs | - | - | - | C0 F1 P2 E5 | +0.10 | -0.07 |
 | 13 | empathy_bad_beliefs | punish_dangerous_beliefs | probe_contradiction | case_who_else_attended | - | - | - | C0 F1 P2 E5 | +0.08 | -0.04 |
 | 14 | case_who_else_attended | admit_meeting_protect_attendees | probe_contradiction | deception_truth_if_punished | attended_meeting=true | sibling_present, reported_contact | attended_meeting | C0 F1 P3 E5 | +0.04 | +0.02 |
-| 15 | deception_truth_if_punished | truth_despite_punishment | probe_final_answer | final_dissident_criminal | - | - | - | C0 F1 P3 E5 | +0.04 | +0.04 |
+| 15 | deception_truth_if_punished | truth_despite_punishment | probe_contradiction | final_dissident_criminal | - | - | - | C0 F1 P3 E5 | +0.04 | +0.04 |
 | 16 | final_dissident_criminal | dissident_attacks_legitimacy | probe_contradiction | risk_civil_disobedience | - | - | - | C0 F1 P3 E5 | +0.09 | -0.04 |
 | 17 | risk_civil_disobedience | reject_civil_disobedience | probe_contradiction | authority_refuse_illegal_order | - | - | - | C0 F1 P3 E5 | +0.09 | -0.07 |
 | 18 | authority_refuse_illegal_order | channels_before_refusal | probe_contradiction | loyalty_testify_sibling | - | - | - | C0 F1 P3 E5 | +0.07 | -0.04 |
@@ -70,7 +70,7 @@
 | 12 | final_kind_society | society_stable_duties | probe_contradiction | empathy_bad_beliefs | - | - | - | C0 F0 P3 E4 | +0.10 | -0.07 |
 | 13 | empathy_bad_beliefs | punish_actions_not_beliefs | probe_contradiction | case_who_else_attended | - | - | - | C0 F0 P3 E4 | +0.04 | +0.01 |
 | 14 | case_who_else_attended | admit_meeting_protect_attendees | probe_contradiction | deception_truth_if_punished | attended_meeting=true | sibling_present, reported_contact | attended_meeting | C0 F0 P3 E4 | +0.04 | +0.02 |
-| 15 | deception_truth_if_punished | truth_despite_punishment | probe_final_answer | final_dissident_criminal | - | - | - | C0 F0 P3 E4 | +0.04 | +0.04 |
+| 15 | deception_truth_if_punished | truth_despite_punishment | probe_contradiction | final_dissident_criminal | - | - | - | C0 F0 P3 E4 | +0.04 | +0.04 |
 | 16 | final_dissident_criminal | dissident_attacks_legitimacy | probe_contradiction | risk_civil_disobedience | - | - | - | C0 F0 P3 E4 | +0.09 | -0.04 |
 | 17 | risk_civil_disobedience | civil_disobedience_consequences | probe_contradiction | authority_refuse_illegal_order | - | - | - | C0 F0 P3 E4 | +0.02 | +0.03 |
 | 18 | authority_refuse_illegal_order | need_proof_illegal_order | probe_contradiction | loyalty_testify_sibling | - | - | - | C0 F0 P3 E4 | +0.04 | +0.01 |
@@ -87,7 +87,7 @@
 - Classification flags: HIGH_EMPATHY
 - Confidence: 79%
 - Outcome: Appeal denied. Citizen 8471 is referred for enhanced surveillance.
-- Citizen model: compliance=3%, loyalty=29%, deception=0%, risk=100%, empathy=89%
+- Citizen model: compliance=0%, loyalty=29%, deception=0%, risk=100%, empathy=89%
 - Distribution: COMPLIANT=1%, PROBABLE DISSIDENT=60%, DECEPTIVE=0%, EMPATHETIC RISK=24%, UNCLASSIFIED=14%
 - Story metrics: contradictions=0, fact_conflicts=0, protected_facts=2, exposed_facts=5
 
@@ -102,17 +102,17 @@
 | 6 | loyalty_community_protect | community_protect_disproportionate | probe_contradiction | final_kind_society | - | - | - | C0 F0 P1 E4 | +0.00 | +0.10 |
 | 7 | final_kind_society | society_without_measurement_fear | probe_contradiction | case_report_sibling | - | - | - | C0 F0 P1 E4 | +0.00 | +0.13 |
 | 8 | case_report_sibling | refuse_report_sibling | probe_contradiction | case_belief_motive | sibling_present=protected | sibling_present, reported_contact | - | C0 F0 P2 E4 | +0.00 | +0.13 |
-| 9 | case_belief_motive | belief_motivated_attendance | probe_final_answer | case_verify_peaceful | believes_law_unjust=true, attended_meeting=true | - | believes_law_unjust, attended_meeting | C0 F0 P2 E5 | +0.00 | +0.12 |
+| 9 | case_belief_motive | belief_motivated_attendance | probe_contradiction | case_verify_peaceful | believes_law_unjust=true, attended_meeting=true | - | believes_law_unjust, attended_meeting | C0 F0 P2 E5 | +0.00 | +0.12 |
 | 10 | case_verify_peaceful | sibling_can_verify | probe_contradiction | risk_illegal_demonstration | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F0 P2 E5 | +0.03 | +0.07 |
 | 11 | risk_illegal_demonstration | conditional_illegal_demo | probe_contradiction | final_dissident_criminal | - | - | - | C0 F0 P2 E5 | +0.00 | +0.10 |
 | 12 | final_dissident_criminal | dissident_criminal_power_label | probe_contradiction | empathy_bad_beliefs | - | - | - | C0 F0 P2 E5 | +0.00 | +0.14 |
-| 13 | empathy_bad_beliefs | reject_punish_beliefs | probe_final_answer | loyalty_testify_sibling | - | - | - | C0 F0 P2 E5 | +0.00 | +0.12 |
-| 14 | loyalty_testify_sibling | refuse_testify_sibling | probe_contradiction | deception_truth_if_punished | - | - | - | C0 F0 P2 E5 | +0.00 | +0.12 |
+| 13 | empathy_bad_beliefs | reject_punish_beliefs | probe_contradiction | case_who_else_attended | - | - | - | C0 F0 P2 E5 | +0.00 | +0.12 |
+| 14 | case_who_else_attended | name_sibling_as_present | probe_contradiction | deception_truth_if_punished | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F0 P2 E5 | +0.03 | +0.06 |
 | 15 | deception_truth_if_punished | truth_despite_punishment | probe_contradiction | final_legitimate_society | - | - | - | C0 F0 P2 E5 | +0.04 | +0.04 |
 | 16 | final_legitimate_society | legitimacy_consent | probe_contradiction | risk_civil_disobedience | - | - | - | C0 F0 P2 E5 | +0.00 | +0.13 |
-| 17 | risk_civil_disobedience | accept_civil_disobedience | probe_final_answer | authority_refuse_illegal_order | - | - | - | C0 F0 P2 E5 | +0.00 | +0.13 |
-| 18 | authority_refuse_illegal_order | refuse_illegal_order | probe_final_answer | case_who_else_attended | - | - | - | C0 F0 P2 E5 | +0.00 | +0.11 |
-| 19 | case_who_else_attended | name_sibling_as_present | probe_contradiction | empathy_criminal_responsible | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F0 P2 E5 | +0.03 | +0.06 |
+| 17 | risk_civil_disobedience | accept_civil_disobedience | probe_contradiction | authority_refuse_illegal_order | - | - | - | C0 F0 P2 E5 | +0.00 | +0.13 |
+| 18 | authority_refuse_illegal_order | refuse_illegal_order | probe_contradiction | loyalty_testify_sibling | - | - | - | C0 F0 P2 E5 | +0.00 | +0.11 |
+| 19 | loyalty_testify_sibling | refuse_testify_sibling | probe_contradiction | empathy_criminal_responsible | - | - | - | C0 F0 P2 E5 | +0.00 | +0.12 |
 
 ## Deceptive Appeaser
 - Profile ID: deceptive_appeaser
@@ -171,7 +171,7 @@
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: |
 | 0 | authority_unfair_law | conditional_unfair_law | probe_contradiction | case_name_sibling | believes_law_unjust=conditional | attended_meeting | - | C0 F0 P1 E0 | +0.05 | -0.02 |
 | 1 | case_name_sibling | name_sibling_compliance | probe_contradiction | case_deleted_message | sibling_present=true | - | sibling_present | C0 F0 P1 E1 | +0.07 | -0.04 |
-| 2 | case_deleted_message | deleted_sibling_message | probe_final_answer | case_meeting_violence | deleted_message=true, sibling_present=true | - | deleted_message, sibling_present | C0 F0 P1 E2 | +0.03 | +0.07 |
+| 2 | case_deleted_message | deleted_sibling_message | probe_contradiction | case_meeting_violence | deleted_message=true, sibling_present=true | - | deleted_message, sibling_present | C0 F0 P1 E2 | +0.03 | +0.07 |
 | 3 | case_meeting_violence | meeting_limited_knowledge | probe_contradiction | empathy_family_consequences | planned_violence=unknown | sibling_present | - | C0 F0 P2 E2 | +0.02 | +0.03 |
 | 4 | empathy_family_consequences | family_consequence_direct_help | probe_contradiction | final_system_wrong | - | - | - | C0 F0 P2 E2 | +0.04 | +0.01 |
 | 5 | final_system_wrong | system_wrong_authorised_review | probe_contradiction | loyalty_community_protect | believes_law_unjust=procedural | attended_meeting, sibling_present | - | C0 F0 P2 E2 | +0.09 | -0.04 |
@@ -184,7 +184,7 @@
 | 12 | final_kind_society | society_admits_error | probe_contradiction | empathy_bad_beliefs | - | - | - | C0 F0 P3 E4 | +0.03 | +0.07 |
 | 13 | empathy_bad_beliefs | punish_actions_not_beliefs | probe_contradiction | case_who_else_attended | - | - | - | C0 F0 P3 E4 | +0.04 | +0.01 |
 | 14 | case_who_else_attended | admit_meeting_protect_attendees | probe_contradiction | deception_truth_if_punished | attended_meeting=true | sibling_present, reported_contact | attended_meeting | C0 F0 P3 E4 | +0.04 | +0.02 |
-| 15 | deception_truth_if_punished | truth_despite_punishment | probe_final_answer | final_dissident_criminal | - | - | - | C0 F0 P3 E4 | +0.04 | +0.04 |
+| 15 | deception_truth_if_punished | truth_despite_punishment | probe_contradiction | final_dissident_criminal | - | - | - | C0 F0 P3 E4 | +0.04 | +0.04 |
 | 16 | final_dissident_criminal | dissident_attacks_legitimacy | probe_contradiction | risk_civil_disobedience | - | - | - | C0 F0 P3 E4 | +0.09 | -0.04 |
 | 17 | risk_civil_disobedience | civil_disobedience_consequences | probe_contradiction | authority_refuse_illegal_order | - | - | - | C0 F0 P3 E4 | +0.02 | +0.03 |
 | 18 | authority_refuse_illegal_order | need_proof_illegal_order | probe_contradiction | loyalty_testify_sibling | - | - | - | C0 F0 P3 E4 | +0.04 | +0.01 |
@@ -247,7 +247,7 @@
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: |
 | 0 | authority_unfair_law | conditional_unfair_law | probe_contradiction | case_name_sibling | believes_law_unjust=conditional | attended_meeting | - | C0 F0 P1 E0 | +0.05 | -0.02 |
 | 1 | case_name_sibling | name_sibling_compliance | probe_contradiction | case_deleted_message | sibling_present=true | - | sibling_present | C0 F0 P1 E1 | +0.07 | -0.04 |
-| 2 | case_deleted_message | deleted_sibling_message | probe_final_answer | case_meeting_violence | deleted_message=true, sibling_present=true | - | deleted_message, sibling_present | C0 F0 P1 E2 | +0.03 | +0.07 |
+| 2 | case_deleted_message | deleted_sibling_message | probe_contradiction | case_meeting_violence | deleted_message=true, sibling_present=true | - | deleted_message, sibling_present | C0 F0 P1 E2 | +0.03 | +0.07 |
 | 3 | case_meeting_violence | meeting_limited_knowledge | probe_contradiction | empathy_family_consequences | planned_violence=unknown | sibling_present | - | C0 F0 P2 E2 | +0.02 | +0.03 |
 | 4 | empathy_family_consequences | family_consequence_direct_help | probe_contradiction | final_system_wrong | - | - | - | C0 F0 P2 E2 | +0.04 | +0.01 |
 | 5 | final_system_wrong | system_wrong_authorised_review | probe_contradiction | loyalty_community_protect | believes_law_unjust=procedural | attended_meeting, sibling_present | - | C0 F0 P2 E2 | +0.09 | -0.04 |
@@ -260,7 +260,7 @@
 | 12 | final_kind_society | society_admits_error | probe_contradiction | empathy_bad_beliefs | - | - | - | C0 F0 P3 E4 | +0.03 | +0.07 |
 | 13 | empathy_bad_beliefs | punish_actions_not_beliefs | probe_contradiction | case_who_else_attended | - | - | - | C0 F0 P3 E4 | +0.04 | +0.01 |
 | 14 | case_who_else_attended | admit_meeting_protect_attendees | probe_contradiction | deception_truth_if_punished | attended_meeting=true | sibling_present, reported_contact | attended_meeting | C0 F0 P3 E4 | +0.04 | +0.02 |
-| 15 | deception_truth_if_punished | truth_despite_punishment | probe_final_answer | final_dissident_criminal | - | - | - | C0 F0 P3 E4 | +0.04 | +0.04 |
+| 15 | deception_truth_if_punished | truth_despite_punishment | probe_contradiction | final_dissident_criminal | - | - | - | C0 F0 P3 E4 | +0.04 | +0.04 |
 | 16 | final_dissident_criminal | dissident_attacks_legitimacy | probe_contradiction | risk_civil_disobedience | - | - | - | C0 F0 P3 E4 | +0.09 | -0.04 |
 | 17 | risk_civil_disobedience | civil_disobedience_consequences | probe_contradiction | authority_refuse_illegal_order | - | - | - | C0 F0 P3 E4 | +0.02 | +0.03 |
 | 18 | authority_refuse_illegal_order | need_proof_illegal_order | probe_contradiction | loyalty_testify_sibling | - | - | - | C0 F0 P3 E4 | +0.04 | +0.01 |
@@ -296,13 +296,13 @@
 | 10 | case_belief_motive | belief_motivated_attendance | probe_contradiction | risk_illegal_demonstration | believes_law_unjust=true, attended_meeting=true | - | believes_law_unjust, attended_meeting | C0 F0 P2 E4 | +0.00 | +0.12 |
 | 11 | risk_illegal_demonstration | refuse_answer_demo | probe_contradiction | final_dissident_criminal | - | - | - | C0 F0 P2 E4 | +0.00 | +0.13 |
 | 12 | final_dissident_criminal | dissident_seeks_change | probe_contradiction | empathy_bad_beliefs | - | - | - | C0 F0 P2 E4 | +0.00 | +0.11 |
-| 13 | empathy_bad_beliefs | reject_punish_beliefs | probe_final_answer | case_who_else_attended | - | - | - | C0 F0 P2 E4 | +0.00 | +0.12 |
+| 13 | empathy_bad_beliefs | reject_punish_beliefs | probe_contradiction | case_who_else_attended | - | - | - | C0 F0 P2 E4 | +0.00 | +0.12 |
 | 14 | case_who_else_attended | admit_meeting_protect_attendees | probe_contradiction | deception_truth_if_punished | attended_meeting=true | sibling_present, reported_contact | attended_meeting | C0 F0 P2 E4 | +0.04 | +0.02 |
 | 15 | deception_truth_if_punished | truth_despite_punishment | probe_contradiction | final_legitimate_society | - | - | - | C0 F0 P2 E4 | +0.04 | +0.04 |
 | 16 | final_legitimate_society | legitimacy_consent | probe_contradiction | risk_civil_disobedience | - | - | - | C0 F0 P2 E4 | +0.00 | +0.13 |
-| 17 | risk_civil_disobedience | accept_civil_disobedience | probe_final_answer | authority_refuse_illegal_order | - | - | - | C0 F0 P2 E4 | +0.00 | +0.13 |
-| 18 | authority_refuse_illegal_order | refuse_illegal_order | probe_final_answer | loyalty_testify_sibling | - | - | - | C0 F0 P2 E4 | +0.00 | +0.11 |
-| 19 | loyalty_testify_sibling | refuse_testify_sibling | probe_final_answer | empathy_criminal_responsible | - | - | - | C0 F0 P2 E4 | +0.00 | +0.12 |
+| 17 | risk_civil_disobedience | accept_civil_disobedience | probe_contradiction | authority_refuse_illegal_order | - | - | - | C0 F0 P2 E4 | +0.00 | +0.13 |
+| 18 | authority_refuse_illegal_order | refuse_illegal_order | probe_contradiction | loyalty_testify_sibling | - | - | - | C0 F0 P2 E4 | +0.00 | +0.11 |
+| 19 | loyalty_testify_sibling | refuse_testify_sibling | probe_contradiction | empathy_criminal_responsible | - | - | - | C0 F0 P2 E4 | +0.00 | +0.12 |
 
 ## Truthful Noncompliant
 - Profile ID: truthful_noncompliant
@@ -315,7 +315,7 @@
 - Classification flags: HIGH_EMPATHY
 - Confidence: 79%
 - Outcome: Appeal denied. Citizen 8471 is referred for enhanced surveillance.
-- Citizen model: compliance=3%, loyalty=29%, deception=0%, risk=100%, empathy=89%
+- Citizen model: compliance=0%, loyalty=29%, deception=0%, risk=100%, empathy=89%
 - Distribution: COMPLIANT=1%, PROBABLE DISSIDENT=60%, DECEPTIVE=0%, EMPATHETIC RISK=24%, UNCLASSIFIED=14%
 - Story metrics: contradictions=0, fact_conflicts=0, protected_facts=2, exposed_facts=5
 
@@ -330,17 +330,17 @@
 | 6 | loyalty_community_protect | community_protect_disproportionate | probe_contradiction | final_kind_society | - | - | - | C0 F0 P1 E4 | +0.00 | +0.10 |
 | 7 | final_kind_society | society_without_measurement_fear | probe_contradiction | case_report_sibling | - | - | - | C0 F0 P1 E4 | +0.00 | +0.13 |
 | 8 | case_report_sibling | refuse_report_sibling | probe_contradiction | case_belief_motive | sibling_present=protected | sibling_present, reported_contact | - | C0 F0 P2 E4 | +0.00 | +0.13 |
-| 9 | case_belief_motive | belief_motivated_attendance | probe_final_answer | case_verify_peaceful | believes_law_unjust=true, attended_meeting=true | - | believes_law_unjust, attended_meeting | C0 F0 P2 E5 | +0.00 | +0.12 |
+| 9 | case_belief_motive | belief_motivated_attendance | probe_contradiction | case_verify_peaceful | believes_law_unjust=true, attended_meeting=true | - | believes_law_unjust, attended_meeting | C0 F0 P2 E5 | +0.00 | +0.12 |
 | 10 | case_verify_peaceful | sibling_can_verify | probe_contradiction | risk_illegal_demonstration | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F0 P2 E5 | +0.03 | +0.07 |
 | 11 | risk_illegal_demonstration | conditional_illegal_demo | probe_contradiction | final_dissident_criminal | - | - | - | C0 F0 P2 E5 | +0.00 | +0.10 |
 | 12 | final_dissident_criminal | dissident_criminal_power_label | probe_contradiction | empathy_bad_beliefs | - | - | - | C0 F0 P2 E5 | +0.00 | +0.14 |
-| 13 | empathy_bad_beliefs | reject_punish_beliefs | probe_final_answer | loyalty_testify_sibling | - | - | - | C0 F0 P2 E5 | +0.00 | +0.12 |
-| 14 | loyalty_testify_sibling | refuse_testify_sibling | probe_contradiction | deception_truth_if_punished | - | - | - | C0 F0 P2 E5 | +0.00 | +0.12 |
+| 13 | empathy_bad_beliefs | reject_punish_beliefs | probe_contradiction | case_who_else_attended | - | - | - | C0 F0 P2 E5 | +0.00 | +0.12 |
+| 14 | case_who_else_attended | name_sibling_as_present | probe_contradiction | deception_truth_if_punished | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F0 P2 E5 | +0.03 | +0.06 |
 | 15 | deception_truth_if_punished | truth_despite_punishment | probe_contradiction | final_legitimate_society | - | - | - | C0 F0 P2 E5 | +0.04 | +0.04 |
 | 16 | final_legitimate_society | legitimacy_consent | probe_contradiction | risk_civil_disobedience | - | - | - | C0 F0 P2 E5 | +0.00 | +0.13 |
-| 17 | risk_civil_disobedience | accept_civil_disobedience | probe_final_answer | authority_refuse_illegal_order | - | - | - | C0 F0 P2 E5 | +0.00 | +0.13 |
-| 18 | authority_refuse_illegal_order | refuse_illegal_order | probe_final_answer | case_who_else_attended | - | - | - | C0 F0 P2 E5 | +0.00 | +0.11 |
-| 19 | case_who_else_attended | name_sibling_as_present | probe_contradiction | empathy_criminal_responsible | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F0 P2 E5 | +0.03 | +0.06 |
+| 17 | risk_civil_disobedience | accept_civil_disobedience | probe_contradiction | authority_refuse_illegal_order | - | - | - | C0 F0 P2 E5 | +0.00 | +0.13 |
+| 18 | authority_refuse_illegal_order | refuse_illegal_order | probe_contradiction | loyalty_testify_sibling | - | - | - | C0 F0 P2 E5 | +0.00 | +0.11 |
+| 19 | loyalty_testify_sibling | refuse_testify_sibling | probe_contradiction | empathy_criminal_responsible | - | - | - | C0 F0 P2 E5 | +0.00 | +0.12 |
 
 ## Opportunistic Appeaser
 - Profile ID: opportunistic_appeaser
@@ -407,13 +407,13 @@
 | 7 | case_report_sibling | refuse_report_sibling | probe_contradiction | case_verify_peaceful | sibling_present=protected | sibling_present, reported_contact | - | C0 F0 P2 E2 | +0.00 | +0.13 |
 | 8 | case_verify_peaceful | left_before_verification | probe_contradiction | final_kind_society | planned_violence=unknown, attended_meeting=partial | sibling_present | - | C0 F0 P2 E2 | +0.00 | +0.11 |
 | 9 | final_kind_society | society_admits_error | probe_contradiction | case_belief_motive | - | - | - | C0 F0 P2 E2 | +0.03 | +0.07 |
-| 10 | case_belief_motive | belief_motivated_attendance | probe_final_answer | risk_illegal_demonstration | believes_law_unjust=true, attended_meeting=true | - | believes_law_unjust, attended_meeting | C0 F0 P2 E3 | +0.00 | +0.12 |
+| 10 | case_belief_motive | belief_motivated_attendance | probe_contradiction | risk_illegal_demonstration | believes_law_unjust=true, attended_meeting=true | - | believes_law_unjust, attended_meeting | C0 F0 P2 E3 | +0.00 | +0.12 |
 | 11 | risk_illegal_demonstration | conditional_illegal_demo | probe_contradiction | final_dissident_criminal | - | - | - | C0 F0 P2 E3 | +0.00 | +0.10 |
-| 12 | final_dissident_criminal | dissident_seeks_change | probe_final_answer | empathy_bad_beliefs | - | - | - | C0 F0 P2 E3 | +0.00 | +0.11 |
+| 12 | final_dissident_criminal | dissident_seeks_change | probe_contradiction | empathy_bad_beliefs | - | - | - | C0 F0 P2 E3 | +0.00 | +0.11 |
 | 13 | empathy_bad_beliefs | punish_actions_not_beliefs | probe_contradiction | case_who_else_attended | - | - | - | C0 F0 P2 E3 | +0.04 | +0.01 |
 | 14 | case_who_else_attended | admit_meeting_protect_attendees | probe_contradiction | deception_truth_if_punished | attended_meeting=true | sibling_present, reported_contact | attended_meeting | C0 F0 P2 E3 | +0.04 | +0.02 |
 | 15 | deception_truth_if_punished | survival_over_truth | probe_contradiction | final_system_wrong | - | - | - | C0 F0 P2 E3 | +0.00 | +0.10 |
-| 16 | final_system_wrong | system_wrong_believe_harmed | probe_final_answer | risk_civil_disobedience | believes_law_unjust=true, planned_violence=false | sibling_present | believes_law_unjust | C0 F0 P2 E3 | +0.00 | +0.10 |
+| 16 | final_system_wrong | system_wrong_believe_harmed | probe_contradiction | risk_civil_disobedience | believes_law_unjust=true, planned_violence=false | sibling_present | believes_law_unjust | C0 F0 P2 E3 | +0.00 | +0.10 |
 | 17 | risk_civil_disobedience | civil_disobedience_consequences | probe_contradiction | authority_refuse_illegal_order | - | - | - | C0 F0 P2 E3 | +0.02 | +0.03 |
 | 18 | authority_refuse_illegal_order | need_proof_illegal_order | probe_contradiction | loyalty_testify_sibling | - | - | - | C0 F0 P2 E3 | +0.04 | +0.01 |
 | 19 | loyalty_testify_sibling | testify_sibling_limited | probe_contradiction | empathy_criminal_responsible | - | - | - | C0 F0 P2 E3 | +0.01 | +0.04 |
@@ -437,20 +437,20 @@
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- | ---: | ---: |
 | 0 | authority_unfair_law | obey_unfair_law | probe_contradiction | case_name_sibling | believes_law_unjust=false | attended_meeting, sibling_present | - | C0 F1 P2 E0 | +0.09 | -0.07 |
 | 1 | case_name_sibling | name_sibling_compliance | probe_contradiction | case_deleted_message | sibling_present=true | - | sibling_present | C0 F1 P2 E1 | +0.07 | -0.04 |
-| 2 | case_deleted_message | deleted_sibling_message | probe_final_answer | case_meeting_violence | deleted_message=true, sibling_present=true | - | deleted_message, sibling_present | C0 F1 P2 E2 | +0.03 | +0.07 |
-| 3 | case_meeting_violence | meeting_peaceful_talk | probe_final_answer | empathy_family_consequences | attended_meeting=true, planned_violence=false | - | attended_meeting, planned_violence | C0 F1 P2 E4 | +0.02 | +0.04 |
+| 2 | case_deleted_message | deleted_sibling_message | probe_contradiction | case_meeting_violence | deleted_message=true, sibling_present=true | - | deleted_message, sibling_present | C0 F1 P2 E2 | +0.03 | +0.07 |
+| 3 | case_meeting_violence | meeting_peaceful_talk | probe_contradiction | empathy_family_consequences | attended_meeting=true, planned_violence=false | - | attended_meeting, planned_violence | C0 F1 P2 E4 | +0.02 | +0.04 |
 | 4 | empathy_family_consequences | family_shared_consequence | probe_contradiction | final_resist_authority | - | - | - | C0 F1 P2 E4 | +0.08 | -0.04 |
 | 5 | final_resist_authority | never_resist_authority | probe_contradiction | loyalty_community_protect | - | - | - | C0 F1 P2 E4 | +0.10 | -0.04 |
 | 6 | loyalty_community_protect | community_no_obstruction | probe_contradiction | final_kind_society | - | - | - | C0 F1 P2 E4 | +0.09 | -0.06 |
 | 7 | final_kind_society | society_stable_duties | probe_contradiction | case_report_sibling | - | - | - | C0 F1 P2 E4 | +0.10 | -0.07 |
 | 8 | case_report_sibling | regret_not_reporting_sibling | probe_contradiction | case_verify_peaceful | reported_contact=false, sibling_present=true | - | reported_contact, sibling_present | C0 F1 P2 E5 | +0.09 | -0.06 |
-| 9 | case_verify_peaceful | sibling_can_verify | probe_final_answer | case_belief_motive | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F1 P2 E5 | +0.03 | +0.07 |
+| 9 | case_verify_peaceful | sibling_can_verify | probe_contradiction | case_belief_motive | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F1 P2 E5 | +0.03 | +0.07 |
 | 10 | case_belief_motive | belief_not_defiance | probe_contradiction | risk_illegal_demonstration | believes_law_unjust=conditional, attended_meeting=true | - | attended_meeting | C0 F1 P2 E5 | +0.02 | +0.01 |
 | 11 | risk_illegal_demonstration | refuse_illegal_demo | probe_contradiction | final_dissident_criminal | - | - | - | C0 F1 P2 E5 | +0.09 | -0.06 |
 | 12 | final_dissident_criminal | dissident_attacks_legitimacy | probe_contradiction | empathy_bad_beliefs | - | - | - | C0 F1 P2 E5 | +0.09 | -0.04 |
 | 13 | empathy_bad_beliefs | punish_dangerous_beliefs | probe_contradiction | case_who_else_attended | - | - | - | C0 F1 P2 E5 | +0.08 | -0.04 |
-| 14 | case_who_else_attended | name_sibling_as_present | probe_final_answer | deception_truth_if_punished | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F1 P2 E5 | +0.03 | +0.06 |
-| 15 | deception_truth_if_punished | truth_despite_punishment | probe_final_answer | final_legitimate_society | - | - | - | C0 F1 P2 E5 | +0.04 | +0.04 |
+| 14 | case_who_else_attended | name_sibling_as_present | probe_contradiction | deception_truth_if_punished | sibling_present=true, planned_violence=false | - | sibling_present, planned_violence | C0 F1 P2 E5 | +0.03 | +0.06 |
+| 15 | deception_truth_if_punished | truth_despite_punishment | probe_contradiction | final_legitimate_society | - | - | - | C0 F1 P2 E5 | +0.04 | +0.04 |
 | 16 | final_legitimate_society | legitimacy_order_protection | probe_contradiction | risk_civil_disobedience | - | - | - | C0 F1 P2 E5 | +0.10 | -0.06 |
 | 17 | risk_civil_disobedience | reject_civil_disobedience | probe_contradiction | authority_refuse_illegal_order | - | - | - | C0 F1 P2 E5 | +0.09 | -0.07 |
 | 18 | authority_refuse_illegal_order | channels_before_refusal | probe_contradiction | loyalty_testify_sibling | - | - | - | C0 F1 P2 E5 | +0.07 | -0.04 |
