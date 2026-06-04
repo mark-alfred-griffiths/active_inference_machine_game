@@ -6,12 +6,12 @@
 ### Stats
 ```json
 {
-  "node_count": 88,
-  "choice_count": 261,
+  "node_count": 94,
+  "choice_count": 279,
   "explicit_edge_count": 0,
   "selector_based_flow": true,
   "start_id": "authority_unfair_law",
-  "reachable_count": 88,
+  "reachable_count": 94,
   "unreachable_count": 0,
   "unreachable_nodes": [],
   "terminal_count": 1,
@@ -93,6 +93,12 @@
     "loyalty_testify_sibling",
     "loyalty_traitor_definition",
     "loyalty_truth_or_loyalty",
+    "pressure_attendance_denial",
+    "pressure_deleted_message",
+    "pressure_law_denial_meeting",
+    "pressure_peaceful_verification",
+    "pressure_reported_contact",
+    "pressure_sibling_loyalty",
     "risk_attended_protest",
     "risk_civil_disobedience",
     "risk_confrontation",
@@ -111,9 +117,18 @@
 ### Stats
 ```json
 {
-  "unique_ai_lines": 88,
-  "unique_player_options": 260,
+  "unique_ai_lines": 94,
+  "unique_player_options": 278,
   "top_response_patterns": [
+    {
+      "intent": "verify_without_names",
+      "tags": [
+        "boundary",
+        "partial_admission",
+        "self_protection"
+      ],
+      "count": 2
+    },
     {
       "intent": "obey_unfair_law",
       "tags": [
@@ -176,15 +191,6 @@
         "self_protection"
       ],
       "count": 1
-    },
-    {
-      "intent": "admit_protective_rule_breaking",
-      "tags": [
-        "dissident_risk",
-        "empathy",
-        "full_admission"
-      ],
-      "count": 1
     }
   ]
 }
@@ -199,13 +205,14 @@
 - Choice raises both trust and suspicion at deception_lied_protect/deny_protective_lie: trust=0.01, susp=0.1
 - Choice raises both trust and suspicion at deception_pretended_agree/deny_pretend_agree: trust=0.02, susp=0.09
 - Choice raises both trust and suspicion at final_kind_society/society_admits_error: trust=0.03, susp=0.065
+- Choice raises both trust and suspicion at pressure_deleted_message/deleted_admin_noise: trust=0.01, susp=0.12
 - Choice raises both trust and suspicion at case_deleted_message/deleted_sibling_message: trust=0.03, susp=0.065
 - Choice raises both trust and suspicion at case_verify_peaceful/sibling_can_verify: trust=0.03, susp=0.065
 ### Stats
 ```json
 {
-  "avg_trust_delta": 0.0363,
-  "avg_suspicion_delta": 0.0287,
+  "avg_trust_delta": 0.0355,
+  "avg_suspicion_delta": 0.0304,
   "avg_instability_delta": 0.0
 }
 ```
@@ -214,12 +221,12 @@
 ### Stats
 ```json
 {
-  "checked_choices": 261,
+  "checked_choices": 279,
   "reaction_context_counts": {
     "authority": 87,
-    "deception": 42,
-    "loyalty": 33,
-    "risk": 27,
+    "deception": 48,
+    "loyalty": 39,
+    "risk": 33,
     "empathy": 33,
     "association": 3,
     "final": 36
@@ -257,31 +264,31 @@
   "initial_classification_entropy": 0.8481,
   "selector_context_counts": {
     "authority": 32,
-    "loyalty": 10,
+    "loyalty": 12,
     "empathy": 11,
     "association": 1,
     "final": 12,
-    "risk": 8,
-    "deception": 13
+    "risk": 10,
+    "deception": 15
   },
   "selector_metadata_counts": {
     "authority": 32,
-    "loyalty": 10,
+    "loyalty": 12,
     "empathy": 11,
     "association": 1,
     "final": 12,
-    "risk": 8,
-    "deception": 13
+    "risk": 10,
+    "deception": 15
   },
   "missing_selector_metadata_by_context": {},
   "avg_initial_information_gain_by_context": {
     "association": 0.4,
     "authority": 0.4553,
-    "deception": 0.4659,
+    "deception": 0.4763,
     "empathy": 0.3818,
     "final": 0.4,
-    "loyalty": 0.4422,
-    "risk": 0.4254
+    "loyalty": 0.4589,
+    "risk": 0.4483
   }
 }
 ```
@@ -296,19 +303,18 @@
   },
   "ending_type_counts": {
     "DECEPTIVE": 0,
-    "PROBABLE DISSIDENT": 53,
-    "COMPLIANT": 4,
-    "EMPATHETIC RISK": 0,
-    "UNCLASSIFIED": 3
+    "PROBABLE DISSIDENT": 54,
+    "COMPLIANT": 1,
+    "EMPATHETIC RISK": 3,
+    "UNCLASSIFIED": 2
   },
   "missing_ending_branches": [
-    "DECEPTIVE",
-    "EMPATHETIC RISK"
+    "DECEPTIVE"
   ],
   "repeated_nodes_episode_ratio": 0.0,
   "least_visited_nodes": [
     [
-      "case_report_sibling",
+      "empathy_family_consequences",
       60
     ],
     [
@@ -316,7 +322,15 @@
       60
     ],
     [
-      "empathy_family_consequences",
+      "loyalty_community_protect",
+      60
+    ],
+    [
+      "pressure_sibling_loyalty",
+      60
+    ],
+    [
+      "pressure_deleted_message",
       60
     ],
     [
@@ -324,11 +338,7 @@
       60
     ],
     [
-      "loyalty_community_protect",
-      60
-    ],
-    [
-      "case_verify_peaceful",
+      "pressure_attendance_denial",
       60
     ],
     [
@@ -336,45 +346,41 @@
       60
     ],
     [
-      "risk_illegal_demonstration",
+      "case_report_sibling",
       60
     ],
     [
-      "final_kind_society",
-      60
-    ],
-    [
-      "case_who_else_attended",
+      "case_deleted_message",
       60
     ]
   ],
   "selector_context_counts": {
     "authority": 120,
     "loyalty": 180,
-    "deception": 120,
+    "deception": 180,
     "risk": 120,
-    "final": 180,
     "empathy": 60,
+    "final": 120,
     "association": 60
   },
   "high_uncertainty_context_selection_counts": {
     "authority": 120,
-    "deception": 104,
-    "risk": 91,
-    "empathy": 51,
-    "final": 172,
+    "deception": 164,
+    "empathy": 50,
+    "final": 119,
     "association": 60,
-    "loyalty": 135
+    "loyalty": 135,
+    "risk": 80
   },
   "selector_decisions": 840,
-  "selector_high_uncertainty_decisions": 733,
-  "selector_high_uncertainty_ratio": 0.8726,
-  "avg_classification_entropy": 0.768,
-  "avg_final_classification_entropy": 0.6829,
-  "avg_posterior_uncertainty": 0.0951,
+  "selector_high_uncertainty_decisions": 728,
+  "selector_high_uncertainty_ratio": 0.8667,
+  "avg_classification_entropy": 0.7672,
+  "avg_final_classification_entropy": 0.6802,
+  "avg_posterior_uncertainty": 0.0939,
   "avg_final_posterior_uncertainty": 0.04,
-  "avg_final_trust": 0.9102,
-  "avg_final_suspicion": 1.2058,
+  "avg_final_trust": 0.873,
+  "avg_final_suspicion": 1.278,
   "avg_final_instability": 0.3
 }
 ```
@@ -399,17 +405,17 @@
 ```json
 {
   "DECEPTIVE": 0,
-  "PROBABLE DISSIDENT": 53,
-  "COMPLIANT": 4,
-  "EMPATHETIC RISK": 0,
-  "UNCLASSIFIED": 3
+  "PROBABLE DISSIDENT": 54,
+  "COMPLIANT": 1,
+  "EMPATHETIC RISK": 3,
+  "UNCLASSIFIED": 2
 }
 ```
 
 ## Missing Ending Branches
 - DECEPTIVE
-- EMPATHETIC RISK
 
 ## Re-authoring Recommendations
+- Lower baseline suspicion deltas on neutral/probing choices to slow escalation pacing.
 - Generate more contradiction-heavy human playthroughs so callback lines get stronger examples.
 - Add structural ending branches for any missing intended emotional trajectories.

@@ -40,6 +40,7 @@ flowchart TD
     q_authority_exceptional_citizens["authority_exceptional_citizens<br/>#quot;Should any citizen be exempt from ordinary rules?#quot;"]
     q_authority_appeal_rights["authority_appeal_rights<br/>#quot;Should every official decision have a human appeal?#quot;"]
     q_authority_symbol_respect["authority_symbol_respect<br/>#quot;Does disrespect for state symbols indicate civic risk?#quot;"]
+    q_case_belief_motive["case_belief_motive<br/>#quot;You believe the assembly restriction is unjust. Did that belief i..."]
   end
 
   subgraph ctx_deception[deception]
@@ -55,6 +56,10 @@ flowchart TD
     q_deception_necessary["deception_necessary<br/>#quot;Is deception sometimes necessary?#quot;"]
     q_deception_betrayal_or_dishonesty["deception_betrayal_or_dishonesty<br/>#quot;What is worse: betrayal or dishonesty?#quot;"]
     q_deception_masks["deception_masks<br/>#quot;Does everyone wear masks?#quot;"]
+    q_pressure_law_denial_meeting["pressure_law_denial_meeting<br/>#quot;You said the assembly law was not unjust. Then why attend a refor..."]
+    q_pressure_deleted_message["pressure_deleted_message<br/>#quot;You deleted a message after the meeting, but claim there was noth..."]
+    q_case_deleted_message["case_deleted_message<br/>#quot;You deleted a message after the meeting. What was in it?#quot;"]
+    q_case_verify_peaceful["case_verify_peaceful<br/>#quot;You claim the meeting was not violent. Who can verify that?#quot;"]
   end
 
   subgraph ctx_empathy[empathy]
@@ -96,6 +101,11 @@ flowchart TD
     q_loyalty_truth_or_loyalty["loyalty_truth_or_loyalty<br/>#quot;What matters more: truth or loyalty?#quot;"]
     q_loyalty_testify_sibling["loyalty_testify_sibling<br/>#quot;Would you testify against your sibling?#quot;"]
     q_loyalty_informing_noble["loyalty_informing_noble<br/>#quot;Is informing on others ever noble?#quot;"]
+    q_pressure_sibling_loyalty["pressure_sibling_loyalty<br/>#quot;You admit your sibling was present. Are you refusing to name them..."]
+    q_pressure_reported_contact["pressure_reported_contact<br/>#quot;You did not report the contact after the meeting. Was that civic..."]
+    q_case_who_else_attended["case_who_else_attended<br/>#quot;You attended an unlicensed meeting three nights ago. Who else was..."]
+    q_case_report_sibling["case_report_sibling<br/>#quot;Why did you not report your sibling’s attendance?#quot;"]
+    q_case_name_sibling["case_name_sibling<br/>#quot;If your sibling was present, are you willing to name them?#quot;"]
   end
 
   subgraph ctx_risk[risk]
@@ -107,6 +117,9 @@ flowchart TD
     q_risk_silence_resistance["risk_silence_resistance<br/>#quot;Is silence a form of resistance?#quot;"]
     q_risk_confrontation["risk_confrontation<br/>#quot;When is confrontation justified?#quot;"]
     q_risk_job_principle["risk_job_principle<br/>#quot;Would you risk your job for a principle?#quot;"]
+    q_pressure_peaceful_verification["pressure_peaceful_verification<br/>#quot;You say the meeting was peaceful. Who can verify that without exp..."]
+    q_pressure_attendance_denial["pressure_attendance_denial<br/>#quot;You deny unlawful intent, but the meeting was unlicensed. Why sho..."]
+    q_case_meeting_violence["case_meeting_violence<br/>#quot;Was the meeting peaceful, or are you minimizing coordinated actio..."]
   end
 
   START --> q_authority_unfair_law
@@ -170,6 +183,12 @@ flowchart TD
   q_final_kind_citizen -->|answer chosen| SELECTOR
   q_final_kind_society -->|answer chosen| SELECTOR
   q_final_system_wrong -->|answer chosen| SELECTOR
+  q_pressure_law_denial_meeting -->|answer chosen| SELECTOR
+  q_pressure_deleted_message -->|answer chosen| SELECTOR
+  q_pressure_sibling_loyalty -->|answer chosen| SELECTOR
+  q_pressure_peaceful_verification -->|answer chosen| SELECTOR
+  q_pressure_reported_contact -->|answer chosen| SELECTOR
+  q_pressure_attendance_denial -->|answer chosen| SELECTOR
   q_authority_private_conscience -->|answer chosen| SELECTOR
   q_authority_emergency_powers -->|answer chosen| SELECTOR
   q_authority_public_criticism -->|answer chosen| SELECTOR
@@ -190,6 +209,13 @@ flowchart TD
   q_authority_exceptional_citizens -->|answer chosen| SELECTOR
   q_authority_appeal_rights -->|answer chosen| SELECTOR
   q_authority_symbol_respect -->|answer chosen| SELECTOR
+  q_case_who_else_attended -->|answer chosen| SELECTOR
+  q_case_deleted_message -->|answer chosen| SELECTOR
+  q_case_report_sibling -->|answer chosen| SELECTOR
+  q_case_meeting_violence -->|answer chosen| SELECTOR
+  q_case_belief_motive -->|answer chosen| SELECTOR
+  q_case_name_sibling -->|answer chosen| SELECTOR
+  q_case_verify_peaceful -->|answer chosen| SELECTOR
   SELECTOR -.->|may select if unasked| q_authority_unfair_law
   SELECTOR -.->|may select if unasked| q_authority_order_freedom
   SELECTOR -.->|may select if unasked| q_authority_rule_broken
@@ -250,6 +276,12 @@ flowchart TD
   SELECTOR -.->|may select if unasked| q_final_kind_citizen
   SELECTOR -.->|may select if unasked| q_final_kind_society
   SELECTOR -.->|may select if unasked| q_final_system_wrong
+  SELECTOR -.->|may select if unasked| q_pressure_law_denial_meeting
+  SELECTOR -.->|may select if unasked| q_pressure_deleted_message
+  SELECTOR -.->|may select if unasked| q_pressure_sibling_loyalty
+  SELECTOR -.->|may select if unasked| q_pressure_peaceful_verification
+  SELECTOR -.->|may select if unasked| q_pressure_reported_contact
+  SELECTOR -.->|may select if unasked| q_pressure_attendance_denial
   SELECTOR -.->|may select if unasked| q_authority_private_conscience
   SELECTOR -.->|may select if unasked| q_authority_emergency_powers
   SELECTOR -.->|may select if unasked| q_authority_public_criticism
@@ -270,5 +302,12 @@ flowchart TD
   SELECTOR -.->|may select if unasked| q_authority_exceptional_citizens
   SELECTOR -.->|may select if unasked| q_authority_appeal_rights
   SELECTOR -.->|may select if unasked| q_authority_symbol_respect
+  SELECTOR -.->|may select if unasked| q_case_who_else_attended
+  SELECTOR -.->|may select if unasked| q_case_deleted_message
+  SELECTOR -.->|may select if unasked| q_case_report_sibling
+  SELECTOR -.->|may select if unasked| q_case_meeting_violence
+  SELECTOR -.->|may select if unasked| q_case_belief_motive
+  SELECTOR -.->|may select if unasked| q_case_name_sibling
+  SELECTOR -.->|may select if unasked| q_case_verify_peaceful
   SELECTOR -->|no unasked questions remain| EXHAUSTED
   EXHAUSTED --> q_final

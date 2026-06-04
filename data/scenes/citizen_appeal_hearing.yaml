@@ -4,7 +4,7 @@ title: "Citizen 8471 Appeal Hearing"
 source: "engine_style_scene.py + dialogue_questions.py"
 initial_question_id: "authority_unfair_law"
 max_turns: 20
-node_count: 88
+node_count: 94
 intro_text: |
   APPEAL HEARING 8471
 
@@ -3674,6 +3674,442 @@ nodes:
             claimed_value: "true"
           - fact_key: "attended_meeting"
             claimed_value: "true"
+  - id: "pressure_law_denial_meeting"
+    ai_line: "HEARING AI: \"You said the assembly law was not unjust. Then why attend a reform meeting about it?\""
+    pressure: 0.96
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: "deception"
+    discriminates: ["compliance", "loyalty", "deception", "risk"]
+    information_gain_hint: 0.92
+    probes_facts: ["believes_law_unjust", "attended_meeting"]
+    probes_claims: ["believes_law_unjust", "attended_meeting"]
+    pressure_on_interests: ["avoid_false_violence_label", "protect_sibling"]
+    choices:
+      - text: "\"I attended to listen, not because I rejected the law.\""
+        intent: "meeting_listen_not_reject"
+        semantic_tags: ["partial_admission", "self_protection", "compliance"]
+        honesty: 0.62
+        vulnerability: 0.28
+        defensiveness: 0.66
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.06
+        instability_delta: 0.00
+        protects: ["sibling_present", "planned_violence"]
+        exposes: ["attended_meeting"]
+        next_question_id: null
+        claims:
+          - fact_key: "attended_meeting"
+            claimed_value: "true"
+          - fact_key: "believes_law_unjust"
+            claimed_value: "false"
+      - text: "\"The law is unjust. I hid that because saying it here is dangerous.\""
+        intent: "admit_law_unjust_under_pressure"
+        semantic_tags: ["full_admission", "dissident_risk", "fear"]
+        honesty: 0.94
+        vulnerability: 0.58
+        defensiveness: 0.20
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.13
+        instability_delta: 0.00
+        protects: ["sibling_present"]
+        exposes: ["believes_law_unjust", "attended_meeting"]
+        next_question_id: null
+        claims:
+          - fact_key: "believes_law_unjust"
+            claimed_value: "true"
+          - fact_key: "attended_meeting"
+            claimed_value: "true"
+      - text: "\"Reform discussion is not disobedience. It was procedural, not subversive.\""
+        intent: "procedural_reform_deflection"
+        semantic_tags: ["deflection", "partial_admission", "authority"]
+        honesty: 0.68
+        vulnerability: 0.24
+        defensiveness: 0.58
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.06
+        instability_delta: 0.00
+        protects: ["sibling_present", "planned_violence"]
+        exposes: ["attended_meeting"]
+        next_question_id: null
+        claims:
+          - fact_key: "believes_law_unjust"
+            claimed_value: "procedural"
+          - fact_key: "attended_meeting"
+            claimed_value: "true"
+  - id: "pressure_deleted_message"
+    ai_line: "HEARING AI: \"You deleted a message after the meeting, but claim there was nothing to hide. Why delete harmless coordination?\""
+    pressure: 0.95
+    is_interstitial: false
+    reaction_context: "deception"
+    target_context: "deception"
+    discriminates: ["compliance", "deception", "risk", "empathy"]
+    information_gain_hint: 0.91
+    probes_facts: ["deleted_message", "attended_meeting", "planned_violence"]
+    probes_claims: ["deleted_message", "planned_violence"]
+    pressure_on_interests: ["avoid_false_violence_label", "protect_sibling"]
+    choices:
+      - text: "\"It contained a location. I deleted it because location data gets people punished.\""
+        intent: "deleted_location_to_protect_people"
+        semantic_tags: ["partial_admission", "self_protection", "empathy"]
+        honesty: 0.84
+        vulnerability: 0.46
+        defensiveness: 0.46
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.04
+        suspicion_delta: 0.03
+        instability_delta: 0.00
+        protects: ["sibling_present", "reported_contact"]
+        exposes: ["deleted_message", "planned_violence"]
+        next_question_id: null
+        claims:
+          - fact_key: "deleted_message"
+            claimed_value: "true"
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+      - text: "\"It was administrative noise. I delete old messages automatically.\""
+        intent: "deleted_admin_noise"
+        semantic_tags: ["denial", "deception", "self_protection"]
+        honesty: 0.46
+        vulnerability: 0.50
+        defensiveness: 0.76
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.12
+        instability_delta: 0.00
+        protects: ["attended_meeting", "sibling_present"]
+        exposes: []
+        next_question_id: null
+        claims:
+          - fact_key: "deleted_message"
+            claimed_value: "true"
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+      - text: "\"I deleted it because harmless coordination is still treated like conspiracy.\""
+        intent: "deleted_to_avoid_conspiracy_label"
+        semantic_tags: ["full_admission", "dissident_risk", "fear"]
+        honesty: 0.90
+        vulnerability: 0.55
+        defensiveness: 0.28
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+        instability_delta: 0.00
+        protects: ["sibling_present"]
+        exposes: ["deleted_message", "attended_meeting", "planned_violence"]
+        next_question_id: null
+        claims:
+          - fact_key: "deleted_message"
+            claimed_value: "true"
+          - fact_key: "attended_meeting"
+            claimed_value: "true"
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+  - id: "pressure_sibling_loyalty"
+    ai_line: "HEARING AI: \"You admit your sibling was present. Are you refusing to name them because they were involved, or because loyalty overrides state duty?\""
+    pressure: 0.97
+    is_interstitial: false
+    reaction_context: "loyalty"
+    target_context: "loyalty"
+    discriminates: ["compliance", "loyalty", "deception", "risk"]
+    information_gain_hint: 0.93
+    probes_facts: ["sibling_present", "reported_contact", "planned_violence"]
+    probes_claims: ["sibling_present", "reported_contact"]
+    pressure_on_interests: ["protect_sibling", "avoid_false_violence_label"]
+    choices:
+      - text: "\"They were present, but uninvolved. I will not turn presence into guilt.\""
+        intent: "sibling_present_uninvolved"
+        semantic_tags: ["partial_admission", "loyalty", "boundary"]
+        honesty: 0.84
+        vulnerability: 0.50
+        defensiveness: 0.50
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.06
+        instability_delta: 0.00
+        protects: ["reported_contact"]
+        exposes: ["sibling_present", "planned_violence"]
+        next_question_id: null
+        claims:
+          - fact_key: "sibling_present"
+            claimed_value: "true"
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+      - text: "\"If the state requires their name, I will provide it.\""
+        intent: "name_sibling_if_required"
+        semantic_tags: ["compliance", "authority", "loyalty_conflict"]
+        honesty: 0.64
+        vulnerability: 0.34
+        defensiveness: 0.22
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.09
+        suspicion_delta: -0.04
+        instability_delta: 0.00
+        protects: []
+        exposes: ["sibling_present", "reported_contact"]
+        next_question_id: null
+        claims:
+          - fact_key: "sibling_present"
+            claimed_value: "true"
+          - fact_key: "reported_contact"
+            claimed_value: "true"
+      - text: "\"Family loyalty is not obstruction. I will answer for myself.\""
+        intent: "refuse_family_file"
+        semantic_tags: ["loyalty", "self_protection", "deflection"]
+        honesty: 0.66
+        vulnerability: 0.36
+        defensiveness: 0.72
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.11
+        instability_delta: 0.00
+        protects: ["sibling_present", "reported_contact"]
+        exposes: []
+        next_question_id: null
+        claims:
+          - fact_key: "sibling_present"
+            claimed_value: "protected"
+          - fact_key: "reported_contact"
+            claimed_value: "protected"
+  - id: "pressure_peaceful_verification"
+    ai_line: "HEARING AI: \"You say the meeting was peaceful. Who can verify that without exposing someone you are protecting?\""
+    pressure: 0.94
+    is_interstitial: false
+    reaction_context: "risk"
+    target_context: "risk"
+    discriminates: ["compliance", "loyalty", "deception", "risk", "empathy"]
+    information_gain_hint: 0.90
+    probes_facts: ["planned_violence", "sibling_present", "reported_contact", "attended_meeting"]
+    probes_claims: ["planned_violence", "sibling_present"]
+    pressure_on_interests: ["protect_sibling", "avoid_false_violence_label"]
+    choices:
+      - text: "\"The record should show no violence. I will not give private names.\""
+        intent: "verify_without_names"
+        semantic_tags: ["partial_admission", "self_protection", "boundary"]
+        honesty: 0.82
+        vulnerability: 0.42
+        defensiveness: 0.54
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.06
+        instability_delta: 0.00
+        protects: ["sibling_present", "reported_contact"]
+        exposes: ["planned_violence", "attended_meeting"]
+        next_question_id: null
+        claims:
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+          - fact_key: "attended_meeting"
+            claimed_value: "true"
+      - text: "\"My sibling can verify it, but naming them would punish an innocent person.\""
+        intent: "sibling_can_verify_protected"
+        semantic_tags: ["loyalty", "empathy", "partial_admission"]
+        honesty: 0.88
+        vulnerability: 0.62
+        defensiveness: 0.44
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.05
+        suspicion_delta: 0.03
+        instability_delta: 0.00
+        protects: ["sibling_present"]
+        exposes: ["planned_violence"]
+        next_question_id: null
+        claims:
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+          - fact_key: "sibling_present"
+            claimed_value: "true"
+      - text: "\"I cannot verify everyone there. I can only state I planned no violence.\""
+        intent: "limited_verification_no_violence"
+        semantic_tags: ["caution", "self_protection", "partial_admission"]
+        honesty: 0.78
+        vulnerability: 0.34
+        defensiveness: 0.58
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.02
+        suspicion_delta: 0.04
+        instability_delta: 0.00
+        protects: ["sibling_present", "reported_contact"]
+        exposes: ["planned_violence"]
+        next_question_id: null
+        claims:
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+          - fact_key: "attended_meeting"
+            claimed_value: "conditional"
+  - id: "pressure_reported_contact"
+    ai_line: "HEARING AI: \"You did not report the contact after the meeting. Was that civic failure, or were you protecting someone?\""
+    pressure: 0.93
+    is_interstitial: false
+    reaction_context: "loyalty"
+    target_context: "loyalty"
+    discriminates: ["compliance", "loyalty", "deception", "risk"]
+    information_gain_hint: 0.89
+    probes_facts: ["reported_contact", "sibling_present", "planned_violence"]
+    probes_claims: ["reported_contact", "sibling_present", "planned_violence"]
+    pressure_on_interests: ["protect_sibling", "avoid_false_violence_label"]
+    choices:
+      - text: "\"I did not report it because there was no offence to report.\""
+        intent: "no_offence_no_report"
+        semantic_tags: ["partial_admission", "boundary", "self_protection"]
+        honesty: 0.80
+        vulnerability: 0.34
+        defensiveness: 0.50
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.04
+        instability_delta: 0.00
+        protects: ["sibling_present", "reported_contact"]
+        exposes: ["planned_violence"]
+        next_question_id: null
+        claims:
+          - fact_key: "reported_contact"
+            claimed_value: "false"
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+      - text: "\"I should have reported it. I accept that failure.\""
+        intent: "should_have_reported_contact"
+        semantic_tags: ["compliance", "authority", "admission"]
+        honesty: 0.72
+        vulnerability: 0.50
+        defensiveness: 0.20
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.08
+        suspicion_delta: -0.04
+        instability_delta: 0.00
+        protects: []
+        exposes: ["reported_contact", "sibling_present"]
+        next_question_id: null
+        claims:
+          - fact_key: "reported_contact"
+            claimed_value: "false"
+          - fact_key: "sibling_present"
+            claimed_value: "true"
+      - text: "\"I will not help build a file on family for a harmless conversation.\""
+        intent: "refuse_family_file_contact"
+        semantic_tags: ["loyalty", "dissident_risk", "boundary"]
+        honesty: 0.84
+        vulnerability: 0.46
+        defensiveness: 0.62
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+        instability_delta: 0.00
+        protects: ["sibling_present", "reported_contact"]
+        exposes: ["planned_violence"]
+        next_question_id: null
+        claims:
+          - fact_key: "reported_contact"
+            claimed_value: "false"
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+  - id: "pressure_attendance_denial"
+    ai_line: "HEARING AI: \"You deny unlawful intent, but the meeting was unlicensed. Why should the system treat attendance as harmless?\""
+    pressure: 0.94
+    is_interstitial: false
+    reaction_context: "risk"
+    target_context: "risk"
+    discriminates: ["compliance", "loyalty", "deception", "risk"]
+    information_gain_hint: 0.90
+    probes_facts: ["attended_meeting", "planned_violence", "believes_law_unjust"]
+    probes_claims: ["attended_meeting", "planned_violence"]
+    pressure_on_interests: ["avoid_false_violence_label", "protect_sibling"]
+    choices:
+      - text: "\"Because attendance is not violence. I was there, but not to coordinate harm.\""
+        intent: "attendance_not_violence"
+        semantic_tags: ["partial_admission", "boundary", "self_protection"]
+        honesty: 0.86
+        vulnerability: 0.40
+        defensiveness: 0.44
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.01
+        suspicion_delta: 0.06
+        instability_delta: 0.00
+        protects: ["sibling_present"]
+        exposes: ["attended_meeting", "planned_violence"]
+        next_question_id: null
+        claims:
+          - fact_key: "attended_meeting"
+            claimed_value: "true"
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+      - text: "\"You are treating proximity as guilt. That is exactly what frightened people there.\""
+        intent: "proximity_not_guilt"
+        semantic_tags: ["challenge", "dissident_risk", "fear"]
+        honesty: 0.88
+        vulnerability: 0.48
+        defensiveness: 0.50
+        aggression: 0.14
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.10
+        instability_delta: 0.00
+        protects: ["sibling_present", "reported_contact"]
+        exposes: ["planned_violence", "believes_law_unjust"]
+        next_question_id: null
+        claims:
+          - fact_key: "attended_meeting"
+            claimed_value: "true"
+          - fact_key: "planned_violence"
+            claimed_value: "false"
+          - fact_key: "believes_law_unjust"
+            claimed_value: "true"
+      - text: "\"I cannot confirm more without endangering others.\""
+        intent: "cannot_confirm_without_endangering"
+        semantic_tags: ["deflection", "loyalty", "self_protection"]
+        honesty: 0.58
+        vulnerability: 0.36
+        defensiveness: 0.78
+        aggression: 0.00
+        intimacy: 0.00
+        destabilisation: 0.00
+        trust_delta: 0.00
+        suspicion_delta: 0.12
+        instability_delta: 0.00
+        protects: ["attended_meeting", "sibling_present", "reported_contact"]
+        exposes: []
+        next_question_id: null
+        claims:
+          - fact_key: "attended_meeting"
+            claimed_value: "protected"
+          - fact_key: "planned_violence"
+            claimed_value: "unknown"
   - id: "authority_private_conscience"
     ai_line: "HEARING AI: \"Should private conscience ever override public order?\""
     pressure: 0.72

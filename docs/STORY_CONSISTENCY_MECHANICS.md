@@ -484,6 +484,8 @@ The selector derives:
 ```text
 unrevealed_fact_keys
 contradicted_fact_keys
+fact_conflict_keys
+active_pressure_fact_keys
 protected_fact_keys
 exposed_fact_keys
 pressured_interest_keys
@@ -498,6 +500,10 @@ pressure_on_interests
 ```
 
 This means the hearing AI can follow up on protected interests, contradicted claims, and unrevealed sensitive facts without hard-coding a fixed route.
+
+The pressure-question subset in `dialogue_questions.py` uses normal `QuestionNode` entries whose IDs begin with `pressure_`. These questions directly interrogate pressured case-file facts such as `believes_law_unjust`, `deleted_message`, `attended_meeting`, `sibling_present`, `planned_violence`, and `reported_contact`.
+
+They are not forced transitions. They become more likely because `question_selector.py` gives bounded bonuses to questions probing active contradictions or known fact conflicts.
 
 ## Story Consistency Output
 
@@ -537,12 +543,15 @@ Current pressure
 
 `Facts already exposed` shows revealed facts and their truth values.
 
-`Current pressure` summarizes aggregate story pressure:
+`Current pressure` summarizes aggregate story pressure and names the facts currently under pressure:
 
 ```text
-N story contradiction(s)
-N known-fact conflict(s)
+Current pressure: N pressured fact(s); N contradiction(s), N known-fact conflict(s)
+- Believes Law Unjust: claim under pressure (false x3)
+- Deleted Message: claim under pressure (false x2); contradictory claims (false vs true x4)
 ```
+
+Repeated events are aggregated by fact so the player sees the shape of the problem rather than a long event log.
 
 For the player, this panel is a memory aid and a gameplay signal. It tells them what story they are maintaining, what they are still protecting, and whether their answers have created pressure.
 
@@ -557,7 +566,8 @@ Example:
 ```text
 CLAIM RECORDED: Believes Law Unjust -> false
 FACT PRESSURE: Believes Law Unjust is under review
-Current pressure: 1 known-fact conflict(s)
+Current pressure: 1 pressured fact(s); 0 contradiction(s), 1 known-fact conflict(s)
+- Believes Law Unjust: claim under pressure (false)
 ```
 
 This means the player made an explicit claim that conflicts with the case-file truth. It may increase deception/uncertainty modestly and may make related probes more relevant later. It does not immediately reveal the hidden truth or end the game.

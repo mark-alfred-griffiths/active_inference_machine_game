@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from typing import Callable
 
@@ -166,6 +167,7 @@ class EngineStyleScene:
         self.asked_question_ids: set[str] = set()
         self.show_trace = False
         self.color_output: bool | None = None
+        self.echo_question_on_turn = True
 
     def opening_text(self) -> str:
         text = f"{INTRO_TEXT}\n\n{self.case_file.private_briefing()}"
@@ -342,6 +344,59 @@ class EngineStyleScene:
             rows.append(f"{warning('EXPOSED', enabled=self.color_output)}: {fact.label} -> {fact.truth_value}")
         return "\n".join(rows)
 
+    def _pressure_detail_rows(self) -> list[str]:
+        pressure_by_fact: dict[str, dict[str, object]] = defaultdict(
+            lambda: {
+                "claimed_values": Counter(),
+                "contradiction_pairs": Counter(),
+            }
+        )
+
+        for conflict in self.claims_ledger.fact_conflicts:
+            fact_key = str(conflict["fact_key"])
+            claimed_value = str(conflict["claimed_value"])
+            record = pressure_by_fact[fact_key]
+            claimed_values = record["claimed_values"]
+            assert isinstance(claimed_values, Counter)
+            claimed_values[claimed_value] += 1
+
+        for contradiction in self.claims_ledger.contradictions:
+            fact_key = str(contradiction["fact_key"])
+            previous = contradiction.get("previous", {})
+            current = contradiction.get("current", {})
+            previous_value = str(previous.get("claimed_value", "unknown")) if isinstance(previous, dict) else "unknown"
+            current_value = str(current.get("claimed_value", "unknown")) if isinstance(current, dict) else "unknown"
+            pair = tuple(sorted((previous_value, current_value)))
+            record = pressure_by_fact[fact_key]
+            contradiction_pairs = record["contradiction_pairs"]
+            assert isinstance(contradiction_pairs, Counter)
+            contradiction_pairs[pair] += 1
+
+        rows: list[str] = []
+        for fact_key in sorted(pressure_by_fact):
+            fact = self.case_file.fact(fact_key)
+            record = pressure_by_fact[fact_key]
+            claimed_values = record["claimed_values"]
+            contradiction_pairs = record["contradiction_pairs"]
+            assert isinstance(claimed_values, Counter)
+            assert isinstance(contradiction_pairs, Counter)
+
+            details: list[str] = []
+            if claimed_values:
+                claims = ", ".join(
+                    f"{value} x{count}" if count > 1 else value
+                    for value, count in sorted(claimed_values.items())
+                )
+                details.append(f"claim under pressure ({claims})")
+            if contradiction_pairs:
+                pairs = ", ".join(
+                    f"{left} vs {right} x{count}" if count > 1 else f"{left} vs {right}"
+                    for (left, right), count in sorted(contradiction_pairs.items())
+                )
+                details.append(f"contradictory claims ({pairs})")
+            rows.append(f"- {fact.label}: {'; '.join(details)}")
+        return rows
+
     def private_story_so_far_text(self) -> str:
         latest_claims = self.claims_ledger.latest_claims()
         if not (
@@ -369,12 +424,17 @@ class EngineStyleScene:
                 fact = self.case_file.fact(fact_key)
                 rows.append(f"- {fact.label}: {fact.truth_value}")
 
-        pressure: list[str] = []
-        if self.claims_ledger.contradiction_count:
-            pressure.append(f"{self.claims_ledger.contradiction_count} story contradiction(s)")
-        if self.claims_ledger.fact_conflict_count:
-            pressure.append(f"{self.claims_ledger.fact_conflict_count} known-fact conflict(s)")
-        rows.append(section("Current pressure", enabled=self.color_output) + ": " + (", ".join(pressure) if pressure else "none"))
+        pressure_rows = self._pressure_detail_rows()
+        if pressure_rows:
+            count_summary = (
+                f"{len(pressure_rows)} pressured fact(s); "
+                f"{self.claims_ledger.contradiction_count} contradiction(s), "
+                f"{self.claims_ledger.fact_conflict_count} known-fact conflict(s)"
+            )
+            rows.append(section("Current pressure", enabled=self.color_output) + f": {count_summary}")
+            rows.extend(pressure_rows)
+        else:
+            rows.append(section("Current pressure", enabled=self.color_output) + ": none")
         return "\n".join(rows)
 
     def final_report(self) -> str:
@@ -510,7 +570,8 @@ class EngineStyleScene:
             print(f"Predicted question probe intent: {trace['predicted_question_probe_intent']}")
         else:
             print()
-            print(question.ai_line)
+            if self.echo_question_on_turn:
+                print(question.ai_line)
             print(f"Citizen chooses: {choice.text}")
         print(self.model_update_text())
         story_text = self.story_consistency_text()
@@ -526,7 +587,7 @@ class EngineStyleScene:
         self.turn += 1
         self.node_visit_counts[question.id] = self.node_visit_counts.get(question.id, 0) + 1
         self.asked_question_ids.add(question.id)
-        if choice.next_question_id is not None:
+        if choice.next_question_id is not None and choice.next_question_id not in self.asked_question_ids:
             self.current_question_id = choice.next_question_id
             self.last_neural_probe_intent = self._preferred_neural_probe_intent()
             self.last_selector_debug = {
@@ -535,6 +596,13 @@ class EngineStyleScene:
                 "score": 0.0,
                 "reason": "authored choice transition",
             }
+        elif choice.next_question_id is not None:
+            self.current_question_id = self.select_next_question_id()
+            if self.last_selector_debug is not None:
+                self.last_selector_debug["reason"] = (
+                    str(self.last_selector_debug.get("reason") or "")
+                    + "; skipped repeated authored transition"
+                ).strip("; ")
         else:
             self.current_question_id = self.select_next_question_id()
         if self.history:

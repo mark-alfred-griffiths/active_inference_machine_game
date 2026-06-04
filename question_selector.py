@@ -14,6 +14,8 @@ CLASSIFICATION_AMBIGUITY_WEIGHT = 0.19
 CONTEXT_COVERAGE_WEIGHT = 0.10
 FACT_PROBE_WEIGHT = 0.002
 CONTRADICTION_PROBE_WEIGHT = 0.05
+FACT_CONFLICT_PROBE_WEIGHT = 0.11
+ACTIVE_PRESSURE_URGENCY_WEIGHT = 0.075
 PROTECTED_INTEREST_WEIGHT = 0.002
 EXPOSED_FACT_PENALTY_WEIGHT = 0.02
 NEURAL_PROBE_INTENT_WEIGHT = 0.001
@@ -43,6 +45,8 @@ class QuestionScore:
     context_coverage: float
     fact_probe_gain: float = 0.0
     contradiction_probe_gain: float = 0.0
+    fact_conflict_probe_gain: float = 0.0
+    active_pressure_urgency: float = 0.0
     protected_interest_pressure: float = 0.0
     exposed_fact_penalty: float = 0.0
     neural_probe_alignment: float = 0.0
@@ -55,11 +59,13 @@ class QuestionScore:
             ("coverage", self.context_coverage * CONTEXT_COVERAGE_WEIGHT),
             ("fact", self.fact_probe_gain * FACT_PROBE_WEIGHT),
             ("contradiction", self.contradiction_probe_gain * CONTRADICTION_PROBE_WEIGHT),
+            ("fact_conflict", self.fact_conflict_probe_gain * FACT_CONFLICT_PROBE_WEIGHT),
+            ("active_pressure", self.active_pressure_urgency * ACTIVE_PRESSURE_URGENCY_WEIGHT),
             ("protected", self.protected_interest_pressure * PROTECTED_INTEREST_WEIGHT),
             ("neural_probe", self.neural_probe_alignment * NEURAL_PROBE_INTENT_WEIGHT),
         ]
         positive = [(label, value) for label, value in components if value > 0.0]
-        top = sorted(positive, key=lambda item: item[1], reverse=True)[:3]
+        top = sorted(positive, key=lambda item: item[1], reverse=True)[:4]
         return ", ".join(f"{label}={value:.3f}" for label, value in top)
 
 
@@ -161,6 +167,7 @@ def _story_state(
 ) -> dict[str, set[str]]:
     claims_ledger_summary = claims_ledger_summary or {}
     contradicted_fact_keys: set[str] = set()
+    fact_conflict_keys: set[str] = set()
     # The ledger summary stores aggregate claims, not individual contradiction events.
     # Treat facts with multiple incompatible claimed values as contradicted.
     for fact_key, claims in claims_ledger_summary.get("claims_by_fact", {}).items():
@@ -170,11 +177,18 @@ def _story_state(
                 if _claims_contradict(previous, current):
                     contradicted_fact_keys.add(str(fact_key))
                     break
+    for conflict in claims_ledger_summary.get("fact_conflict_records", []):
+        fact_key = conflict.get("fact_key")
+        if fact_key:
+            fact_conflict_keys.add(str(fact_key))
     protected_fact_keys = set(str(key) for key in claims_ledger_summary.get("protected_fact_keys", []))
     exposed_fact_keys = set(str(key) for key in claims_ledger_summary.get("exposed_fact_keys", []))
+    active_pressure_fact_keys = contradicted_fact_keys | fact_conflict_keys
     return {
         "unrevealed_fact_keys": _unrevealed_fact_keys(case_file_summary),
         "contradicted_fact_keys": contradicted_fact_keys,
+        "fact_conflict_keys": fact_conflict_keys,
+        "active_pressure_fact_keys": active_pressure_fact_keys,
         "protected_fact_keys": protected_fact_keys,
         "exposed_fact_keys": exposed_fact_keys,
         "pressured_interest_keys": _interest_pressure(case_file_summary, protected_fact_keys),
@@ -210,11 +224,12 @@ def _story_gains(
     node: Any,
     case_file_summary: dict[str, Any] | None,
     claims_ledger_summary: dict[str, Any] | None,
-) -> tuple[float, float, float, float]:
+) -> tuple[float, float, float, float, float, float]:
     state = _story_state(case_file_summary, claims_ledger_summary)
     probes_facts = set(str(key) for key in getattr(node, "probes_facts", ()))
     probes_claims = set(str(key) for key in getattr(node, "probes_claims", ()))
     pressure_on_interests = set(str(key) for key in getattr(node, "pressure_on_interests", ()))
+    probed_story_keys = probes_facts | probes_claims
 
     fact_probe_gain = _average_sensitive_overlap(
         probes_facts,
@@ -222,17 +237,38 @@ def _story_gains(
         case_file_summary,
     )
     contradiction_probe_gain = _average_sensitive_overlap(
-        probes_facts | probes_claims,
+        probed_story_keys,
         state["contradicted_fact_keys"],
         case_file_summary,
     )
+    fact_conflict_probe_gain = _average_sensitive_overlap(
+        probed_story_keys,
+        state["fact_conflict_keys"],
+        case_file_summary,
+    )
+    active_pressure_urgency = _average_sensitive_overlap(
+        probed_story_keys,
+        state["active_pressure_fact_keys"],
+        case_file_summary,
+    )
+    if active_pressure_urgency > 0.0:
+        # High-pressure authored questions should surface before generic trait probes,
+        # but this remains bounded so the selector can still vary interrogation.
+        active_pressure_urgency *= max(0.65, min(1.0, float(getattr(node, "pressure", 0.0))))
     protected_interest_pressure = 1.0 if pressure_on_interests & state["pressured_interest_keys"] else 0.0
     exposed_fact_penalty = _average_sensitive_overlap(
         probes_facts,
         state["exposed_fact_keys"],
         case_file_summary,
     )
-    return fact_probe_gain, contradiction_probe_gain, protected_interest_pressure, exposed_fact_penalty
+    return (
+        fact_probe_gain,
+        contradiction_probe_gain,
+        fact_conflict_probe_gain,
+        active_pressure_urgency,
+        protected_interest_pressure,
+        exposed_fact_penalty,
+    )
 
 
 def _probe_intent_alignment(
@@ -299,12 +335,23 @@ def score_question(
     selector_context = _selector_context(node)
     context_seen = context_counts[selector_context]
     context_coverage = (max_seen - context_seen + 1) / (max_seen + 1) if max_seen else 1.0
-    fact_probe_gain, contradiction_probe_gain, protected_interest_pressure, exposed_fact_penalty = _story_gains(
+    (
+        fact_probe_gain,
+        contradiction_probe_gain,
+        fact_conflict_probe_gain,
+        active_pressure_urgency,
+        protected_interest_pressure,
+        exposed_fact_penalty,
+    ) = _story_gains(
         node,
         case_file_summary,
         claims_ledger_summary,
     )
-    if len(asked_question_ids) < STORY_PRESSURE_WARMUP_TURNS and contradiction_probe_gain <= 0.0:
+    if (
+        len(asked_question_ids) < STORY_PRESSURE_WARMUP_TURNS
+        and contradiction_probe_gain <= 0.0
+        and fact_conflict_probe_gain <= 0.0
+    ):
         fact_probe_gain = 0.0
         protected_interest_pressure = 0.0
         exposed_fact_penalty = 0.0
@@ -325,6 +372,8 @@ def score_question(
         + context_coverage * CONTEXT_COVERAGE_WEIGHT
         + fact_probe_gain * FACT_PROBE_WEIGHT
         + contradiction_probe_gain * CONTRADICTION_PROBE_WEIGHT
+        + fact_conflict_probe_gain * FACT_CONFLICT_PROBE_WEIGHT
+        + active_pressure_urgency * ACTIVE_PRESSURE_URGENCY_WEIGHT
         + protected_interest_pressure * PROTECTED_INTEREST_WEIGHT
         + neural_probe_alignment * NEURAL_PROBE_INTENT_WEIGHT
         - exposed_fact_penalty * EXPOSED_FACT_PENALTY_WEIGHT
@@ -338,6 +387,8 @@ def score_question(
         context_coverage=context_coverage,
         fact_probe_gain=fact_probe_gain,
         contradiction_probe_gain=contradiction_probe_gain,
+        fact_conflict_probe_gain=fact_conflict_probe_gain,
+        active_pressure_urgency=active_pressure_urgency,
         protected_interest_pressure=protected_interest_pressure,
         exposed_fact_penalty=exposed_fact_penalty,
         neural_probe_alignment=neural_probe_alignment,

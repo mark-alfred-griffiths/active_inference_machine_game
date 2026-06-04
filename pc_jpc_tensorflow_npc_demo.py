@@ -795,7 +795,11 @@ def main() -> None:
     print(scene.opening_text())
 
     if args.interactive:
-        input("\nPress Enter to begin the hearing...")
+        scene.echo_question_on_turn = False
+        try:
+            input("\nPress Enter to begin the hearing...")
+        except EOFError:
+            return
         while not scene.is_complete():
             clear_terminal()
             print()
@@ -804,7 +808,10 @@ def main() -> None:
             choices = scene.choices(Observation)
             for i, choice in enumerate(choices, start=1):
                 print(f"{choice_number(i, enabled=scene.color_output)} {choice.text}")
-            raw = input(prompt("> ", enabled=scene.color_output)).strip()
+            try:
+                raw = input(prompt("> ", enabled=scene.color_output)).strip()
+            except EOFError:
+                break
             if raw.lower() in {"q", "quit", "exit"}:
                 break
             try:
@@ -817,7 +824,10 @@ def main() -> None:
             clear_terminal()
             scene.play_turn(idx, Observation)
             if not scene.is_complete():
-                input("\nPress Enter for next question...")
+                try:
+                    input("\nPress Enter for next question...")
+                except EOFError:
+                    break
     else:
         # Deterministic path through the authored engine-style tree.
         demo_choices = [1, 2, 0, 2, 0, 1, 0, 1]

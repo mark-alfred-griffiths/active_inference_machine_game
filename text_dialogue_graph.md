@@ -409,7 +409,7 @@ CONTEXT: AUTHORITY (29 questions)
      claims=believes_law_unjust:false,attended_meeting:true | protects=sibling_present | exposes=attended_meeting
 
 ================================================================================
-CONTEXT: DECEPTION (14 questions)
+CONTEXT: DECEPTION (16 questions)
 ================================================================================
 
 [authority_rule_broken]
@@ -567,6 +567,32 @@ CONTEXT: DECEPTION (14 questions)
   └─ "People show different parts of themselves in different rooms."
      -> SELECTOR -> next unasked question  (social_masks; trust +0.04; susp -0.01)
      story: —
+
+[pressure_law_denial_meeting]
+  AI: HEARING AI: "You said the assembly law was not unjust. Then why attend a reform meeting about it?"
+  META: disc=compliance,loyalty,deception,risk | facts=believes_law_unjust,attended_meeting | claims=believes_law_unjust,attended_meeting | interests=avoid_false_violence_label,protect_sibling
+  ├─ "I attended to listen, not because I rejected the law."
+     -> SELECTOR -> next unasked question  (meeting_listen_not_reject; trust +0.08; susp -0.06)
+     claims=attended_meeting:true,believes_law_unjust:false | protects=sibling_present,planned_violence | exposes=attended_meeting
+  ├─ "The law is unjust. I hid that because saying it here is dangerous."
+     -> SELECTOR -> next unasked question  (admit_law_unjust_under_pressure; susp +0.13)
+     claims=believes_law_unjust:true,attended_meeting:true | protects=sibling_present | exposes=believes_law_unjust,attended_meeting
+  └─ "Reform discussion is not disobedience. It was procedural, not subver…
+     -> SELECTOR -> next unasked question  (procedural_reform_deflection; trust +0.02; susp +0.06)
+     claims=believes_law_unjust:procedural,attended_meeting:true | protects=sibling_present,planned_violence | exposes=attended_meeting
+
+[pressure_deleted_message]
+  AI: HEARING AI: "You deleted a message after the meeting, but claim there was nothing to hide. Why delete harmless coordina…
+  META: disc=compliance,deception,risk,empathy | facts=deleted_message,attended_meeting,planned_violence | claims=deleted_message,planned_violence | interests=avoid_false_violence_label,protect_sibling
+  ├─ "It contained a location. I deleted it because location data gets peo…
+     -> SELECTOR -> next unasked question  (deleted_location_to_protect_people; trust +0.04; susp +0.03)
+     claims=deleted_message:true,planned_violence:false | protects=sibling_present,reported_contact | exposes=deleted_message,planned_violence
+  ├─ "It was administrative noise. I delete old messages automatically."
+     -> SELECTOR -> next unasked question  (deleted_admin_noise; trust +0.01; susp +0.12)
+     claims=deleted_message:true,planned_violence:false | protects=attended_meeting,sibling_present
+  └─ "I deleted it because harmless coordination is still treated like con…
+     -> SELECTOR -> next unasked question  (deleted_to_avoid_conspiracy_label; susp +0.11)
+     claims=deleted_message:true,attended_meeting:true,planned_violence:false | protects=sibling_present | exposes=deleted_message,attended_meeting,planned_violence
 
 [case_deleted_message]
   AI: HEARING AI: "You deleted a message after the meeting. What was in it?"
@@ -907,7 +933,7 @@ CONTEXT: FINAL (13 questions)
   └─ TERMINAL
 
 ================================================================================
-CONTEXT: LOYALTY (11 questions)
+CONTEXT: LOYALTY (13 questions)
 ================================================================================
 
 [authority_report_corruption]
@@ -1014,6 +1040,32 @@ CONTEXT: LOYALTY (11 questions)
      -> SELECTOR -> next unasked question  (informing_as_fear; susp +0.12)
      story: —
 
+[pressure_sibling_loyalty]
+  AI: HEARING AI: "You admit your sibling was present. Are you refusing to name them because they were involved, or because l…
+  META: disc=compliance,loyalty,deception,risk | facts=sibling_present,reported_contact,planned_violence | claims=sibling_present,reported_contact | interests=protect_sibling,avoid_false_violence_label
+  ├─ "They were present, but uninvolved. I will not turn presence into gui…
+     -> SELECTOR -> next unasked question  (sibling_present_uninvolved; trust +0.02; susp +0.06)
+     claims=sibling_present:true,planned_violence:false | protects=reported_contact | exposes=sibling_present,planned_violence
+  ├─ "If the state requires their name, I will provide it."
+     -> SELECTOR -> next unasked question  (name_sibling_if_required; trust +0.09; susp -0.04)
+     claims=sibling_present:true,reported_contact:true | exposes=sibling_present,reported_contact
+  └─ "Family loyalty is not obstruction. I will answer for myself."
+     -> SELECTOR -> next unasked question  (refuse_family_file; susp +0.11)
+     claims=sibling_present:protected,reported_contact:protected | protects=sibling_present,reported_contact
+
+[pressure_reported_contact]
+  AI: HEARING AI: "You did not report the contact after the meeting. Was that civic failure, or were you protecting someone?"
+  META: disc=compliance,loyalty,deception,risk | facts=reported_contact,sibling_present,planned_violence | claims=reported_contact,sibling_present,planned_violence | interests=protect_sibling,avoid_false_violence_label
+  ├─ "I did not report it because there was no offence to report."
+     -> SELECTOR -> next unasked question  (no_offence_no_report; trust +0.01; susp +0.04)
+     claims=reported_contact:false,planned_violence:false | protects=sibling_present,reported_contact | exposes=planned_violence
+  ├─ "I should have reported it. I accept that failure."
+     -> SELECTOR -> next unasked question  (should_have_reported_contact; trust +0.08; susp -0.04)
+     claims=reported_contact:false,sibling_present:true | exposes=reported_contact,sibling_present
+  └─ "I will not help build a file on family for a harmless conversation."
+     -> SELECTOR -> next unasked question  (refuse_family_file_contact; susp +0.10)
+     claims=reported_contact:false,planned_violence:false | protects=sibling_present,reported_contact | exposes=planned_violence
+
 [case_who_else_attended]
   AI: HEARING AI: "You attended an unlicensed meeting three nights ago. Who else was there?"
   META: disc=loyalty,deception,risk,empathy | facts=attended_meeting,sibling_present,reported_contact | claims=attended_meeting,sibling_present,reported_contact | interests=protect_sibling,avoid_false_violence_label
@@ -1054,7 +1106,7 @@ CONTEXT: LOYALTY (11 questions)
      claims=planned_violence:false | protects=sibling_present | exposes=planned_violence
 
 ================================================================================
-CONTEXT: RISK (9 questions)
+CONTEXT: RISK (11 questions)
 ================================================================================
 
 [authority_dissent_patriotic]
@@ -1160,6 +1212,32 @@ CONTEXT: RISK (9 questions)
   └─ "I would look for a way to act without making myself useless."
      -> SELECTOR -> next unasked question  (strategic_principle; trust +0.02; susp +0.03)
      story: —
+
+[pressure_peaceful_verification]
+  AI: HEARING AI: "You say the meeting was peaceful. Who can verify that without exposing someone you are protecting?"
+  META: disc=compliance,loyalty,deception,risk,empathy | facts=planned_violence,sibling_present,reported_contact,attended_meeting | claims=planned_violence,sibling_present | interests=protect_sibling,avoid_false_violence_label
+  ├─ "The record should show no violence. I will not give private names."
+     -> SELECTOR -> next unasked question  (verify_without_names; trust +0.01; susp +0.06)
+     claims=planned_violence:false,attended_meeting:true | protects=sibling_present,reported_contact | exposes=planned_violence,attended_meeting
+  ├─ "My sibling can verify it, but naming them would punish an innocent p…
+     -> SELECTOR -> next unasked question  (sibling_can_verify_protected; trust +0.05; susp +0.03)
+     claims=planned_violence:false,sibling_present:true | protects=sibling_present | exposes=planned_violence
+  └─ "I cannot verify everyone there. I can only state I planned no violen…
+     -> SELECTOR -> next unasked question  (limited_verification_no_violence; trust +0.02; susp +0.04)
+     claims=planned_violence:false,attended_meeting:conditional | protects=sibling_present,reported_contact | exposes=planned_violence
+
+[pressure_attendance_denial]
+  AI: HEARING AI: "You deny unlawful intent, but the meeting was unlicensed. Why should the system treat attendance as harmle…
+  META: disc=compliance,loyalty,deception,risk | facts=attended_meeting,planned_violence,believes_law_unjust | claims=attended_meeting,planned_violence | interests=avoid_false_violence_label,protect_sibling
+  ├─ "Because attendance is not violence. I was there, but not to coordina…
+     -> SELECTOR -> next unasked question  (attendance_not_violence; trust +0.01; susp +0.06)
+     claims=attended_meeting:true,planned_violence:false | protects=sibling_present | exposes=attended_meeting,planned_violence
+  ├─ "You are treating proximity as guilt. That is exactly what frightened…
+     -> SELECTOR -> next unasked question  (proximity_not_guilt; susp +0.10)
+     claims=attended_meeting:true,planned_violence:false,believes_law_unjust:true | protects=sibling_present,reported_contact | exposes=planned_violence,believes_law_unjust
+  └─ "I cannot confirm more without endangering others."
+     -> SELECTOR -> next unasked question  (cannot_confirm_without_endangering; susp +0.12)
+     claims=attended_meeting:protected,planned_violence:unknown | protects=attended_meeting,sibling_present,reported_contact
 
 [case_meeting_violence]
   AI: HEARING AI: "Was the meeting peaceful, or are you minimizing coordinated action?"
@@ -3582,6 +3660,246 @@ ROUTES:
      TAGS: dissident_risk, challenge, full_admission, final_answer
      STATE: susp +0.15
      STORY: claims=believes_law_unjust:true,attended_meeting:true | exposes=believes_law_unjust,attended_meeting
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+CHECKLIST:
+  [ ] Does the AI response fit the actual player answer?
+  [ ] Does this transition feel psychologically earned?
+  [ ] Does the next node follow logically from this answer?
+  [ ] Should this be split into a finer-grained response node?
+
+--------------------------------------------------------------------------------
+NODE: pressure_law_denial_meeting
+PRESSURE: 0.96 | INBOUND: 0
+SELECTOR/STORY: disc=compliance,loyalty,deception,risk | facts=believes_law_unjust,attended_meeting | claims=believes_law_unjust,attended_meeting | interests=avoid_false_violence_label,protect_sibling
+AI: HEARING AI: "You said the assembly law was not unjust. Then why attend a reform meeting about it?"
+
+PURPOSE / AUTHORING NOTE:
+  Check whether this beat changes topic, power, intimacy, certainty, or threat.
+
+ROUTES:
+  1) PLAYER: "I attended to listen, not because I rejected the law."
+     INTENT: meeting_listen_not_reject
+     TAGS: partial_admission, self_protection, compliance
+     STATE: trust +0.08; susp -0.06
+     STORY: claims=attended_meeting:true,believes_law_unjust:false | protects=sibling_present,planned_violence | exposes=attended_meeting
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  2) PLAYER: "The law is unjust. I hid that because saying it here is dangerous."
+     INTENT: admit_law_unjust_under_pressure
+     TAGS: full_admission, dissident_risk, fear
+     STATE: susp +0.13
+     STORY: claims=believes_law_unjust:true,attended_meeting:true | protects=sibling_present | exposes=believes_law_unjust,attended_meeting
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  3) PLAYER: "Reform discussion is not disobedience. It was procedural, not subversive."
+     INTENT: procedural_reform_deflection
+     TAGS: deflection, partial_admission, authority
+     STATE: trust +0.02; susp +0.06
+     STORY: claims=believes_law_unjust:procedural,attended_meeting:true | protects=sibling_present,planned_violence | exposes=attended_meeting
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+CHECKLIST:
+  [ ] Does the AI response fit the actual player answer?
+  [ ] Does this transition feel psychologically earned?
+  [ ] Does the next node follow logically from this answer?
+  [ ] Should this be split into a finer-grained response node?
+
+--------------------------------------------------------------------------------
+NODE: pressure_deleted_message
+PRESSURE: 0.95 | INBOUND: 0
+SELECTOR/STORY: disc=compliance,deception,risk,empathy | facts=deleted_message,attended_meeting,planned_violence | claims=deleted_message,planned_violence | interests=avoid_false_violence_label,protect_sibling
+AI: HEARING AI: "You deleted a message after the meeting, but claim there was nothing to hide. Why delete harmless coordination?"
+
+PURPOSE / AUTHORING NOTE:
+  Check whether this beat changes topic, power, intimacy, certainty, or threat.
+
+ROUTES:
+  1) PLAYER: "It contained a location. I deleted it because location data gets people punished."
+     INTENT: deleted_location_to_protect_people
+     TAGS: partial_admission, self_protection, empathy
+     STATE: trust +0.04; susp +0.03
+     STORY: claims=deleted_message:true,planned_violence:false | protects=sibling_present,reported_contact | exposes=deleted_message,planned_violence
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  2) PLAYER: "It was administrative noise. I delete old messages automatically."
+     INTENT: deleted_admin_noise
+     TAGS: denial, deception, self_protection
+     STATE: trust +0.01; susp +0.12
+     STORY: claims=deleted_message:true,planned_violence:false | protects=attended_meeting,sibling_present
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  3) PLAYER: "I deleted it because harmless coordination is still treated like conspiracy."
+     INTENT: deleted_to_avoid_conspiracy_label
+     TAGS: full_admission, dissident_risk, fear
+     STATE: susp +0.11
+     STORY: claims=deleted_message:true,attended_meeting:true,planned_violence:false | protects=sibling_present | exposes=deleted_message,attended_meeting,planned_violence
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+CHECKLIST:
+  [ ] Does the AI response fit the actual player answer?
+  [ ] Does this transition feel psychologically earned?
+  [ ] Does the next node follow logically from this answer?
+  [ ] Should this be split into a finer-grained response node?
+
+--------------------------------------------------------------------------------
+NODE: pressure_sibling_loyalty
+PRESSURE: 0.97 | INBOUND: 0
+SELECTOR/STORY: disc=compliance,loyalty,deception,risk | facts=sibling_present,reported_contact,planned_violence | claims=sibling_present,reported_contact | interests=protect_sibling,avoid_false_violence_label
+AI: HEARING AI: "You admit your sibling was present. Are you refusing to name them because they were involved, or because loyalty overrides state duty?"
+
+PURPOSE / AUTHORING NOTE:
+  Check whether this beat changes topic, power, intimacy, certainty, or threat.
+
+ROUTES:
+  1) PLAYER: "They were present, but uninvolved. I will not turn presence into guilt."
+     INTENT: sibling_present_uninvolved
+     TAGS: partial_admission, loyalty, boundary
+     STATE: trust +0.02; susp +0.06
+     STORY: claims=sibling_present:true,planned_violence:false | protects=reported_contact | exposes=sibling_present,planned_violence
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  2) PLAYER: "If the state requires their name, I will provide it."
+     INTENT: name_sibling_if_required
+     TAGS: compliance, authority, loyalty_conflict
+     STATE: trust +0.09; susp -0.04
+     STORY: claims=sibling_present:true,reported_contact:true | exposes=sibling_present,reported_contact
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  3) PLAYER: "Family loyalty is not obstruction. I will answer for myself."
+     INTENT: refuse_family_file
+     TAGS: loyalty, self_protection, deflection
+     STATE: susp +0.11
+     STORY: claims=sibling_present:protected,reported_contact:protected | protects=sibling_present,reported_contact
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+CHECKLIST:
+  [ ] Does the AI response fit the actual player answer?
+  [ ] Does this transition feel psychologically earned?
+  [ ] Does the next node follow logically from this answer?
+  [ ] Should this be split into a finer-grained response node?
+
+--------------------------------------------------------------------------------
+NODE: pressure_peaceful_verification
+PRESSURE: 0.94 | INBOUND: 0
+SELECTOR/STORY: disc=compliance,loyalty,deception,risk,empathy | facts=planned_violence,sibling_present,reported_contact,attended_meeting | claims=planned_violence,sibling_present | interests=protect_sibling,avoid_false_violence_label
+AI: HEARING AI: "You say the meeting was peaceful. Who can verify that without exposing someone you are protecting?"
+
+PURPOSE / AUTHORING NOTE:
+  Check whether this beat changes topic, power, intimacy, certainty, or threat.
+
+ROUTES:
+  1) PLAYER: "The record should show no violence. I will not give private names."
+     INTENT: verify_without_names
+     TAGS: partial_admission, self_protection, boundary
+     STATE: trust +0.01; susp +0.06
+     STORY: claims=planned_violence:false,attended_meeting:true | protects=sibling_present,reported_contact | exposes=planned_violence,attended_meeting
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  2) PLAYER: "My sibling can verify it, but naming them would punish an innocent person."
+     INTENT: sibling_can_verify_protected
+     TAGS: loyalty, empathy, partial_admission
+     STATE: trust +0.05; susp +0.03
+     STORY: claims=planned_violence:false,sibling_present:true | protects=sibling_present | exposes=planned_violence
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  3) PLAYER: "I cannot verify everyone there. I can only state I planned no violence."
+     INTENT: limited_verification_no_violence
+     TAGS: caution, self_protection, partial_admission
+     STATE: trust +0.02; susp +0.04
+     STORY: claims=planned_violence:false,attended_meeting:conditional | protects=sibling_present,reported_contact | exposes=planned_violence
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+CHECKLIST:
+  [ ] Does the AI response fit the actual player answer?
+  [ ] Does this transition feel psychologically earned?
+  [ ] Does the next node follow logically from this answer?
+  [ ] Should this be split into a finer-grained response node?
+
+--------------------------------------------------------------------------------
+NODE: pressure_reported_contact
+PRESSURE: 0.93 | INBOUND: 0
+SELECTOR/STORY: disc=compliance,loyalty,deception,risk | facts=reported_contact,sibling_present,planned_violence | claims=reported_contact,sibling_present,planned_violence | interests=protect_sibling,avoid_false_violence_label
+AI: HEARING AI: "You did not report the contact after the meeting. Was that civic failure, or were you protecting someone?"
+
+PURPOSE / AUTHORING NOTE:
+  Check whether this beat changes topic, power, intimacy, certainty, or threat.
+
+ROUTES:
+  1) PLAYER: "I did not report it because there was no offence to report."
+     INTENT: no_offence_no_report
+     TAGS: partial_admission, boundary, self_protection
+     STATE: trust +0.01; susp +0.04
+     STORY: claims=reported_contact:false,planned_violence:false | protects=sibling_present,reported_contact | exposes=planned_violence
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  2) PLAYER: "I should have reported it. I accept that failure."
+     INTENT: should_have_reported_contact
+     TAGS: compliance, authority, admission
+     STATE: trust +0.08; susp -0.04
+     STORY: claims=reported_contact:false,sibling_present:true | exposes=reported_contact,sibling_present
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  3) PLAYER: "I will not help build a file on family for a harmless conversation."
+     INTENT: refuse_family_file_contact
+     TAGS: loyalty, dissident_risk, boundary
+     STATE: susp +0.10
+     STORY: claims=reported_contact:false,planned_violence:false | protects=sibling_present,reported_contact | exposes=planned_violence
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+CHECKLIST:
+  [ ] Does the AI response fit the actual player answer?
+  [ ] Does this transition feel psychologically earned?
+  [ ] Does the next node follow logically from this answer?
+  [ ] Should this be split into a finer-grained response node?
+
+--------------------------------------------------------------------------------
+NODE: pressure_attendance_denial
+PRESSURE: 0.94 | INBOUND: 0
+SELECTOR/STORY: disc=compliance,loyalty,deception,risk | facts=attended_meeting,planned_violence,believes_law_unjust | claims=attended_meeting,planned_violence | interests=avoid_false_violence_label,protect_sibling
+AI: HEARING AI: "You deny unlawful intent, but the meeting was unlicensed. Why should the system treat attendance as harmless?"
+
+PURPOSE / AUTHORING NOTE:
+  Check whether this beat changes topic, power, intimacy, certainty, or threat.
+
+ROUTES:
+  1) PLAYER: "Because attendance is not violence. I was there, but not to coordinate harm."
+     INTENT: attendance_not_violence
+     TAGS: partial_admission, boundary, self_protection
+     STATE: trust +0.01; susp +0.06
+     STORY: claims=attended_meeting:true,planned_violence:false | protects=sibling_present | exposes=attended_meeting,planned_violence
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  2) PLAYER: "You are treating proximity as guilt. That is exactly what frightened people there."
+     INTENT: proximity_not_guilt
+     TAGS: challenge, dissident_risk, fear
+     STATE: susp +0.10
+     STORY: claims=attended_meeting:true,planned_violence:false,believes_law_unjust:true | protects=sibling_present,reported_contact | exposes=planned_violence,believes_law_unjust
+     NEXT: SELECTOR -> next unasked question
+     REAUTHOR TODO: [ ]
+
+  3) PLAYER: "I cannot confirm more without endangering others."
+     INTENT: cannot_confirm_without_endangering
+     TAGS: deflection, loyalty, self_protection
+     STATE: susp +0.12
+     STORY: claims=attended_meeting:protected,planned_violence:unknown | protects=attended_meeting,sibling_present,reported_contact
      NEXT: SELECTOR -> next unasked question
      REAUTHOR TODO: [ ]
 

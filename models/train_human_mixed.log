@@ -1,0 +1,17 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1780593323.382852     321 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1780593324.702953     321 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+E0000 00:00:1780593325.393690     321 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+Running synthetic warmup...
+training step    1 | total=9.7700 | belief_mse=7.6929 | probe_ce=2.0771 | probe_acc=0.000
+training step  150 | total=4.2619 | belief_mse=2.9794 | probe_ce=1.2825 | probe_acc=0.747
+training step  300 | total=3.0819 | belief_mse=2.1395 | probe_ce=0.9423 | probe_acc=0.753
+Loaded 560 auto rows from data/training/auto_train_story.jsonl, 1400 human rows from data/training/human_train_all_archetypes.jsonl, training on 4760 effective rows.
+jsonl epoch   1/4 | total=0.6317 | belief_mse=0.1329 | probe_ce=0.4988 | probe_acc=0.818
+jsonl epoch   2/4 | total=0.5573 | belief_mse=0.0981 | probe_ce=0.4592 | probe_acc=0.825
+jsonl epoch   3/4 | total=0.5205 | belief_mse=0.0817 | probe_ce=0.4388 | probe_acc=0.829
+jsonl epoch   4/4 | total=0.4931 | belief_mse=0.0721 | probe_ce=0.4210 | probe_acc=0.833
+Saved trained model to models/demo_npc_story_human_mixed
+
+Final training averages | total=0.4931 | belief_mse=0.0721 | probe_ce=0.4210 | probe_acc=0.833

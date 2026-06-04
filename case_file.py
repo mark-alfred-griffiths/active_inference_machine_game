@@ -191,6 +191,8 @@ class ClaimsLedger:
         self.claims_by_fact: dict[str, list[ClaimRecord]] = {}
         self.contradiction_count = 0
         self.fact_conflict_count = 0
+        self.contradictions: list[dict[str, object]] = []
+        self.fact_conflicts: list[dict[str, object]] = []
         self.protected_fact_keys: set[str] = set()
         self.exposed_fact_keys: set[str] = set()
 
@@ -247,6 +249,8 @@ class ClaimsLedger:
 
         self.contradiction_count += len(contradictions)
         self.fact_conflict_count += len(fact_conflicts)
+        self.contradictions.extend(contradictions)
+        self.fact_conflicts.extend(fact_conflicts)
         return ClaimUpdate(
             new_claims=tuple(new_claims),
             contradictions=tuple(contradictions),
@@ -284,6 +288,8 @@ class ClaimsLedger:
             },
             "story_contradictions": self.contradiction_count,
             "fact_conflicts": self.fact_conflict_count,
+            "contradictions": list(self.contradictions),
+            "fact_conflict_records": list(self.fact_conflicts),
             "protected_fact_keys": sorted(self.protected_fact_keys),
             "exposed_fact_keys": sorted(self.exposed_fact_keys),
             "protected_fact_count": len(self.protected_fact_keys),

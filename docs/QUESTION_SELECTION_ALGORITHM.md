@@ -187,6 +187,8 @@ total =
   + context_coverage              * CONTEXT_COVERAGE_WEIGHT
   + fact_probe_gain               * FACT_PROBE_WEIGHT
   + contradiction_probe_gain      * CONTRADICTION_PROBE_WEIGHT
+  + fact_conflict_probe_gain      * FACT_CONFLICT_PROBE_WEIGHT
+  + active_pressure_urgency       * ACTIVE_PRESSURE_URGENCY_WEIGHT
   + protected_interest_pressure   * PROTECTED_INTEREST_WEIGHT
   + neural_probe_alignment        * NEURAL_PROBE_INTENT_WEIGHT
   - exposed_fact_penalty          * EXPOSED_FACT_PENALTY_WEIGHT
@@ -201,13 +203,15 @@ CLASSIFICATION_AMBIGUITY_WEIGHT = 0.19
 CONTEXT_COVERAGE_WEIGHT = 0.10
 FACT_PROBE_WEIGHT = 0.002
 CONTRADICTION_PROBE_WEIGHT = 0.05
+FACT_CONFLICT_PROBE_WEIGHT = 0.11
+ACTIVE_PRESSURE_URGENCY_WEIGHT = 0.075
 PROTECTED_INTEREST_WEIGHT = 0.002
 EXPOSED_FACT_PENALTY_WEIGHT = 0.02
 NEURAL_PROBE_INTENT_WEIGHT = 0.001
 STORY_PRESSURE_WARMUP_TURNS = 5
 ```
 
-The large weights are currently trait uncertainty, pressure, classification ambiguity, and context coverage. Story and neural-probe terms are smaller nudges, except contradiction probing has a stronger dedicated weight.
+The large weights are currently trait uncertainty, pressure, classification ambiguity, and context coverage. Direct story pressure also has dedicated bounded weights: contradictions, fact conflicts, and active pressure make concrete follow-up questions more competitive without turning them into mandatory overrides.
 
 ## Classification Ambiguity
 
@@ -336,9 +340,13 @@ Gameplay effect: direct inconsistencies make follow-up questions more likely, bu
 
 ### Fact Conflicts
 
-Known fact conflicts are tracked by `ClaimsLedger` and affect the belief model in `belief_model.py`. In the selector, direct fact-conflict events are not separately weighted as their own field. Instead, their practical influence enters through the claims ledger and story state: claims remain recorded by fact, exposed/protected facts remain tracked, and related fact/claim probes can still be scored through `probes_facts`, `probes_claims`, protected interests, and contradiction logic.
+Known fact conflicts are tracked by `ClaimsLedger` when an explicit `true` or `false` claim conflicts with the case-file truth.
 
-Gameplay effect: a claim that conflicts with the case file creates model pressure immediately, while future selection pressure depends on how that claim changes the ledger and relevant authored probe metadata.
+The selector now derives `fact_conflict_keys` from `fact_conflict_records` in `ClaimsLedger.summary()`. If a candidate question probes one of those facts through `probes_facts` or `probes_claims`, it receives `fact_conflict_probe_gain`.
+
+The selector also computes `active_pressure_fact_keys` as the union of contradicted facts and fact-conflict facts. A candidate probing those facts receives `active_pressure_urgency`, scaled by the authored question's pressure. This makes concrete high-pressure follow-ups more likely than generic trait questions once the player has created story pressure.
+
+Gameplay effect: a claim that conflicts with the case file creates model pressure immediately and makes related authored pressure questions more likely soon afterward. The bonus is bounded, so the AI can still vary the interrogation.
 
 ## Story Warmup
 
@@ -347,13 +355,17 @@ Gameplay effect: a claim that conflicts with the case file creates model pressur
 In `score_question()`:
 
 ```python
-if len(asked_question_ids) < STORY_PRESSURE_WARMUP_TURNS and contradiction_probe_gain <= 0.0:
+if (
+    len(asked_question_ids) < STORY_PRESSURE_WARMUP_TURNS
+    and contradiction_probe_gain <= 0.0
+    and fact_conflict_probe_gain <= 0.0
+):
     fact_probe_gain = 0.0
     protected_interest_pressure = 0.0
     exposed_fact_penalty = 0.0
 ```
 
-During the first five asked questions, story fact pressure is mostly muted unless there is already contradiction pressure.
+During the first five asked questions, general story fact pressure is mostly muted unless there is already contradiction or fact-conflict pressure.
 
 Gameplay effect: early play does not immediately collapse into case-file interrogation unless the player creates strong inconsistency pressure.
 
@@ -463,6 +475,8 @@ def play_turn(choice):
             + context_coverage(node, asked_question_ids) * 0.10
             + fact_probe_gain(node, case_file, claims_ledger) * 0.002
             + contradiction_probe_gain(node, case_file, claims_ledger) * 0.05
+            + fact_conflict_probe_gain(node, case_file, claims_ledger) * 0.11
+            + active_pressure_urgency(node, case_file, claims_ledger) * 0.075
             + protected_interest_pressure(node, case_file, claims_ledger) * 0.002
             + neural_probe_alignment(node, preferred_probe) * 0.001
             - exposed_fact_penalty(node, case_file, claims_ledger) * 0.02
@@ -485,6 +499,7 @@ Examples:
 - If the deception trait is uncertain, deception-discriminating questions become more valuable.
 - If the player protects sibling-related facts, questions with `pressure_on_interests=("protect_sibling",)` become more attractive.
 - If the player directly contradicts an earlier claim, contradiction probes become more attractive.
+- If the player makes a known-fact conflict, concrete questions probing that pressured fact become more attractive.
 - If a fact is already exposed, repeated probes on that fact become less attractive.
 - If the neural model predicts `probe_protected_fact`, relevant authored questions receive a small alignment boost.
 
@@ -494,6 +509,6 @@ This means the hearing AI is not following a fixed script. It is navigating an a
 
 The neural probe intent currently has a small weight relative to trait uncertainty, pressure, ambiguity, and coverage. This is deliberate: it keeps the authored selector stable and prevents the neural head from producing incoherent question order.
 
-Fact conflicts are not directly represented as a separate selector scoring term. They influence beliefs immediately and can indirectly affect future question choice through the claims ledger and relevant authored metadata.
+Fact conflicts are now directly represented as a selector scoring term. This is intentionally bounded so pressure follow-ups happen soon, but not necessarily every turn.
 
 The selector is deterministic in `EngineStyleScene`; stochastic tie selection exists in the standalone selector function but is not currently used by the playable scene.

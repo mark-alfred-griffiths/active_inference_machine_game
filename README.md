@@ -81,6 +81,8 @@ Selection combines:
 
 The neural network does not directly pick arbitrary question IDs. It predicts a probe intent such as `probe_deception`, `probe_protected_fact`, or `probe_contradiction`. The heuristic selector then maps that intent onto a valid authored question and prevents invalid or repeated questions.
 
+Recent pressure-specific question nodes make story pressure more concrete. When the player creates a contradiction or known-fact conflict, the selector gives a bounded bonus to authored `pressure_*` questions that probe the pressured fact, so follow-ups can directly interrogate claims about the law, deleted messages, sibling protection, meeting attendance, violence ambiguity, and reporting contact.
+
 ---
 
 ## Case File And Story Consistency
@@ -114,7 +116,7 @@ The claims ledger detects:
 
 Contradiction logic is intentionally softened. Conditional, private, procedural, protected, partial, unknown, and similar values are treated as ambiguous refinements unless they directly conflict with explicit `true`/`false` claims.
 
-During play, the engine shows a private `PRIVATE STORY SO FAR` panel so the player can understand what they are protecting, what they have exposed, and whether their story is under pressure.
+During play, the engine shows a private `PRIVATE STORY SO FAR` panel so the player can understand what they are protecting, what they have exposed, and whether their story is under pressure. The pressure section names the specific pressured facts rather than only showing aggregate counts.
 
 ---
 
